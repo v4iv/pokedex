@@ -26,25 +26,24 @@ class PokemonList extends Component {
 
     render() {
         const {pokemonList} = this.props;
-        console.log(pokemonList);
         return (
-            <section className="section ">
-                {(pokemonList.error)
-                    ? <ErrorPanel errors={[pokemonList.error.message]}/>
-                    : Object.values(pokemonList.pokemons).map((items, index) => {
-                            return index % 4 === 0
-                                ? <div className="columns is-centered" key={index}>
-                                    {
-                                        Object.values(pokemonList.pokemons).slice(index, index + 4).map(pokemon =>
-                                            <PokemonCard key={pokemon.id} pokemon={pokemon}/>
-                                        )}
-                                </div>
-                                : undefined;
-                        }
-                    )}
+            <section className="section">
+                {Object.values(pokemonList.pokemons).map((items, index) => {
+                        return index % 4 === 0
+                            ? <div className="columns is-centered" key={index}>
+                                {
+                                    Object.values(pokemonList.pokemons).slice(index, index + 4).map(pokemon =>
+                                        <PokemonCard key={pokemon.id} pokemon={pokemon}/>
+                                    )}
+                            </div>
+                            : undefined;
+                    }
+                )}
                 {(pokemonList.loading)
                     ? <Loader/>
-                    : undefined
+                    : (pokemonList.error)
+                        ? <ErrorPanel errors={[pokemonList.error]}/>
+                        : undefined
                 }
             </section>
         );

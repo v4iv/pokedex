@@ -10,7 +10,7 @@ const Header = () => {
                 <div className="navbar-item">
                     <span className="pokeball"/>
                 </div>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <div className="navbar-item">
                     Pokédex
                 </div>
