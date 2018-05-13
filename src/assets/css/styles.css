@@ -25,7 +25,6 @@
 }
 
 .flying {
-    background: -o-linear-gradient(#3dc7ef, #bdb9b8);
     background: -webkit-linear-gradient(#3dc7ef, #bdb9b8);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -51,7 +50,6 @@
 }
 
 .ground {
-    background: -o-linear-gradient(#f7de3f, #ab9842);
     background: -webkit-linear-gradient(#f7de3f, #ab9842);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -85,7 +83,6 @@
 }
 
 .dragon {
-    background: -o-linear-gradient(#53a4cf, #f16e57);
     background: -webkit-linear-gradient(#53a4cf, #f16e57);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
