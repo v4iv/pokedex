@@ -13,19 +13,20 @@ import ErrorPanel from '../../components/ErrorPanel';
 
 class PokemonList extends Component {
     componentWillMount() {
-        this.props.actions.fetchPokemonList(24, 0);
+        this.props.actions.fetchPokemonList(20, 1);
     }
 
     componentDidMount() {
         $(window).scroll(function () {
             if ($(window).scrollTop() === $(document).height() - $(window).height() && !this.props.pokemonList.loading) {
-                this.props.actions.fetchPokemonList(24, Object.values(this.props.pokemonList.pokemons).length + 24);
+                this.props.actions.fetchPokemonList(Object.values(this.props.pokemonList.pokemons).length + 20, Object.values(this.props.pokemonList.pokemons).length + 1);
             }
         }.bind(this));
     }
 
     render() {
         const {pokemonList} = this.props;
+        console.log(pokemonList);
         return (
             <section className="section ">
                 {(pokemonList.error)

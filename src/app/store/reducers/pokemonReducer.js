@@ -12,7 +12,6 @@ const INITIAL_STATE = {
 };
 
 export default function pokemonReducer(state = INITIAL_STATE, action) {
-    let error;
     switch (action.type) {
         case FETCH_POKEMON_REQUEST:
             return {
@@ -24,23 +23,24 @@ export default function pokemonReducer(state = INITIAL_STATE, action) {
                 }
             };
         case FETCH_POKEMON_SUCCESS:
-            let pokemon = {...state.pokemonList.pokemons};
-            pokemon[action.payload.name] = {...action.payload};
+            let pokemons = {...state.pokemonList.pokemons};
+            action.payload.forEach((pokemon)=>{
+               pokemons[pokemon.name] = {...pokemon}
+            });
             return {
                 ...state,
                 pokemonList: {
-                    pokemons: {...state.pokemonList.pokemons, ...pokemon},
+                    pokemons: {...state.pokemonList.pokemons, ...pokemons},
                     error: null,
                     loading: false
                 }
             };
         case FETCH_POKEMON_FAILURE:
-            error = action.payload || {message: action.payload.error_description};
             return {
                 ...state,
                 pokemonList: {
                     pokemons: {},
-                    error: error,
+                    error: action.payload,
                     loading: false
                 }
             };

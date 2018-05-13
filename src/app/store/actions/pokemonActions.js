@@ -1,8 +1,16 @@
 /**
  * Created by vaibhav on 12/5/18
  */
-import axios from 'axios';
-import {ROOT_URL} from "../../../core/config";
+const Pokedex = require('pokeapi-js-wrapper');
+const options = {
+    protocol: 'https',
+    hostName: 'pokeapi.co',
+    versionPath: '/api/v2/',
+    cache: true,
+    timeout: 60 * 1000 // 60s
+};
+const P = new Pokedex.Pokedex(options);
+
 
 export const FETCH_POKEMON_REQUEST = 'FETCH_POKEMON_REQUEST';
 export const FETCH_POKEMON_SUCCESS = 'FETCH_POKEMON_SUCCESS';
@@ -28,31 +36,17 @@ export function pokemonListFailure(error) {
     }
 }
 
-
-export function fetchPokemon(url) {
-    return async function (dispatch) {
-        try {
-            const response = await axios.get(url);
-            const data = await response.data;
-            dispatch(pokemonListSuccess(data))
-        } catch (e) {
-            pokemonListFailure(e);
-        }
-    }
-}
-
 export function fetchPokemonList(limit, offset) {
     return async function (dispatch) {
         dispatch(pokemonListRequest());
-        const uri = ROOT_URL + `/pokemon/?limit=${limit}&offset=${offset}`;
-        try {
-            const response = await axios.get(uri);
-            const data = await response.data;
-            data.results.forEach((item) => {
-                dispatch(fetchPokemon(item.url))
-            })
-        } catch (e) {
-            console.log(e);
+        let pokeapi_urls = [];
+        for (let p = offset; p <= limit; p++) {
+            pokeapi_urls.push(`/api/v2/pokemon/${p}`);
         }
+        return P.resource(pokeapi_urls).then(response =>
+            dispatch(pokemonListSuccess(response))
+        ).catch(error =>
+            dispatch(pokemonListFailure(error))
+        );
     }
 }
