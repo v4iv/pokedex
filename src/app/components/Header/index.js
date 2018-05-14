@@ -2,6 +2,8 @@
  * Created by vaibhav on 16/4/18
  */
 import React from 'react';
+import {Link} from 'react-router-dom';
+import "./styles.css";
 
 const Header = () => {
     return (
@@ -11,9 +13,9 @@ const Header = () => {
                     <span className="pokeball"/>
                 </div>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <div className="navbar-item">
+                <Link to="/" className="navbar-item">
                     Pokédex
-                </div>
+                </Link>
             </div>
         </nav>
     );

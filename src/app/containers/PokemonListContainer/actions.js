@@ -1,37 +1,29 @@
 /**
  * Created by vaibhav on 12/5/18
  */
-const Pokedex = require('pokeapi-js-wrapper');
-const options = {
-    protocol: 'https',
-    hostName: 'pokeapi.co',
-    versionPath: '/api/v2/',
-    cache: true,
-    timeout: 60 * 1000 // 60s
-};
-const P = new Pokedex.Pokedex(options);
+import {PokeAPI} from "../../../core/config";
 
 
-export const FETCH_POKEMON_REQUEST = 'FETCH_POKEMON_REQUEST';
-export const FETCH_POKEMON_SUCCESS = 'FETCH_POKEMON_SUCCESS';
-export const FETCH_POKEMON_FAILURE = 'FETCH_POKEMON_FAILURE';
+export const POKEMON_LIST_REQUEST = 'POKEMON_LIST_REQUEST';
+export const POKEMON_LIST_SUCCESS = 'POKEMON_LIST_SUCCESS';
+export const POKEMON_LIST_FAILURE = 'POKEMON_LIST_FAILURE';
 
 export function pokemonListRequest() {
     return {
-        type: FETCH_POKEMON_REQUEST
+        type: POKEMON_LIST_REQUEST
     }
 }
 
 export function pokemonListSuccess(data) {
     return {
-        type: FETCH_POKEMON_SUCCESS,
+        type: POKEMON_LIST_SUCCESS,
         payload: data
     }
 }
 
 export function pokemonListFailure(error) {
     return {
-        type: FETCH_POKEMON_FAILURE,
+        type: POKEMON_LIST_FAILURE,
         payload: error
     }
 }
@@ -43,7 +35,7 @@ export function fetchPokemonList(limit, offset) {
         for (let p = offset; p <= limit; p++) {
             pokeapi_urls.push(`/api/v2/pokemon/${p}`);
         }
-        return P.resource(pokeapi_urls).then(response =>
+        return await PokeAPI.resource(pokeapi_urls).then(response =>
             dispatch(pokemonListSuccess(response))
         ).catch(error =>
             dispatch(pokemonListFailure(error))

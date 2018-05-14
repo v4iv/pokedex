@@ -6,12 +6,17 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {withRouter} from "react-router-dom";
 import * as $ from 'jquery'
-import * as actions from '../../store/actions/pokemonActions';
-import Loader from "../../components/Loader";
+import * as actions from './actions';
 import PokemonCard from "../../components/PokemonCard";
 import ErrorPanel from '../../components/ErrorPanel';
 
 class PokemonList extends Component {
+    constructor(props) {
+        super(props);
+        this.sort = this.sort.bind(this);
+        this.state = {order: ''}
+    }
+
     componentWillMount() {
         this.props.actions.fetchPokemonList(20, 1);
     }
@@ -24,10 +29,50 @@ class PokemonList extends Component {
         }.bind(this));
     }
 
+    sort(e) {
+        this.setState({order: e.target.value});
+        let order = e.target.value;
+        this.props.pokemonList.pokemons = Object.values(this.props.pokemonList.pokemons).sort(function (param1, param2) {
+            switch (order) {
+                case "Lowest Number First":
+                    return param1.id - param2.id;
+
+                case "Highest Number First":
+                    return param2.id - param1.id;
+
+                case "Z - A":
+                    return param2.name.localeCompare(param1.name);
+
+                case "A - Z":
+                    return param1.name.localeCompare(param2.name);
+
+                default:
+                    return param1.id - param2.id;
+            }
+        });
+    }
+
     render() {
         const {pokemonList} = this.props;
         return (
-            <section className="section">
+            <div className="container">
+                <div className="field is-horizontal is-grouped is-grouped-right">
+                    <div className="control">
+                        <div className="field-body">
+                            <div className="select is-primary">
+                                <select
+                                    value={this.state.order}
+                                    onChange={this.sort}
+                                >
+                                    <option>Lowest Number First</option>
+                                    <option>Highest Number First</option>
+                                    <option>A - Z</option>
+                                    <option>Z - A</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 {Object.values(pokemonList.pokemons).map((items, index) => {
                         return index % 4 === 0
                             ? <div className="columns is-centered" key={index}>
@@ -40,12 +85,12 @@ class PokemonList extends Component {
                     }
                 )}
                 {(pokemonList.loading)
-                    ? <Loader/>
+                    ? <section><span className="loader" style={{margin: "auto"}}/></section>
                     : (pokemonList.error)
                         ? <ErrorPanel errors={[pokemonList.error]}/>
                         : undefined
                 }
-            </section>
+            </div>
         );
     }
 }
@@ -53,7 +98,7 @@ class PokemonList extends Component {
 
 function mapStateToProps(state, ownProps) {
     return {
-        pokemonList: state.pokemonReducer.pokemonList
+        pokemonList: state.pokemonListReducer.pokemonList
     };
 }
 

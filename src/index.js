@@ -5,7 +5,7 @@ import {BrowserRouter} from "react-router-dom";
 import './assets/css/fontawesome-all.min.css';
 import './assets/css/bulma.min.css';
 import './assets/css/styles.css';
-import configureStore from './app/store';
+import configureStore from './core/store';
 import registerServiceWorker from './registerServiceWorker';
 import App from './app';
 

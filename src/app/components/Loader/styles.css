@@ -1,26 +1,81 @@
-.pokeball {
+#h {
+    position: relative;
+    width: 81.6666666667px;
+    margin: 0 auto;
+    transform: rotate(45deg);
+}
+#h #a {
+    margin: 0 auto;
     position: absolute;
-    background: url('../../../assets/img/pokemonloader.png') 0 0/cover;
-    height: 50px;
-    width: 50px;
-    -webkit-animation: pkgif 1.14s steps(27) infinite;
-    animation: pokeball 1.14s steps(27) infinite;
+    width: 70px;
+    height: 70px;
+    border-width: 11.6666666667px;
+    border-color: #6ab071;
+    border-style: solid;
+    border-radius: 70px;
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+    animation: goa 2s 0.5s linear infinite;
+}
+#h #m {
+    margin: 0 auto;
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    border-width: 11.6666666667px;
+    border-color: #b2dea6;
+    border-style: solid;
+    border-radius: 70px;
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+    top: 17.5px;
+    left: 17.5px;
+    animation: gom 2s linear infinite;
+}
+#h #l {
+    position: absolute;
+    width: 0;
+    height: 0;
+    background: red;
+    border-width: 11.6666666667px;
+    border-color: #e0f1db;
+    border-style: solid;
+    border-radius: 70px;
+    top: 35px;
+    left: 35px;
 }
 
-@-webkit-keyframes pokeball {
-    from {
-        background-position: 0 0
+@keyframes goa {
+    0% {
+        transform: rotate(0deg);
     }
-    to {
-        background-position: -1350px 0
+    25% {
+        transform: rotate(-180deg);
+    }
+    50% {
+        transform: rotate(-180deg);
+    }
+    75% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(0deg);
     }
 }
-
-@keyframes pokeball {
-    from {
-        background-position: 0 0
+@keyframes gom {
+    0% {
+        transform: rotate(0deg);
     }
-    to {
-        background-position: -1350px 0
+    25% {
+        transform: rotate(180deg);
+    }
+    50% {
+        transform: rotate(180deg);
+    }
+    75% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(0deg);
     }
 }

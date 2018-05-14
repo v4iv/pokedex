@@ -1,5 +1,5 @@
 /**
- * Created by vaibhav on 8/3/18
+ * Created by vaibhav on 16/4/18
  */
 import {applyMiddleware, createStore} from 'redux';
 import thunk from 'redux-thunk';
