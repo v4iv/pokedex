@@ -23,8 +23,8 @@ const PokemonCard = ({pokemon}) => {
                             <p className="title is-4 is-capitalized">
                                 {pokemon.name}
                             </p>
-                            <p className="is-3">Height: {pokemon.height} ft</p>
-                            <p className="is-3">Weight: {pokemon.weight} lbs</p>
+                            <p className="is-3">Height: {pokemon.height/10} m</p>
+                            <p className="is-3">Weight: {pokemon.weight/10} kg</p>
                         </div>
                     </div>
                 </div>
