@@ -5,7 +5,17 @@ import {FETCH_POKEMON_FAILURE, FETCH_POKEMON_REQUEST, FETCH_POKEMON_SUCCESS} fro
 
 const INITIAL_STATE = {
     pokemonObject: {
-        pokemon: {},
+        pokemon: {
+            forms: [],
+            abilities: [],
+            stats: [],
+            moves: [],
+            sprites: {},
+            held_items: [],
+            species: {},
+            game_indices: [],
+            types: []
+        },
         error: null,
         loading: false
     }
@@ -17,7 +27,17 @@ export default function pokemonReducer(state = INITIAL_STATE, action) {
             return {
                 ...state,
                 pokemonObject: {
-                    pokemons: {},
+                    pokemon: {
+                        forms: [],
+                        abilities: [],
+                        stats: [],
+                        moves: [],
+                        sprites: {},
+                        held_items: [],
+                        species: {},
+                        game_indices: [],
+                        types: []
+                    },
                     error: null,
                     loading: true
                 }
@@ -35,7 +55,17 @@ export default function pokemonReducer(state = INITIAL_STATE, action) {
             return {
                 ...state,
                 pokemonObject: {
-                    pokemon: {},
+                    pokemon: {
+                        forms: [],
+                        abilities: [],
+                        stats: [],
+                        moves: [],
+                        sprites: {},
+                        held_items: [],
+                        species: {},
+                        game_indices: [],
+                        types: []
+                    },
                     error: action.payload,
                     loading: false
                 }

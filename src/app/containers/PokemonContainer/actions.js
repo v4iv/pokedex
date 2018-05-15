@@ -32,7 +32,7 @@ export function pokemonFailure(error) {
 export function fetchPokemon(name) {
     return async function (dispatch) {
         dispatch(pokemonRequest());
-        return PokeAPI.getPokemonByName(name).then(response =>
+        return await PokeAPI.getPokemonByName(name).then(response =>
             dispatch(pokemonSuccess(response))
         ).catch(error =>
             dispatch(pokemonFailure(error))
