@@ -25,10 +25,10 @@
 }
 
 .flying {
-    background: -webkit-linear-gradient(#3dc7ef, #bdb9b8);
+    background: -webkit-linear-gradient(#3dc7ef 10%, #bdb9b8 90%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background: -moz-linear-gradient(#3dc7ef, #bdb9b8);
+    background: -moz-linear-gradient(#3dc7ef 10%, #bdb9b8 90%);
     -moz-background-clip: text;
     -moz-text-fill-color: transparent;
 }
@@ -50,10 +50,10 @@
 }
 
 .ground {
-    background: -webkit-linear-gradient(#f7de3f, #ab9842);
+    background: -webkit-linear-gradient(#f7de3f 30%, #ab9842 70%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background: -moz-linear-gradient(#f7de3f, #ab9842);
+    background: -moz-linear-gradient(#f7de3f 30%, #ab9842 70%);
     -moz-background-clip: text;
     -moz-text-fill-color: transparent;
 }
@@ -83,10 +83,10 @@
 }
 
 .dragon {
-    background: -webkit-linear-gradient(#53a4cf, #f16e57);
+    background: -webkit-linear-gradient(#53a4cf 30%, #f16e57 70%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background: -moz-linear-gradient(#53a4cf, #f16e57);
+    background: -moz-linear-gradient(#53a4cf 30%, #f16e57 70%);
     -moz-background-clip: text;
     -moz-text-fill-color: transparent;
 }

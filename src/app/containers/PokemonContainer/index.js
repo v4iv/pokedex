@@ -7,6 +7,10 @@ import {connect} from 'react-redux';
 import {withRouter} from "react-router-dom";
 import * as actions from './actions';
 import ErrorPanel from '../../components/ErrorPanel';
+import SpritesCard from "../../components/SpritesCard";
+import StatsCard from "../../components/StatsCard";
+import DetailCard from "../../components/DetailCard";
+import SpecieCard from "../../components/SpecieCard";
 
 class Pokemon extends Component {
     componentDidMount() {
@@ -14,10 +18,9 @@ class Pokemon extends Component {
     }
 
     render() {
-        const {pokemonObject} = this.props;
-        let id_string = "" + pokemonObject.pokemon.id;
-        let filler = "000";
-        let pokemon_id = filler.substring(0, filler.length - id_string.length) + id_string;
+        const {pokemonObject, specieObject} = this.props;
+        const flavor = Object.values(specieObject.specie.flavor_text_entries).pop();
+        const genera = specieObject.specie.genera[2];
         return (
             <div className="container">
                 {(pokemonObject.loading)
@@ -27,98 +30,28 @@ class Pokemon extends Component {
                         : <section className="section">
                             <div className="columns">
                                 <div className="column is-one-fourth">
-                                    <div className="card">
-                                        <div className="card-image">
-                                            <figure className="image is-2by2 has-background-light">
-                                                <img async src={pokemonObject.pokemon.sprites.front_default}
-                                                     alt={pokemonObject.pokemon.name}/>
-                                            </figure>
-                                        </div>
-                                        <div className="card-content">
-                                            <div className="media">
-                                                <div className="media-content">
-                                                    <p className="subtitle is-6 has-text-grey">#{pokemon_id}</p>
-                                                    <p className="title is-4 is-capitalized">
-                                                        <span
-                                                            className="has-text-black">
-                                                            {pokemonObject.pokemon.name}
-                                                        </span>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <footer className="card-footer">
-                                            {pokemonObject.pokemon.types.map((item, index) =>
-                                                <span key={index}
-                                                      className={`card-footer-item is-uppercase ${item.type.name}`}>
-                                                            {item.type.name}
-                                                        </span>
-                                            )}
-                                        </footer>
-                                    </div>
+                                    <SpecieCard
+                                        number={pokemonObject.pokemon.id}
+                                        name={pokemonObject.pokemon.name}
+                                        image={pokemonObject.pokemon.sprites.front_default}
+                                        types={pokemonObject.pokemon.types}
+                                        flavor_text={flavor.flavor_text}
+                                    />
                                 </div>
                                 <div className="column is-two-thirds">
-                                    <div className="card">
-                                        <div className="card-content">
-                                            <div className="columns">
-                                                <div className="column is-half">
-                                                    <p>Height</p>
-                                                    <p>{pokemonObject.pokemon.height / 10} m</p>
-                                                    <p>Weight</p>
-                                                    <p>{pokemonObject.pokemon.weight / 10} kg</p>
-                                                </div>
-                                                <div className="column is-half">
-                                                    <p>Abilities</p>
-                                                    {Object.values(pokemonObject.pokemon.abilities).map((ability, index) => {
-                                                        return <p key={index}
-                                                                  className="is-capitalized">{ability.ability.name}</p>
-                                                    })}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="card">
-                                        <div className="card-header">
-                                            <p className="card-header-title">
-                                                Stats
-                                            </p>
-                                        </div>
-                                        <div className="card-content">
-                                            {Object.values(pokemonObject.pokemon.stats).map((stat, index) =>
-                                                <div key={index}>
-                                                    <p className="has-text-grey is-uppercase is-4">{stat.stat.name}</p>
-
-                                                    <progress className="progress is-primary" value={stat.base_stat}
-                                                              max="100">{stat.base_stat}%
-                                                    </progress>
-                                                </div>
-                                            )}
-                                        </div>
-                                    </div>
+                                    <DetailCard
+                                        height={pokemonObject.pokemon.height}
+                                        weight={pokemonObject.pokemon.weight}
+                                        category={(genera) ? genera.genus : "-"}
+                                        ablities={Object.values(pokemonObject.pokemon.abilities)}
+                                    />
+                                    <StatsCard stats={Object.values(pokemonObject.pokemon.stats)}/>
                                 </div>
                             </div>
-                            <div className="card">
-                                <div className="card-header">
-                                    <p className="card-header-title">
-                                        Sprites
-                                    </p>
-                                </div>
-                               <div className="columns">
-                                   {Object.values(pokemonObject.pokemon.sprites)
-                                       .filter(sprite => sprite !== null)
-                                       .map((sprite, index) => {
-                                               return (
-                                                   <div className="column" key={index}>
-                                                       <figure className="image is-2by2">
-                                                           <img async src={sprite}
-                                                                alt={pokemonObject.pokemon.name}/>
-                                                       </figure>
-                                                   </div>
-                                               )
-                                           }
-                                       )}
-                               </div>
-                            </div>
+                            <SpritesCard
+                                sprites={Object.values(pokemonObject.pokemon.sprites)}
+                                name={pokemonObject.pokemon.name}
+                            />
                         </section>
                 }
                 {(pokemonObject.loading)
@@ -134,7 +67,8 @@ class Pokemon extends Component {
 
 function mapStateToProps(state, ownProps) {
     return {
-        pokemonObject: state.pokemonReducer.pokemonObject
+        pokemonObject: state.pokemonReducer.pokemonObject,
+        specieObject: state.pokemonReducer.specieObject
     };
 }
 
