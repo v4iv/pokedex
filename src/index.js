@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from "react-redux";
 import {BrowserRouter} from "react-router-dom";
-import './assets/css/fontawesome-all.min.css';
 import './assets/css/bulma.min.css';
 import './assets/css/styles.css';
 import configureStore from './core/store';

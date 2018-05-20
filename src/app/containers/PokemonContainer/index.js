@@ -17,6 +17,13 @@ class Pokemon extends Component {
         this.props.actions.fetchPokemon(this.props.match.params.pokemon);
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.match.params.pokemon !== this.props.match.params.pokemon) {
+            this.props.actions.fetchPokemon(nextProps.match.params.pokemon);
+        }
+    }
+
+
     render() {
         const {pokemonObject, specieObject} = this.props;
         const flavor = Object.values(specieObject.specie.flavor_text_entries).pop();
@@ -57,7 +64,7 @@ class Pokemon extends Component {
                 {(pokemonObject.loading)
                     ? <section className="section"><span className="loader" style={{margin: "0 auto"}}/></section>
                     : (pokemonObject.error)
-                        ? <ErrorPanel errors={[pokemonObject.error]}/>
+                        ? <ErrorPanel errors={[`${pokemonObject.error}`]}/>
                         : undefined
                 }
             </div>

@@ -11,7 +11,7 @@ const PokemonCard = ({pokemon}) => {
     let pokemon_id = filler.substring(0, filler.length - id_string.length) + id_string;
     return (
         <div className="column is-one-fourth">
-            <div className="card">
+            <div className="box">
                 <div className="card-image">
                     <figure className="image is-2by2 has-background-light">
                         <Link to={`/pokemon/${pokemon.name}/`}>

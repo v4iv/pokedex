@@ -33,7 +33,7 @@ export function fetchPokemonList(limit, offset) {
         dispatch(pokemonListRequest());
         let pokeapi_urls = [];
         for (let p = offset; p <= limit; p++) {
-            pokeapi_urls.push(`/api/v2/pokemon/${p}`);
+            pokeapi_urls.push(`/api/v2/pokemon/${p}/`);
         }
         return await PokeAPI.resource(pokeapi_urls).then(response =>
             dispatch(pokemonListSuccess(response))
