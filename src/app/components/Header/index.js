@@ -11,21 +11,20 @@ class Header extends Component {
         this.query = "";
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
-        this.handleSurprise = this.handleSurprise.bind(this);
+        Header.handleSurprise = Header.handleSurprise.bind(this);
     }
 
     handleInputChange(e) {
         e.preventDefault();
         this.query = e.target.value;
-        console.log(this.query);
     }
 
     handleSearch() {
-        let pokemon = this.query.toLowerCase();
+        let pokemon = this.query;
         window.location = `/pokemon/${pokemon}/`;
     }
 
-    handleSurprise() {
+    static handleSurprise() {
         window.location = `/pokemon/${Math.floor((Math.random() * 721) + 1)}/`;
     }
 
@@ -76,14 +75,14 @@ class Header extends Component {
                 </div>
                 <div id="navMenu" className="navbar-menu">
                     <div className="navbar-end">
-                        <a onClick={this.handleSurprise} className="navbar-item">Surprise Me</a>
+                        <a onClick={Header.handleSurprise} className="navbar-item">Surprise Me</a>
                         <div className="navbar-item">
                             <form className="is-horizontal">
                                 <div className="field has-addons">
                                     <div className="control">
                                         <input className="input is-rounded is-danger"
                                                type="search"
-                                               placeholder="Pokémon ID or Name"
+                                               placeholder="Pokémon Name"
                                                ref="searchInput"
                                                onChange={this.handleInputChange}/>
                                     </div>

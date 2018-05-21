@@ -11,13 +11,13 @@ const SpritesCard = ({sprites, name}) => {
                     Sprites
                 </p>
             </div>
-            <div className="columns">
+            <div className="columns is-multiline">
                 {sprites
                     .filter(sprite => sprite !== null)
                     .reverse()
                     .map((sprite, index) => {
                             return (
-                                <div className="column" key={index}>
+                                <div className="column is-3" key={index}>
                                     <figure className="image is-2by2">
                                         <img async src={sprite}
                                              alt={name}/>
