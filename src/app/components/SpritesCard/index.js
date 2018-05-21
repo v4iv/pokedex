@@ -2,6 +2,7 @@
  * Created by vaibhav on 15/5/18
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const SpritesCard = ({sprites, name}) => {
     return (
@@ -29,6 +30,11 @@ const SpritesCard = ({sprites, name}) => {
             </div>
         </div>
     );
+};
+
+SpritesCard.propTypes = {
+    name: PropTypes.string.isRequired,
+    sprites: PropTypes.array.isRequired
 };
 
 export default SpritesCard;

@@ -2,6 +2,7 @@
  * Created by vaibhav on 15/5/18
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const StatsCard = ({stats}) => {
     return (
@@ -25,5 +26,10 @@ const StatsCard = ({stats}) => {
         </div>
     );
 };
+
+StatsCard.propTypes ={
+    stats: PropTypes.array.isRequired
+};
+
 
 export default StatsCard;

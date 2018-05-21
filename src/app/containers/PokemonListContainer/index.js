@@ -2,6 +2,7 @@
  * Created by vaibhav on 16/4/18
  */
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {withRouter} from "react-router-dom";
@@ -95,6 +96,10 @@ class PokemonList extends Component {
     }
 }
 
+
+PokemonList.propTypes = {
+    pokemonList: PropTypes.object.isRequired
+};
 
 function mapStateToProps(state, ownProps) {
     return {

@@ -2,6 +2,7 @@
  * Created by vaibhav on 15/5/18
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const SpecieCard = ({number, name, image, types, flavor_text}) => {
     let id_string = "" + number;
@@ -39,6 +40,14 @@ const SpecieCard = ({number, name, image, types, flavor_text}) => {
             </footer>
         </div>
     );
+};
+
+SpecieCard.propTypes = {
+    number: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    type: PropTypes.array.isRequired,
+    flavor_text: PropTypes.string.isRequired
 };
 
 export default SpecieCard;

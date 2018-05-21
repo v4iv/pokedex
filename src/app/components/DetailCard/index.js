@@ -2,6 +2,7 @@
  * Created by vaibhav on 15/5/18
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const DetailCard = ({height, weight, category, ablities}) => {
     return (
@@ -33,5 +34,13 @@ const DetailCard = ({height, weight, category, ablities}) => {
         </div>
     );
 };
+
+DetailCard.propTypes = {
+    height: PropTypes.number.iseRequired,
+    weight: PropTypes.number.iseRequired,
+    category: PropTypes.string.isRequired,
+    abilities: PropTypes.array.isRequired
+};
+
 
 export default DetailCard;
