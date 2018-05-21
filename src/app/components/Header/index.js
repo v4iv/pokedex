@@ -21,7 +21,9 @@ class Header extends Component {
 
     handleSearch() {
         let pokemon = this.query;
-        window.location = `/pokemon/${pokemon}/`;
+        if (pokemon.trim()) {
+            window.location = `/pokemon/${pokemon.toLowerCase()}/`;
+        }
     }
 
     static handleSurprise() {
@@ -30,29 +32,17 @@ class Header extends Component {
 
     componentDidMount() {
         document.addEventListener('DOMContentLoaded', function () {
-
-            // Get all "navbar-burger" elements
-            var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
-
-            // Check if there are any navbar burgers
+            let $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
             if ($navbarBurgers.length > 0) {
-
-                // Add a click event on each of them
                 $navbarBurgers.forEach(function ($el) {
                     $el.addEventListener('click', function () {
-
-                        // Get the target from the "data-target" attribute
-                        var target = $el.dataset.target;
-                        var $target = document.getElementById(target);
-
-                        // Toggle the class on both the "navbar-burger" and the "navbar-menu"
+                        let target = $el.dataset.target;
+                        let $target = document.getElementById(target);
                         $el.classList.toggle('is-active');
                         $target.classList.toggle('is-active');
-
                     });
                 });
             }
-
         });
     }
 
@@ -77,22 +67,20 @@ class Header extends Component {
                     <div className="navbar-end">
                         <a onClick={Header.handleSurprise} className="navbar-item">Surprise Me</a>
                         <div className="navbar-item">
-                            <form className="is-horizontal">
-                                <div className="field has-addons">
-                                    <div className="control">
-                                        <input className="input is-rounded is-danger"
-                                               type="search"
-                                               placeholder="Pokémon Name"
-                                               ref="searchInput"
-                                               onChange={this.handleInputChange}/>
-                                    </div>
-                                    <div className="control">
-                                        <a className="button is-danger is-rounded"
-                                           onClick={this.handleSearch}
-                                        >Search</a>
-                                    </div>
+                            <div className="field has-addons">
+                                <div className="control">
+                                    <input className="input is-rounded is-danger"
+                                           type="text"
+                                           placeholder="Pokémon ID or Name"
+                                           ref="searchInput"
+                                           onChange={this.handleInputChange}/>
                                 </div>
-                            </form>
+                                <div className="control">
+                                    <a className="button is-danger is-rounded"
+                                       onClick={this.handleSearch}
+                                    >Search</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
