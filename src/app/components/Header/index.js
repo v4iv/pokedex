@@ -68,7 +68,7 @@ class Header extends Component {
                         <a onClick={Header.handleSurprise} className="navbar-item">Surprise Me</a>
                         <div className="navbar-item">
                             <div className="field has-addons">
-                                <div className="control">
+                                <div className="control is-expanded">
                                     <input className="input is-rounded is-danger"
                                            type="text"
                                            placeholder="Pokémon ID or Name"
@@ -76,9 +76,9 @@ class Header extends Component {
                                            onChange={this.handleInputChange}/>
                                 </div>
                                 <div className="control">
-                                    <a className="button is-danger is-rounded"
+                                    <button className="button is-danger is-rounded"
                                        onClick={this.handleSearch}
-                                    >Search</a>
+                                    >Search</button>
                                 </div>
                             </div>
                         </div>
