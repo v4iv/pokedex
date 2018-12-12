@@ -12,7 +12,7 @@ const store = configureStore();
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
-            <App onUpdate={() => window.scrollTo(0, 0)}/>
+            <App/>
         </BrowserRouter>
     </Provider>,
     document.getElementById('root')
