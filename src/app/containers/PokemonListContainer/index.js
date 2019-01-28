@@ -7,7 +7,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {withRouter} from "react-router-dom";
 import * as $ from 'jquery'
-import * as actions from './actions';
+import * as actions from '../../actions/pokemonActions';
 import PokemonCard from "../../components/PokemonCard";
 import ErrorPanel from '../../components/ErrorPanel';
 
@@ -19,13 +19,13 @@ class PokemonList extends Component {
     }
 
     componentWillMount() {
-        this.props.actions.fetchPokemonList(20, 1);
+        this.props.actions.fetchPokemonList(21, this.props.pokemonList.pokemons.length || 0);
     }
 
     componentDidMount() {
         $(window).scroll(function () {
             if ($(window).scrollTop() === $(document).height() - $(window).height() && !this.props.pokemonList.loading) {
-                this.props.actions.fetchPokemonList(Object.values(this.props.pokemonList.pokemons).length + 20, Object.values(this.props.pokemonList.pokemons).length + 1);
+                this.props.actions.fetchPokemonList(21, this.props.pokemonList.pokemons.length);
             }
         }.bind(this));
     }
@@ -33,7 +33,7 @@ class PokemonList extends Component {
     sort(e) {
         this.setState({order: e.target.value});
         let order = e.target.value;
-        this.props.pokemonList.pokemons = Object.values(this.props.pokemonList.pokemons).sort(function (param1, param2) {
+        this.props.pokemonList.pokemons = this.props.pokemonList.pokemons.sort(function (param1, param2) {
             switch (order) {
                 case "Lowest Number First":
                     return param1.id - param2.id;
@@ -74,17 +74,12 @@ class PokemonList extends Component {
                         </div>
                     </div>
                 </div>
-                {Object.values(pokemonList.pokemons).map((items, index) => {
-                        return index % 4 === 0
-                            ? <div className="columns is-centered" key={index}>
-                                {
-                                    Object.values(pokemonList.pokemons).slice(index, index + 4).map(pokemon =>
-                                        <PokemonCard key={pokemon.id} pokemon={pokemon}/>
-                                    )}
-                            </div>
-                            : undefined;
-                    }
-                )}
+                <div className="columns is-multiline is-centered">
+                    {pokemonList.pokemons.map(pokemon => {
+                            return <PokemonCard key={pokemon.id} pokemon={pokemon}/>;
+                        }
+                    )}
+                </div>
                 {(pokemonList.loading)
                     ? <section><span className="loader" style={{margin: "auto"}}/></section>
                     : (pokemonList.error)

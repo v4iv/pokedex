@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {withRouter} from "react-router-dom";
-import * as actions from './actions';
+import * as actions from '../../actions/pokemonActions';
 import ErrorPanel from '../../components/ErrorPanel';
 import SpritesCard from "../../components/SpritesCard";
 import StatsCard from "../../components/StatsCard";

@@ -1,13 +1,11 @@
-/**
- * Created by vaibhav on 14/5/18
- */
 import {
     FETCH_POKEMON_FAILURE,
     FETCH_POKEMON_REQUEST,
     FETCH_POKEMON_SUCCESS,
-    FETCH_SPECIES_FAILURE, FETCH_SPECIES_REQUEST,
+    FETCH_SPECIES_FAILURE,
+    FETCH_SPECIES_REQUEST,
     FETCH_SPECIES_SUCCESS
-} from "./actions";
+} from "../actions";
 
 const INITIAL_STATE = {
     pokemonObject: {
@@ -35,7 +33,7 @@ const INITIAL_STATE = {
     }
 };
 
-export default function pokemonReducer(state = INITIAL_STATE, action) {
+export default function (state = INITIAL_STATE, action) {
     switch (action.type) {
         case FETCH_POKEMON_REQUEST:
             return {

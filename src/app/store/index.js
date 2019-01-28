@@ -1,10 +1,7 @@
-/**
- * Created by vaibhav on 16/4/18
- */
 import {applyMiddleware, createStore, compose} from 'redux';
 import thunk from 'redux-thunk';
 
-import rootReducer from './reducers';
+import rootReducer from '../reducers';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

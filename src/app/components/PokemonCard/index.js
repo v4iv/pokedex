@@ -10,7 +10,7 @@ const PokemonCard = ({pokemon}) => {
     let filler = "000";
     let pokemon_id = filler.substring(0, filler.length - id_string.length) + id_string;
     return (
-        <div className="column is-one-fourth">
+        <div className="column is-one-third">
             <div className="box">
                 <div className="card-image">
                     <figure className="image is-2by2 has-background-light">
