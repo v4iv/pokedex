@@ -98,7 +98,7 @@ PokemonList.propTypes = {
 
 function mapStateToProps(state, ownProps) {
     return {
-        pokemonList: state.pokemonListReducer.pokemonList
+        pokemonList: state.pokemonReducer.pokemonList
     };
 }
 
