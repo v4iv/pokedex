@@ -1,4 +1,4 @@
-import {FETCH_POKEDEX_ERROR, FETCH_POKEDEX_REQUEST, FETCH_POKEDEX_SUCCESS} from "../constants";
+import {FETCH_POKEDEX_ERROR, FETCH_POKEDEX_REQUEST, FETCH_POKEDEX_SUCCESS, SORT_POKEMONS} from "../constants";
 
 
 export interface Pokemon {
@@ -28,11 +28,11 @@ export interface PokedexState {
     loading: boolean
 }
 
-interface PokedexRequestAction {
+interface PokedexFetchRequestAction {
     type: typeof FETCH_POKEDEX_REQUEST
 }
 
-interface PokedexSuccessAction {
+interface PokedexFetchSuccessAction {
     type: typeof FETCH_POKEDEX_SUCCESS
     payload: {
         data: Pokemon[]
@@ -40,9 +40,14 @@ interface PokedexSuccessAction {
     }
 }
 
-interface PokedexErrorAction {
+interface PokedexFetchErrorAction {
     type: typeof FETCH_POKEDEX_ERROR
     payload: string
 }
 
-export type PokedexActionTypes = PokedexRequestAction | PokedexSuccessAction | PokedexErrorAction
+interface PokedexSortAction {
+    type: typeof SORT_POKEMONS
+    payload: Pokemon[]
+}
+
+export type PokedexActionTypes = PokedexFetchRequestAction | PokedexFetchSuccessAction | PokedexFetchErrorAction | PokedexSortAction

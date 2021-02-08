@@ -1,5 +1,5 @@
 import {Reducer} from "redux";
-import {FETCH_POKEDEX_ERROR, FETCH_POKEDEX_REQUEST, FETCH_POKEDEX_SUCCESS} from "../constants";
+import {FETCH_POKEDEX_ERROR, FETCH_POKEDEX_REQUEST, FETCH_POKEDEX_SUCCESS, SORT_POKEMONS} from "../constants";
 import {PokedexActionTypes, PokedexState} from "../types/pokedex.types";
 
 const INITIAL_STATE: PokedexState = {
@@ -30,6 +30,11 @@ const pokedexReducer: Reducer = (state = INITIAL_STATE, action: PokedexActionTyp
                 pokemon_list: [...state.pokemon_list],
                 error: action.payload,
                 loading: false
+            }
+        case SORT_POKEMONS:
+            return {
+                ...state,
+                pokemon_list: action.payload
             }
         default:
             return state

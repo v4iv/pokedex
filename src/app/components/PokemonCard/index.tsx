@@ -1,10 +1,9 @@
 import React, {FunctionComponent} from 'react';
-import {Link} from 'react-router-dom';
 import {get} from 'lodash'
 import {pokemon_id_generator} from "../../../utils";
 import {Pokemon} from "../../types/pokedex.types";
 
-type Props = {
+interface Props {
     pokemon: Pokemon
 }
 
