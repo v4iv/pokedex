@@ -12,7 +12,7 @@ const PokemonCard: FunctionComponent<Props> = (props) => {
     const {pokemon} = props
 
     const name = get(pokemon, ['name'])
-    const icon = get(pokemon, ['sprites', 'other', 'official-artwork', 'front_default'])
+    const image = get(pokemon, ['sprites', 'other', 'official-artwork', 'front_default'])
     const pokemon_id = pokemon_id_generator(get(pokemon, ['id']))
     const height = get(pokemon, ['height']) / 10
     const weight = get(pokemon, ['weight']) / 10
@@ -24,7 +24,7 @@ const PokemonCard: FunctionComponent<Props> = (props) => {
                 <div className="card-image">
                     <figure className="image is-2by2 has-background-light">
                         <Link to={`/pokemon/${name}/`}>
-                            <img src={icon} alt={name}/>
+                            <img src={image} alt={name}/>
                         </Link>
                     </figure>
                 </div>

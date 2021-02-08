@@ -1,4 +1,5 @@
 import React, {FunctionComponent, useEffect} from 'react';
+import Helmet from "react-helmet";
 import {useDispatch, useSelector} from "react-redux";
 import {useParams} from 'react-router-dom';
 import {isEmpty} from 'lodash';
@@ -47,6 +48,12 @@ const PokemonPage: FunctionComponent = () => {
 
     return (
         <>
+            <Helmet>
+                <title>POKéDEX &middot; The POKéMON Encyclopedia</title>
+
+                <meta name="description" content="Pokédex is a mini-encyclopedia of Pokémon species, types etc." />
+            </Helmet>
+
             <section className='section'>
                 {!error && !isEmpty(pokemon) && <PokemonLayout pokemon={pokemon}/>}
 

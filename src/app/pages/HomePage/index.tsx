@@ -1,4 +1,5 @@
 import React, {useState, useEffect, FunctionComponent, ChangeEvent} from 'react';
+import Helmet from 'react-helmet'
 import {useDispatch, useSelector} from "react-redux";
 import {isEmpty} from 'lodash'
 import {RootState} from "../../reducers";
@@ -71,6 +72,34 @@ const HomePage: FunctionComponent = () => {
 
     return (
         <>
+            <Helmet>
+                <title>POKéDEX &middot; The POKéMON Encyclopedia</title>
+
+                <meta name="description" content="Pokédex is a mini-encyclopedia of Pokémon species, types etc." />
+
+                {/* Twitter Card tags */}
+                <meta name='twitter:card' content='summary' />
+
+                <meta name='twitter:site' content={`https://pokedex.theleakycauldronblog.com`} />
+
+                <meta name='twitter:title' content={`POKéDEX - The POKéMON Encyclopedia`} />
+
+                <meta name='twitter:description' content={`Pokédex is a mini-encyclopedia of Pokémon species, types etc.`} />
+
+                <meta name='twitter:image' content={`https://pokedex.theleakycauldronblog.com/logo192.png`} />
+
+                {/* OpenGraph tags */}
+                <meta property='og:url' content={`https://pokedex.theleakycauldronblog.com`} />
+
+                <meta property='og:title' content={`POKéDEX - The POKéMON Encyclopedia`} />
+
+                <meta property='og:author' content={'POKéMON'} />
+
+                <meta property='og:description' content={`Pokédex is a mini-encyclopedia of Pokémon species, types etc.`} />
+
+                <meta property='og:image' content={`https://pokedex.theleakycauldronblog.com/logo192.png`} />
+            </Helmet>
+
             <section className='section'>
                 <nav className='level'>
                     <div className='level-item has-text-centered'>
