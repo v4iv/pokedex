@@ -1,8 +1,9 @@
 import React, {FunctionComponent} from 'react';
-import SpriteBox from "../SpriteBox";
+import Helmet from "react-helmet";
 import {get, find} from "lodash";
 import {pokemon_id_generator} from "../../../utils";
 import {Pokemon} from "../../types/pokemon.types";
+import SpriteBox from "../SpriteBox";
 import StatsBox from "../StatsBox";
 
 interface Props {
@@ -13,6 +14,7 @@ const PokemonLayout: FunctionComponent<Props> = (props) => {
     const {pokemon} = props
 
     const name = get(pokemon, ['name'])
+    const image = get(pokemon, ['sprites', 'other', 'official-artwork', 'front_default'])
     const sprites = get(pokemon, ['sprites'])
     const pokemon_id = pokemon_id_generator(get(pokemon, ['id']))
     const height = get(pokemon, ['height']) / 10
@@ -27,6 +29,34 @@ const PokemonLayout: FunctionComponent<Props> = (props) => {
 
     return (
         <>
+            <Helmet>
+                <title>{name} &middot; POKéDEX &middot; The POKéMON Encyclopedia</title>
+
+                <meta name="description" content={`${name} - ${flavor_text}`} />
+
+                {/* Twitter Card tags */}
+                <meta name='twitter:card' content='summary' />
+
+                <meta name='twitter:site' content={`https://pokedex.theleakycauldronblog.com/pokemon/${name}`} />
+
+                <meta name='twitter:title' content={`${name} | POKéDEX - The POKéMON Encyclopedia`} />
+
+                <meta name='twitter:description' content={`${name} - ${flavor_text}`} />
+
+                <meta name='twitter:image' content={image} />
+
+                {/* OpenGraph tags */}
+                <meta property='og:url' content={`https://pokedex.theleakycauldronblog.com/pokemon/${name}`} />
+
+                <meta property='og:title' content={`${name} | POKéDEX - The POKéMON Encyclopedia`} />
+
+                <meta property='og:author' content={'POKéMON'} />
+
+                <meta property='og:description' content={`${name} - ${flavor_text}`} />
+
+                <meta property='og:image' content={`https://pokedex.theleakycauldronblog.com/logo192.png`} />
+            </Helmet>
+
             <div className='columns is-vcentered'>
                 <div className='column is-one-quarter'>
                     <SpriteBox name={name} sprites={sprites} types={types}/>
