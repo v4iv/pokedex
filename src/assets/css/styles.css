@@ -1,0 +1,104 @@
+/* latin */
+@font-face {
+    font-family: 'Orbitron';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Orbitron Regular'), local('Orbitron-Regular'), url(../fonts/orbitron-regular.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD
+
+}
+
+* {
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 1px;
+}
+
+.grass {
+    color: #9bcc50
+}
+
+.poison {
+    color: #b97fc9
+}
+
+.fire {
+    color: #fd7d24
+}
+
+.flying {
+    background-color: #2f2f2f;
+    background-image: linear-gradient(#3dc7ef 10%, #bdb9b8 90%);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+}
+
+.water {
+    color: #4592c4
+}
+
+.bug {
+    color: #729f3f
+}
+
+.normal {
+    color: #a4acaf
+}
+
+.electric {
+    color: #eed535
+}
+
+.ground {
+    background-color: #2f2f2f;
+    background-image: linear-gradient(#f7de3f 30%, #ab9842 70%);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+}
+
+.fairy {
+    color: #fdb9e9
+}
+
+.fighting {
+    color: #d56723
+}
+
+.psychic {
+    color: #f366b9
+}
+
+.rock {
+    color: #a38c21
+}
+
+.steel {
+    color: #9eb7b8
+}
+
+.ice {
+    color: #51c4e7
+}
+
+.dragon {
+    background-color: #2f2f2f;
+    background-image: linear-gradient(#53a4cf 30%, #f16e57 70%);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+}
+
+.dark {
+    color: #707070
+}
+
+.ghost {
+    color: #7b62a3
+}

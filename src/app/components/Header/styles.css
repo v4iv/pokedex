@@ -1,0 +1,26 @@
+.pokeball {
+    position: absolute;
+    background: url('../../../assets/images/pokeball-spritesheet.png') 0 0/cover;
+    height: 50px;
+    width: 50px;
+    -webkit-animation: pkgif 1.14s steps(27) infinite;
+    animation: pokeball 1.14s steps(27) infinite;
+}
+
+@-webkit-keyframes pokeball {
+    from {
+        background-position: 0 0
+    }
+    to {
+        background-position: -1350px 0
+    }
+}
+
+@keyframes pokeball {
+    from {
+        background-position: 0 0
+    }
+    to {
+        background-position: -1350px 0
+    }
+}
