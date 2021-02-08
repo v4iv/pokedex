@@ -1,153 +1,198 @@
-import React, {useState, useEffect, FunctionComponent, ChangeEvent} from 'react';
-import Helmet from 'react-helmet'
-import {useDispatch, useSelector} from "react-redux";
-import {isEmpty} from 'lodash'
-import {RootState} from "../../reducers";
-import {FETCH_POKEDEX_ERROR, FETCH_POKEDEX_REQUEST, FETCH_POKEDEX_SUCCESS, SORT_POKEMONS} from "../../constants";
-import {fetchPokedex, sortPokemons} from "../../actions/pokedex.action";
-import Spinner from "../../components/Spinner";
-import PokemonGrid from "../../components/PokemonGrid";
-
+import React, {
+  useState,
+  useEffect,
+  FunctionComponent,
+  ChangeEvent,
+} from "react"
+import Helmet from "react-helmet"
+import { useDispatch, useSelector } from "react-redux"
+import { isEmpty } from "lodash"
+import { RootState } from "../../reducers"
+import {
+  FETCH_POKEDEX_ERROR,
+  FETCH_POKEDEX_REQUEST,
+  FETCH_POKEDEX_SUCCESS,
+  SORT_POKEMONS,
+} from "../../constants"
+import { fetchPokedex, sortPokemons } from "../../actions/pokedex.action"
+import Spinner from "../../components/Spinner"
+import PokemonGrid from "../../components/PokemonGrid"
 
 const HomePage: FunctionComponent = () => {
-    const [isFetching, setIsFetching] = useState(false);
-    const [order, setOrder] = useState('Lowest Number First')
-    const dispatch = useDispatch()
+  const [isFetching, setIsFetching] = useState(false)
+  const [order, setOrder] = useState("Lowest Number First")
+  const dispatch = useDispatch()
 
-    const {pokemon_list, next, error, loading} = useSelector((state: RootState) => ({
-        pokemon_list: state.pokedex.pokemon_list,
-        next: state.pokedex.next,
-        error: state.pokedex.error,
-        loading: state.pokedex.loading
-    }))
+  const { pokemonList, next, error, loading } = useSelector(
+    (state: RootState) => ({
+      pokemonList: state.pokedex.pokemonList,
+      next: state.pokedex.next,
+      error: state.pokedex.error,
+      loading: state.pokedex.loading,
+    })
+  )
 
-    const handleScroll = () => {
-        if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight) return;
-        setIsFetching(true);
-    }
+  const handleScroll = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop !==
+      document.documentElement.offsetHeight
+    )
+      return
+    setIsFetching(true)
+  }
 
-    useEffect(() => {
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
-    useEffect(() => {
-        (async () => {
-            if(loading) return
+  useEffect(() => {
+    ;(async () => {
+      if (loading) return
 
-            dispatch({
-                type: FETCH_POKEDEX_REQUEST
-            })
+      dispatch({
+        type: FETCH_POKEDEX_REQUEST,
+      })
 
-            try {
-                const payload = await fetchPokedex(next)
-
-                dispatch({
-                    type: FETCH_POKEDEX_SUCCESS,
-                    payload: payload
-                })
-            } catch (err) {
-                dispatch({
-                    type: FETCH_POKEDEX_ERROR,
-                    payload: "An Error Occurred! Please Try Again."
-                })
-            }
-        })()
-
-        setIsFetching(false)
-    }, [dispatch, isFetching]) // eslint-disable-line react-hooks/exhaustive-deps
-
-    const handleSort = (e: ChangeEvent<HTMLSelectElement>) => {
-        setOrder(e.target.value)
-
-        let orderBy = e.target.value
-
-        const payload = sortPokemons(pokemon_list, orderBy)
+      try {
+        const payload = await fetchPokedex(next)
 
         dispatch({
-            type: SORT_POKEMONS,
-            payload: payload
+          type: FETCH_POKEDEX_SUCCESS,
+          payload,
         })
-    }
+      } catch (err) {
+        dispatch({
+          type: FETCH_POKEDEX_ERROR,
+          payload: "An Error Occurred! Please Try Again.",
+        })
+      }
+    })()
 
-    return (
-        <>
-            <Helmet>
-                <title>POKéDEX &middot; The POKéMON Encyclopedia</title>
+    setIsFetching(false)
+  }, [dispatch, isFetching]) // eslint-disable-line react-hooks/exhaustive-deps
 
-                <meta name="description" content="Pokédex is a mini-encyclopedia of Pokémon species, types etc." />
+  const handleSort = (e: ChangeEvent<HTMLSelectElement>) => {
+    setOrder(e.target.value)
 
-                {/* Twitter Card tags */}
-                <meta name='twitter:card' content='summary' />
+    const orderBy = e.target.value
 
-                <meta name='twitter:site' content={`https://pokedex.theleakycauldronblog.com`} />
+    const payload = sortPokemons(pokemonList, orderBy)
 
-                <meta name='twitter:title' content={`POKéDEX - The POKéMON Encyclopedia`} />
+    dispatch({
+      type: SORT_POKEMONS,
+      payload,
+    })
+  }
 
-                <meta name='twitter:description' content={`Pokédex is a mini-encyclopedia of Pokémon species, types etc.`} />
+  return (
+    <>
+      <Helmet>
+        <title>POKéDEX &middot; The POKéMON Encyclopedia</title>
 
-                <meta name='twitter:image' content={`https://pokedex.theleakycauldronblog.com/logo192.png`} />
+        <meta
+          name="description"
+          content="Pokédex is a mini-encyclopedia of Pokémon species, types etc."
+        />
 
-                {/* OpenGraph tags */}
-                <meta property='og:url' content={`https://pokedex.theleakycauldronblog.com`} />
+        {/* Twitter Card tags */}
+        <meta name="twitter:card" content="summary" />
 
-                <meta property='og:title' content={`POKéDEX - The POKéMON Encyclopedia`} />
+        <meta
+          name="twitter:site"
+          content="https://pokedex.theleakycauldronblog.com"
+        />
 
-                <meta property='og:author' content={'POKéMON'} />
+        <meta
+          name="twitter:title"
+          content="POKéDEX - The POKéMON Encyclopedia"
+        />
 
-                <meta property='og:description' content={`Pokédex is a mini-encyclopedia of Pokémon species, types etc.`} />
+        <meta
+          name="twitter:description"
+          content="Pokédex is a mini-encyclopedia of Pokémon species, types etc."
+        />
 
-                <meta property='og:image' content={`https://pokedex.theleakycauldronblog.com/logo192.png`} />
-            </Helmet>
+        <meta
+          name="twitter:image"
+          content="https://pokedex.theleakycauldronblog.com/logo192.png"
+        />
 
-            <section className='section'>
-                <nav className='level'>
-                    <div className='level-item has-text-centered'>
-                        <div>
-                            <h1 className="title">POKéMON</h1>
+        {/* OpenGraph tags */}
+        <meta
+          property="og:url"
+          content="https://pokedex.theleakycauldronblog.com"
+        />
 
-                            <h2 className="heading">gotta catch'em all</h2>
-                        </div>
-                    </div>
-                </nav>
+        <meta
+          property="og:title"
+          content="POKéDEX - The POKéMON Encyclopedia"
+        />
 
-                <div className='columns'>
-                    <div className='column is-half'>
-                        <button className="button is-info is-light is-fullwidth">Surprise Me!</button>
-                    </div>
+        <meta property="og:author" content="POKéMON" />
 
-                    <div className='column is-half'>
-                        <div className="field is-horizontal is-grouped is-grouped-right">
-                            <div className="control is-fullwidth">
-                                <div className="field-body is-fullwidth">
-                                    <label className='label is-hidden'>Sort</label>
+        <meta
+          property="og:description"
+          content="Pokédex is a mini-encyclopedia of Pokémon species, types etc."
+        />
 
-                                    <div className="select is-primary">
-                                        <select
-                                            value={order}
-                                            onChange={handleSort}
-                                        >
-                                            <option>Lowest Number First</option>
+        <meta
+          property="og:image"
+          content="https://pokedex.theleakycauldronblog.com/logo192.png"
+        />
+      </Helmet>
 
-                                            <option>Highest Number First</option>
+      <section className="section">
+        <nav className="level">
+          <div className="level-item has-text-centered">
+            <div>
+              <h1 className="title">POKéMON</h1>
 
-                                            <option>A - Z</option>
+              <h2 className="heading">gotta catch'em all</h2>
+            </div>
+          </div>
+        </nav>
 
-                                            <option>Z - A</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <div className="columns">
+          <div className="column is-half">
+            <button className="button is-info is-light is-fullwidth">
+              Surprise Me!
+            </button>
+          </div>
+
+          <div className="column is-half">
+            <div className="field is-horizontal is-grouped is-grouped-right">
+              <div className="control is-fullwidth">
+                <div className="field-body is-fullwidth">
+                  <label className="label is-hidden" htmlFor="#sort">
+                    Sort
+                  </label>
+
+                  <div id="sort" className="select is-primary">
+                    <select value={order} onChange={handleSort}>
+                      <option>Lowest Number First</option>
+
+                      <option>Highest Number First</option>
+
+                      <option>A - Z</option>
+
+                      <option>Z - A</option>
+                    </select>
+                  </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-                {(!error && !isEmpty(pokemon_list)) && <PokemonGrid pokemons={pokemon_list}/>}
+        {!error && !isEmpty(pokemonList) && (
+          <PokemonGrid pokemons={pokemonList} />
+        )}
 
-                {loading && <Spinner/>}
-            </section>
-        </>
-    );
-};
+        {loading && <Spinner />}
+      </section>
+    </>
+  )
+}
 
-export default HomePage;
+export default HomePage
