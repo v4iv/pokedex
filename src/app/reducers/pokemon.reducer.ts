@@ -13,6 +13,7 @@ const pokemonReducer: Reducer = (state=INITIAL_STATE, action: PokemonActionTypes
         case FETCH_POKEMON_REQUEST:
             return {
                 ...state,
+                pokemon: {},
                 loading: true
             }
         case FETCH_POKEMON_SUCCESS:

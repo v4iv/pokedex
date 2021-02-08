@@ -75,7 +75,7 @@ const HomePage: FunctionComponent = () => {
                 <nav className='level'>
                     <div className='level-item has-text-centered'>
                         <div>
-                            <h1 className="title">Pokémon</h1>
+                            <h1 className="title">POKéMON</h1>
 
                             <h2 className="heading">gotta catch'em all</h2>
                         </div>

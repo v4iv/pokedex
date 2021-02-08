@@ -1,13 +1,13 @@
-import React, {useEffect, FunctionComponent} from 'react';
+import React, {FunctionComponent, useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import { useParams } from 'react-router-dom';
-import { get, isEmpty } from 'lodash';
+import {useParams} from 'react-router-dom';
+import {isEmpty} from 'lodash';
 import {RootState} from "../../reducers";
 import {Pokemon} from "../../types/pokemon.types";
 import {fetchPokemon} from "../../actions/pokemon.action";
 import {FETCH_POKEMON_ERROR, FETCH_POKEMON_REQUEST, FETCH_POKEMON_SUCCESS} from "../../constants";
 import Spinner from "../../components/Spinner";
-import SpriteBox from "../../components/SpriteBox";
+import PokemonLayout from "../../components/PokemonLayout";
 
 interface ParamTypes {
     slug: string
@@ -48,16 +48,7 @@ const PokemonPage: FunctionComponent = () => {
     return (
         <>
             <section className='section'>
-                {!error && !isEmpty(pokemon) && <div className='columns'>
-                    <div className='column is-one-third'>
-                        <SpriteBox name={get(pokemon, ['name'])} sprites={get(pokemon, ['sprites'])}/>
-                    </div>
-                    <div className='column is-two-thirds'>
-                        <div>
-                            <h1 className='title is-capitalized'>{get(pokemon, ['name'])}</h1>
-                        </div>
-                    </div>
-                </div>}
+                {!error && !isEmpty(pokemon) && <PokemonLayout pokemon={pokemon}/>}
 
                 {loading && <Spinner/>}
             </section>

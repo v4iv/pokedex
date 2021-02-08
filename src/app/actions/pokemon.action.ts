@@ -10,7 +10,18 @@ export const fetchPokemon: Function = async (pokemon: string) => {
                 url: `${process.env.REACT_APP_BASE_URL}/pokemon/${pokemon}`
             })
 
-            const payload: Pokemon = get(response, ['data'])
+            const pokemon_result: Pokemon = get(response, ['data'])
+
+            const species_url = get(pokemon_result, ['species', 'url'])
+
+            const res: AxiosResponse = await axios({
+                method: "get",
+                url: species_url
+            })
+
+            const species_result: object = get(res, ['data'])
+
+            const payload: Pokemon = {...pokemon_result, species: species_result}
 
             resolve(payload)
         } catch (err) {

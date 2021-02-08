@@ -12,10 +12,10 @@ const PokemonCard: FunctionComponent<Props> = (props) => {
     const {pokemon} = props
 
     const name = get(pokemon, ['name'])
-    const icon = get(pokemon, ['sprites', 'front_default'])
+    const icon = get(pokemon, ['sprites', 'other', 'official-artwork', 'front_default'])
     const pokemon_id = pokemon_id_generator(get(pokemon, ['id']))
-    const height = get(pokemon, ['height'])
-    const weight = get(pokemon, ['weight'])
+    const height = get(pokemon, ['height']) / 10
+    const weight = get(pokemon, ['weight']) / 10
     const types = get(pokemon, ['types'])
 
     return (
@@ -40,9 +40,9 @@ const PokemonCard: FunctionComponent<Props> = (props) => {
                                 </Link>
                             </p>
 
-                            <p className="is-3">Height: {height / 10} m</p>
+                            <p className="is-3">Height: {height} m</p>
 
-                            <p className="is-3">Weight: {weight / 10} kg</p>
+                            <p className="is-3">Weight: {weight} kg</p>
                         </div>
                     </div>
                 </div>
