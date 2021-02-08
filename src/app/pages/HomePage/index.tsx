@@ -3,10 +3,9 @@ import {useDispatch, useSelector} from "react-redux";
 import {isEmpty} from 'lodash'
 import {RootState} from "../../reducers";
 import {FETCH_POKEDEX_ERROR, FETCH_POKEDEX_REQUEST, FETCH_POKEDEX_SUCCESS, SORT_POKEMONS} from "../../constants";
-import {fetchPokedex} from "../../actions/pokedex.action";
+import {fetchPokedex, sortPokemons} from "../../actions/pokedex.action";
 import Spinner from "../../components/Spinner";
 import PokemonGrid from "../../components/PokemonGrid";
-import {Pokemon} from "../../types/pokedex.types";
 
 
 const HomePage: FunctionComponent = () => {
@@ -49,7 +48,7 @@ const HomePage: FunctionComponent = () => {
             } catch (err) {
                 dispatch({
                     type: FETCH_POKEDEX_ERROR,
-                    payload: "An Error Occurred!"
+                    payload: "An Error Occurred! Please Try Again."
                 })
             }
         })()
@@ -62,26 +61,7 @@ const HomePage: FunctionComponent = () => {
 
         let orderBy = e.target.value
 
-        const list = [...pokemon_list]
-
-        const payload = list.sort((param1: Pokemon, param2: Pokemon) => {
-            switch (orderBy) {
-                case "Lowest Number First":
-                    return param1.id - param2.id;
-
-                case "Highest Number First":
-                    return param2.id - param1.id;
-
-                case "Z - A":
-                    return param2.name.localeCompare(param1.name);
-
-                case "A - Z":
-                    return param1.name.localeCompare(param2.name);
-
-                default:
-                    return param1.id - param2.id;
-            }
-        })
+        const payload = sortPokemons(pokemon_list, orderBy)
 
         dispatch({
             type: SORT_POKEMONS,

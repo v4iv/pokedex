@@ -1,25 +1,5 @@
+import {Pokemon} from "./pokemon.types";
 import {FETCH_POKEDEX_ERROR, FETCH_POKEDEX_REQUEST, FETCH_POKEDEX_SUCCESS, SORT_POKEMONS} from "../constants";
-
-
-export interface Pokemon {
-    id: number
-    name: string
-    base_experience: number
-    height: number
-    is_default: boolean
-    order: number
-    weight: number
-    abilities: object[],
-    forms: object[],
-    game_indices: object[],
-    held_items: object[],
-    location_area_encounters: string
-    moves: object[],
-    sprites: object,
-    species: object,
-    stats: object[],
-    types: object[]
-}
 
 export interface PokedexState {
     pokemon_list: Pokemon[]

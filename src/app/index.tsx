@@ -5,6 +5,7 @@ import store from "./store";
 import Header from "./components/Header";
 // Pages
 import HomePage from "./pages/HomePage";
+import PokemonPage from "./pages/PokemonPage";
 
 const App: FunctionComponent = () => {
     return <Provider store={store}>
@@ -14,6 +15,7 @@ const App: FunctionComponent = () => {
                 <div className='container'>
                     <Switch>
                         <Route component={HomePage} exact path={`/`}/>
+                        <Route component={PokemonPage} exact path={`/pokemon/:slug`}/>
                     </Switch>
                 </div>
             </Fragment>

@@ -1,8 +1,10 @@
 import {combineReducers} from 'redux'
 import pokedexReducer from "./pokedex.reducer";
+import pokemonReducer from "./pokemon.reducer";
 
 const rootReducer = combineReducers({
-    pokedex: pokedexReducer
+    pokedex: pokedexReducer,
+    pokemon: pokemonReducer
 })
 
 export type RootState = ReturnType<typeof rootReducer>

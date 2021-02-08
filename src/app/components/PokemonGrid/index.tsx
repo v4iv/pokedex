@@ -1,5 +1,5 @@
 import React, {FunctionComponent} from 'react';
-import {Pokemon} from "../../types/pokedex.types";
+import {Pokemon} from "../../types/pokemon.types";
 import PokemonCard from "../PokemonCard";
 
 interface Props {

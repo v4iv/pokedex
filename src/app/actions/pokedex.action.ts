@@ -1,6 +1,6 @@
 import axios, {AxiosResponse} from "axios";
 import {get} from 'lodash'
-import {Pokemon} from "../types/pokedex.types";
+import {Pokemon} from "../types/pokemon.types";
 
 
 export const fetchPokedex: Function = (url: string) => {
@@ -70,4 +70,25 @@ export const fetchPokedex: Function = (url: string) => {
             reject(err)
         }
     }))
+}
+
+export const sortPokemons = (list: Pokemon[], order_by: string = 'Lowest Number First') => {
+    return list.sort((param1, param2) => {
+        switch (order_by) {
+            case "Lowest Number First":
+                return param1.id - param2.id;
+
+            case "Highest Number First":
+                return param2.id - param1.id;
+
+            case "Z - A":
+                return param2.name.localeCompare(param1.name);
+
+            case "A - Z":
+                return param1.name.localeCompare(param2.name);
+
+            default:
+                return param1.id - param2.id;
+        }
+    })
 }

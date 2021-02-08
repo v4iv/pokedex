@@ -64,7 +64,7 @@ export const setCache = (key: string, data: any, duration: number = DEFAULT_DURA
 
 export const clearCache = (key: string) => {
     console.log('Clearing %s Cache ...', key);
-    if(localStorage && localStorage.getItem(key)) {
+    if (localStorage && localStorage.getItem(key)) {
         localStorage.removeItem(key)
     }
 }

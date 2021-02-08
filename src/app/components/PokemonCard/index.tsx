@@ -1,7 +1,8 @@
 import React, {FunctionComponent} from 'react';
+import {Link} from 'react-router-dom';
 import {get} from 'lodash'
+import {Pokemon} from "../../types/pokemon.types";
 import {pokemon_id_generator} from "../../../utils";
-import {Pokemon} from "../../types/pokedex.types";
 
 interface Props {
     pokemon: Pokemon
@@ -22,7 +23,9 @@ const PokemonCard: FunctionComponent<Props> = (props) => {
             <div className="box">
                 <div className="card-image">
                     <figure className="image is-2by2 has-background-light">
-                        <img src={icon} alt={name}/>
+                        <Link to={`/pokemon/${name}/`}>
+                            <img src={icon} alt={name}/>
+                        </Link>
                     </figure>
                 </div>
 
@@ -32,7 +35,9 @@ const PokemonCard: FunctionComponent<Props> = (props) => {
                             <p className="subtitle is-6 has-text-grey">#{pokemon_id}</p>
 
                             <p className="title is-4 is-capitalized">
-                                {name}
+                                <Link to={`/pokemon/${name}/`} className="has-text-black">
+                                    {name}
+                                </Link>
                             </p>
 
                             <p className="is-3">Height: {height / 10} m</p>

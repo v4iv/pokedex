@@ -1,0 +1,36 @@
+@-webkit-keyframes frame-animation {
+    100% {
+        transform: translateX(-100%);
+    }
+}
+@keyframes frame-animation {
+    100% {
+        transform: translateX(-100%);
+    }
+}
+.animation {
+    margin: 0 auto;
+    max-width: 520px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.animation-frames {
+    -webkit-animation: frame-animation 600ms infinite;
+    animation: frame-animation 600ms infinite;
+    -webkit-animation-timing-function: steps(2);
+    animation-timing-function: steps(2);
+    display: flex;
+    width: 200%;
+    background: #499271;
+}
+
+.animation-frame {
+    display: block;
+    width: 50%;
+    max-width: 50%;
+    flex-basis: 50%;
+}
+.animation-frame img {
+    width: 100%;
+}
