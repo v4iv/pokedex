@@ -33,6 +33,8 @@ const HomePage: FunctionComponent = () => {
 
     useEffect(() => {
         (async () => {
+            if(loading) return
+
             dispatch({
                 type: FETCH_POKEDEX_REQUEST
             })
@@ -60,7 +62,9 @@ const HomePage: FunctionComponent = () => {
 
         let orderBy = e.target.value
 
-        const payload = pokemon_list.sort((param1: Pokemon, param2: Pokemon) => {
+        const list = [...pokemon_list]
+
+        const payload = list.sort((param1: Pokemon, param2: Pokemon) => {
             switch (orderBy) {
                 case "Lowest Number First":
                     return param1.id - param2.id;
@@ -88,19 +92,42 @@ const HomePage: FunctionComponent = () => {
     return (
         <>
             <section className='section'>
-                <div className="field is-horizontal is-grouped is-grouped-right">
-                    <div className="control">
-                        <div className="field-body">
-                            <div className="select is-primary is-rounded">
-                                <select
-                                    value={order}
-                                    onChange={handleSort}
-                                >
-                                    <option>Lowest Number First</option>
-                                    <option>Highest Number First</option>
-                                    <option>A - Z</option>
-                                    <option>Z - A</option>
-                                </select>
+                <nav className='level'>
+                    <div className='level-item has-text-centered'>
+                        <div>
+                            <h1 className="title">Pokémon</h1>
+
+                            <h2 className="heading">gotta catch'em all</h2>
+                        </div>
+                    </div>
+                </nav>
+
+                <div className='columns'>
+                    <div className='column is-half'>
+                        <button className="button is-info is-light is-fullwidth">Surprise Me!</button>
+                    </div>
+
+                    <div className='column is-half'>
+                        <div className="field is-horizontal is-grouped is-grouped-right">
+                            <div className="control is-fullwidth">
+                                <div className="field-body is-fullwidth">
+                                    <label className='label is-hidden'>Sort</label>
+
+                                    <div className="select is-primary">
+                                        <select
+                                            value={order}
+                                            onChange={handleSort}
+                                        >
+                                            <option>Lowest Number First</option>
+
+                                            <option>Highest Number First</option>
+
+                                            <option>A - Z</option>
+
+                                            <option>Z - A</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

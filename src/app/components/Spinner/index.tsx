@@ -4,7 +4,7 @@ import './styles.css'
 const Spinner: FunctionComponent = () => {
     return (
         <section className="section">
-            <div id='h' className="container">
+            <div id='h'>
                 <div id='a'/>
                 <div id='m'/>
                 <div id='l'/>
