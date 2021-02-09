@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
 import { isEmpty, random } from "lodash"
@@ -15,8 +15,8 @@ import Spinner from "../../components/Spinner"
 import PokemonGrid from "../../components/PokemonGrid"
 
 const HomePage: React.FunctionComponent = () => {
-  const dispatch = useDispatch()
   const history = useHistory()
+  const dispatch = useDispatch()
 
   const [surprise, setSurprise] = useState(false)
   const [order, setOrder] = useState("Lowest Number First")
@@ -31,7 +31,30 @@ const HomePage: React.FunctionComponent = () => {
     })
   )
 
-  const handleFetch = (nextURL: string) => {
+  const handleFetch = useCallback(() => {
+    if (!isEmpty(pokemonList) || loading) return
+
+    dispatch({
+      type: FETCH_POKEDEX_REQUEST,
+    })
+
+    fetchPokemons(`${process.env.REACT_APP_BASE_URL}/pokemon?limit=12&offset=0`)
+      .then((res) => {
+        dispatch({
+          type: FETCH_POKEDEX_SUCCESS,
+          payload: res,
+        })
+      })
+      .catch((err) => {
+        console.error(FETCH_POKEDEX_ERROR, err)
+        dispatch({
+          type: FETCH_POKEDEX_ERROR,
+          payload: "An Error Occurred! Please Try Again.",
+        })
+      })
+  }, [fetchPokemons, dispatch]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  const handleFetchMore = (nextURL: string) => {
     if (loading) return
 
     dispatch({
@@ -94,13 +117,14 @@ const HomePage: React.FunctionComponent = () => {
   }
 
   useEffect(() => {
+    handleFetch()
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+  }, [handleFetch])
 
   useEffect(() => {
     if (isBottom) {
-      handleFetch(url)
+      handleFetchMore(url)
     }
   }, [handleFetch, isBottom]) // eslint-disable-line react-hooks/exhaustive-deps
 
