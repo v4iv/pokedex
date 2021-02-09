@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react"
+import React from "react"
 import { Helmet } from "react-helmet"
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
   image: string
 }
 
-const SEO: FunctionComponent<Props> = (props) => {
+const SEO: React.FunctionComponent<Props> = (props) => {
   const { title, url, description, image } = props
 
   return (

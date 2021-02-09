@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react"
+import React from "react"
 import { get } from "lodash"
 import "./styles.css"
 
@@ -8,7 +8,7 @@ interface Props {
   types: object[]
 }
 
-const SpriteBox: FunctionComponent<Props> = (props) => {
+const SpriteBox: React.FunctionComponent<Props> = (props) => {
   const { name, sprites, types } = props
 
   const frontDefaultSprite: string = get(sprites, ["front_default"])

@@ -1,5 +1,5 @@
-import React, { FunctionComponent } from "react"
-import { get, find } from "lodash"
+import React from "react"
+import { find, get } from "lodash"
 import { pokemonIDGenerator } from "../../../utils"
 import { Pokemon } from "../../types/pokemon.types"
 import SpriteBox from "../SpriteBox"
@@ -10,7 +10,7 @@ interface Props {
   pokemon: Pokemon
 }
 
-const PokemonLayout: FunctionComponent<Props> = (props) => {
+const PokemonLayout: React.FunctionComponent<Props> = (props) => {
   const { pokemon } = props
 
   const name = get(pokemon, ["name"])

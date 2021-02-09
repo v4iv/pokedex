@@ -1,7 +1,7 @@
-import React, { FunctionComponent } from "react"
+import React from "react"
 import "./styles.css"
 
-const Spinner: FunctionComponent = () => {
+const Spinner: React.FunctionComponent = () => {
   return (
     <section className="section">
       <div id="h">

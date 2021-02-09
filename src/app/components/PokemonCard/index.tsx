@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react"
+import React from "react"
 import { Link } from "react-router-dom"
 import { get } from "lodash"
 import { Pokemon } from "../../types/pokemon.types"
@@ -8,7 +8,7 @@ interface Props {
   pokemon: Pokemon
 }
 
-const PokemonCard: FunctionComponent<Props> = (props) => {
+const PokemonCard: React.FunctionComponent<Props> = (props) => {
   const { pokemon } = props
 
   const name = get(pokemon, ["name"])

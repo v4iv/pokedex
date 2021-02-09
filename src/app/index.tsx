@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, Fragment, FunctionComponent } from "react"
+import React, { lazy, Suspense } from "react"
 import { Provider } from "react-redux"
 import { BrowserRouter, Route, Switch } from "react-router-dom"
 import store from "./store"
@@ -8,7 +8,7 @@ import Spinner from "./components/Spinner"
 const HomePage = lazy(() => import("./pages/HomePage"))
 const PokemonPage = lazy(() => import("./pages/PokemonPage"))
 
-const App: FunctionComponent = () => {
+const App: React.FunctionComponent = () => {
   return (
     <Provider store={store}>
       <BrowserRouter>

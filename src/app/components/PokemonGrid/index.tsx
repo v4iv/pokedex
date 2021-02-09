@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react"
+import React from "react"
 import { Pokemon } from "../../types/pokemon.types"
 import PokemonCard from "../PokemonCard"
 
@@ -6,7 +6,7 @@ interface Props {
   pokemons: Pokemon[]
 }
 
-const PokemonGrid: FunctionComponent<Props> = (props) => {
+const PokemonGrid: React.FunctionComponent<Props> = (props) => {
   const { pokemons } = props
 
   return (

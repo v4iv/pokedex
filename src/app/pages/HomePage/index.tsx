@@ -1,6 +1,7 @@
-import React, { useState, useEffect, ChangeEvent } from "react"
+import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { isEmpty } from "lodash"
+import { useHistory } from "react-router-dom"
+import { isEmpty, random } from "lodash"
 import { RootState } from "../../reducers"
 import {
   FETCH_POKEDEX_ERROR,
@@ -14,10 +15,12 @@ import Spinner from "../../components/Spinner"
 import PokemonGrid from "../../components/PokemonGrid"
 
 const HomePage: React.FunctionComponent = () => {
+  const dispatch = useDispatch()
+  const history = useHistory()
+
+  const [surprise, setSurprise] = useState(false)
   const [order, setOrder] = useState("Lowest Number First")
   const [isBottom, setIsBottom] = useState(false)
-
-  const dispatch = useDispatch()
 
   const { pokemonList, url, error, loading } = useSelector(
     (state: RootState) => ({
@@ -53,7 +56,7 @@ const HomePage: React.FunctionComponent = () => {
     setIsBottom(false)
   }
 
-  const handleSort = (e: ChangeEvent<HTMLSelectElement>) => {
+  const handleSort = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setOrder(e.target.value)
 
     const orderBy = e.target.value
@@ -64,6 +67,18 @@ const HomePage: React.FunctionComponent = () => {
       type: SORT_POKEMONS,
       payload,
     })
+  }
+
+  const handleSurprise = () => {
+    setSurprise(true)
+
+    setTimeout(() => {
+      const randomNumber = random(1, 898)
+
+      const slug = `/pokemon/${randomNumber}`
+
+      history.push(slug)
+    }, 3000)
   }
 
   const handleScroll = () => {
@@ -111,7 +126,14 @@ const HomePage: React.FunctionComponent = () => {
 
         <div className="columns">
           <div className="column is-half">
-            <button className="button is-info is-light is-fullwidth">
+            <button
+              type="button"
+              className={`button is-info is-fullwidth ${
+                surprise ? "is-loading" : "is-light"
+              }`}
+              onClick={handleSurprise}
+              disabled={surprise}
+            >
               Surprise Me!
             </button>
           </div>
