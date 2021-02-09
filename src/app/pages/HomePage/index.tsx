@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useEffect,
-  FunctionComponent,
-  ChangeEvent,
-} from "react"
-import Helmet from "react-helmet"
+import React, { useState, useEffect, ChangeEvent } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { isEmpty } from "lodash"
 import { RootState } from "../../reducers"
@@ -14,63 +8,50 @@ import {
   FETCH_POKEDEX_SUCCESS,
   SORT_POKEMONS,
 } from "../../constants"
-import { fetchPokedex, sortPokemons } from "../../actions/pokedex.action"
+import { fetchPokemons, sortPokemons } from "../../actions/pokedex.action"
+import SEO from "../../components/SEO"
 import Spinner from "../../components/Spinner"
 import PokemonGrid from "../../components/PokemonGrid"
 
-const HomePage: FunctionComponent = () => {
-  const [isFetching, setIsFetching] = useState(false)
+const HomePage: React.FunctionComponent = () => {
   const [order, setOrder] = useState("Lowest Number First")
+  const [isBottom, setIsBottom] = useState(false)
+
   const dispatch = useDispatch()
 
-  const { pokemonList, next, error, loading } = useSelector(
+  const { pokemonList, url, error, loading } = useSelector(
     (state: RootState) => ({
       pokemonList: state.pokedex.pokemonList,
-      next: state.pokedex.next,
+      url: state.pokedex.url,
       error: state.pokedex.error,
       loading: state.pokedex.loading,
     })
   )
 
-  const handleScroll = () => {
-    if (
-      window.innerHeight + document.documentElement.scrollTop !==
-      document.documentElement.offsetHeight
-    )
-      return
-    setIsFetching(true)
-  }
+  const handleFetch = (nextURL: string) => {
+    if (loading) return
 
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+    dispatch({
+      type: FETCH_POKEDEX_REQUEST,
+    })
 
-  useEffect(() => {
-    ;(async () => {
-      if (loading) return
-
-      dispatch({
-        type: FETCH_POKEDEX_REQUEST,
-      })
-
-      try {
-        const payload = await fetchPokedex(next)
-
+    fetchPokemons(nextURL)
+      .then((res) => {
         dispatch({
           type: FETCH_POKEDEX_SUCCESS,
-          payload,
+          payload: res,
         })
-      } catch (err) {
+      })
+      .catch((err) => {
+        console.error(FETCH_POKEDEX_ERROR, err)
         dispatch({
           type: FETCH_POKEDEX_ERROR,
           payload: "An Error Occurred! Please Try Again.",
         })
-      }
-    })()
+      })
 
-    setIsFetching(false)
-  }, [dispatch, isFetching]) // eslint-disable-line react-hooks/exhaustive-deps
+    setIsBottom(false)
+  }
 
   const handleSort = (e: ChangeEvent<HTMLSelectElement>) => {
     setOrder(e.target.value)
@@ -85,62 +66,37 @@ const HomePage: FunctionComponent = () => {
     })
   }
 
+  const handleScroll = () => {
+    const scrollTop =
+      (document.documentElement && document.documentElement.scrollTop) ||
+      document.body.scrollTop
+    const scrollHeight =
+      (document.documentElement && document.documentElement.scrollHeight) ||
+      document.body.scrollHeight
+    if (scrollTop + window.innerHeight + 50 >= scrollHeight) {
+      setIsBottom(true)
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  useEffect(() => {
+    if (isBottom) {
+      handleFetch(url)
+    }
+  }, [handleFetch, isBottom]) // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
     <>
-      <Helmet>
-        <title>POKéDEX &middot; The POKéMON Encyclopedia</title>
-
-        <meta
-          name="description"
-          content="Pokédex is a mini-encyclopedia of Pokémon species, types etc."
-        />
-
-        {/* Twitter Card tags */}
-        <meta name="twitter:card" content="summary" />
-
-        <meta
-          name="twitter:site"
-          content="https://pokedex.theleakycauldronblog.com"
-        />
-
-        <meta
-          name="twitter:title"
-          content="POKéDEX - The POKéMON Encyclopedia"
-        />
-
-        <meta
-          name="twitter:description"
-          content="Pokédex is a mini-encyclopedia of Pokémon species, types etc."
-        />
-
-        <meta
-          name="twitter:image"
-          content="https://pokedex.theleakycauldronblog.com/logo192.png"
-        />
-
-        {/* OpenGraph tags */}
-        <meta
-          property="og:url"
-          content="https://pokedex.theleakycauldronblog.com"
-        />
-
-        <meta
-          property="og:title"
-          content="POKéDEX - The POKéMON Encyclopedia"
-        />
-
-        <meta property="og:author" content="POKéMON" />
-
-        <meta
-          property="og:description"
-          content="Pokédex is a mini-encyclopedia of Pokémon species, types etc."
-        />
-
-        <meta
-          property="og:image"
-          content="https://pokedex.theleakycauldronblog.com/logo192.png"
-        />
-      </Helmet>
+      <SEO
+        title="Home"
+        description="Pokédex is a mini-encyclopedia of Pokémon species, types etc."
+        image="https://pokedex.theleakycauldronblog.com/logo192.png"
+        url="https://pokedex.theleakycauldronblog.com"
+      />
 
       <section className="section">
         <nav className="level">
