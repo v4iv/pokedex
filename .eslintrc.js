@@ -41,8 +41,6 @@ module.exports = {
     "no-underscore-dangle": "off",
     "react/no-unescaped-entities": "off",
     "react/button-has-type": "off",
-    "no-await-in-loop": "off",
-    "no-async-promise-executor": "off",
     "import/prefer-default-export": "off",
     "jsx-a11y/label-has-associated-control": "off",
     "prettier/prettier": [

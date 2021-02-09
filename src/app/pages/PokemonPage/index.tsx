@@ -1,16 +1,15 @@
-import React, { FunctionComponent, useEffect } from "react"
-import Helmet from "react-helmet"
+import React, { useEffect, useCallback } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import { isEmpty } from "lodash"
 import { RootState } from "../../reducers"
-import { Pokemon } from "../../types/pokemon.types"
-import { fetchPokemon } from "../../actions/pokemon.action"
 import {
   FETCH_POKEMON_ERROR,
   FETCH_POKEMON_REQUEST,
   FETCH_POKEMON_SUCCESS,
 } from "../../constants"
+import { fetchPokemon } from "../../actions/pokemon.action"
+import SEO from "../../components/SEO"
 import Spinner from "../../components/Spinner"
 import PokemonLayout from "../../components/PokemonLayout"
 
@@ -18,7 +17,7 @@ interface ParamTypes {
   slug: string
 }
 
-const PokemonPage: FunctionComponent = () => {
+const PokemonPage: React.FunctionComponent = () => {
   const dispatch = useDispatch()
   const { slug } = useParams<ParamTypes>()
 
@@ -28,38 +27,40 @@ const PokemonPage: FunctionComponent = () => {
     loading: state.pokemon.loading,
   }))
 
-  useEffect(() => {
-    ;(async () => {
-      dispatch({
-        type: FETCH_POKEMON_REQUEST,
-      })
+  const handleFetch = useCallback(() => {
+    dispatch({
+      type: FETCH_POKEMON_REQUEST,
+    })
 
-      try {
-        const payload: Pokemon = await fetchPokemon(slug)
-
+    fetchPokemon(slug)
+      .then((res) => {
         dispatch({
           type: FETCH_POKEMON_SUCCESS,
-          payload,
+          payload: res,
         })
-      } catch (err) {
+      })
+      .catch((err) => {
+        console.error(err)
+
         dispatch({
           type: FETCH_POKEMON_ERROR,
           payload: "An Error Occurred! Please Try Again.",
         })
-      }
-    })()
+      })
   }, [dispatch, slug])
+
+  useEffect(() => {
+    handleFetch()
+  }, [handleFetch])
 
   return (
     <>
-      <Helmet>
-        <title>POKéDEX &middot; The POKéMON Encyclopedia</title>
-
-        <meta
-          name="description"
-          content="Pokédex is a mini-encyclopedia of Pokémon species, types etc."
-        />
-      </Helmet>
+      <SEO
+        title="POKéMON"
+        description="Pokédex is a mini-encyclopedia of Pokémon species, types etc."
+        image="https://pokedex.theleakycauldronblog.com/logo192.png"
+        url="https://pokedex.theleakycauldronblog.com"
+      />
 
       <section className="section">
         {!error && !isEmpty(pokemon) && <PokemonLayout pokemon={pokemon} />}

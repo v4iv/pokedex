@@ -1,11 +1,11 @@
-import React, { FunctionComponent } from "react"
+import React from "react"
 import { get } from "lodash"
 
 interface Props {
   stats: object[]
 }
 
-const StatsBox: FunctionComponent<Props> = (props) => {
+const StatsBox: React.FunctionComponent<Props> = (props) => {
   const { stats } = props
   return (
     <div className="box">

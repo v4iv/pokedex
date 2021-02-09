@@ -8,7 +8,7 @@ import {
 
 export interface PokedexState {
   pokemonList: Pokemon[]
-  next: string
+  url: string
   error: string | null | undefined
   loading: boolean
 }
@@ -21,7 +21,7 @@ interface PokedexFetchSuccessAction {
   type: typeof FETCH_POKEDEX_SUCCESS
   payload: {
     data: Pokemon[]
-    next: string
+    url: string
   }
 }
 

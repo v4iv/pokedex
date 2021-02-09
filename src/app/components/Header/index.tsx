@@ -1,8 +1,8 @@
-import React, { FunctionComponent } from "react"
+import React from "react"
 import { Link } from "react-router-dom"
 import "./styles.css"
 
-const Header: FunctionComponent = () => {
+const Header: React.FunctionComponent = () => {
   return (
     <nav className="navbar is-transparent is-danger is-fixed-top">
       <div className="container">

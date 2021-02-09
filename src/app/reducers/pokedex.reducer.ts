@@ -9,7 +9,7 @@ import { PokedexActionTypes, PokedexState } from "../types/pokedex.types"
 
 const INITIAL_STATE: PokedexState = {
   pokemonList: [],
-  next: `${process.env.REACT_APP_BASE_URL}/pokemon?limit=12&offset=0`,
+  url: `${process.env.REACT_APP_BASE_URL}/pokemon?limit=12&offset=0`,
   error: null,
   loading: false,
 }
@@ -29,7 +29,7 @@ const pokedexReducer: Reducer = (
       return {
         ...state,
         pokemonList: [...state.pokemonList, ...action.payload.data],
-        next: action.payload.next,
+        url: action.payload.url,
         loading: false,
       }
     case FETCH_POKEDEX_ERROR:

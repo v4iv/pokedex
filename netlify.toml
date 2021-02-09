@@ -2,6 +2,9 @@
   publish = "build"
   command = "yarn run build"
 
+[build.environment]
+  RUBY_VERSION = "2.6.2"
+
 [[headers]]
   for = "/service-worker.js"
   [headers.values]

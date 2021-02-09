@@ -1,12 +1,7 @@
-import React, {
-  useState,
-  useEffect,
-  FunctionComponent,
-  ChangeEvent,
-} from "react"
-import Helmet from "react-helmet"
+import React, { useCallback, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { isEmpty } from "lodash"
+import { useHistory } from "react-router-dom"
+import { isEmpty, random } from "lodash"
 import { RootState } from "../../reducers"
 import {
   FETCH_POKEDEX_ERROR,
@@ -14,65 +9,77 @@ import {
   FETCH_POKEDEX_SUCCESS,
   SORT_POKEMONS,
 } from "../../constants"
-import { fetchPokedex, sortPokemons } from "../../actions/pokedex.action"
+import { fetchPokemons, sortPokemons } from "../../actions/pokedex.action"
+import SEO from "../../components/SEO"
 import Spinner from "../../components/Spinner"
 import PokemonGrid from "../../components/PokemonGrid"
 
-const HomePage: FunctionComponent = () => {
-  const [isFetching, setIsFetching] = useState(false)
-  const [order, setOrder] = useState("Lowest Number First")
+const HomePage: React.FunctionComponent = () => {
+  const history = useHistory()
   const dispatch = useDispatch()
 
-  const { pokemonList, next, error, loading } = useSelector(
+  const [surprise, setSurprise] = useState(false)
+  const [order, setOrder] = useState("Lowest Number First")
+  const [isBottom, setIsBottom] = useState(false)
+
+  const { pokemonList, url, error, loading } = useSelector(
     (state: RootState) => ({
       pokemonList: state.pokedex.pokemonList,
-      next: state.pokedex.next,
+      url: state.pokedex.url,
       error: state.pokedex.error,
       loading: state.pokedex.loading,
     })
   )
 
-  const handleScroll = () => {
-    if (
-      window.innerHeight + document.documentElement.scrollTop !==
-      document.documentElement.offsetHeight
-    )
-      return
-    setIsFetching(true)
-  }
+  const handleFetch = useCallback(() => {
+    if (!isEmpty(pokemonList) || loading) return
 
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+    dispatch({
+      type: FETCH_POKEDEX_REQUEST,
+    })
 
-  useEffect(() => {
-    ;(async () => {
-      if (loading) return
-
-      dispatch({
-        type: FETCH_POKEDEX_REQUEST,
-      })
-
-      try {
-        const payload = await fetchPokedex(next)
-
+    fetchPokemons(`${process.env.REACT_APP_BASE_URL}/pokemon?limit=12&offset=0`)
+      .then((res) => {
         dispatch({
           type: FETCH_POKEDEX_SUCCESS,
-          payload,
+          payload: res,
         })
-      } catch (err) {
+      })
+      .catch((err) => {
+        console.error(FETCH_POKEDEX_ERROR, err)
         dispatch({
           type: FETCH_POKEDEX_ERROR,
           payload: "An Error Occurred! Please Try Again.",
         })
-      }
-    })()
+      })
+  }, [fetchPokemons, dispatch]) // eslint-disable-line react-hooks/exhaustive-deps
 
-    setIsFetching(false)
-  }, [dispatch, isFetching]) // eslint-disable-line react-hooks/exhaustive-deps
+  const handleFetchMore = (nextURL: string) => {
+    if (loading) return
 
-  const handleSort = (e: ChangeEvent<HTMLSelectElement>) => {
+    dispatch({
+      type: FETCH_POKEDEX_REQUEST,
+    })
+
+    fetchPokemons(nextURL)
+      .then((res) => {
+        dispatch({
+          type: FETCH_POKEDEX_SUCCESS,
+          payload: res,
+        })
+      })
+      .catch((err) => {
+        console.error(FETCH_POKEDEX_ERROR, err)
+        dispatch({
+          type: FETCH_POKEDEX_ERROR,
+          payload: "An Error Occurred! Please Try Again.",
+        })
+      })
+
+    setIsBottom(false)
+  }
+
+  const handleSort = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setOrder(e.target.value)
 
     const orderBy = e.target.value
@@ -85,62 +92,50 @@ const HomePage: FunctionComponent = () => {
     })
   }
 
+  const handleSurprise = () => {
+    setSurprise(true)
+
+    setTimeout(() => {
+      const randomNumber = random(1, 898)
+
+      const slug = `/pokemon/${randomNumber}`
+
+      history.push(slug)
+    }, 3000)
+  }
+
+  const handleScroll = () => {
+    const scrollTop =
+      (document.documentElement && document.documentElement.scrollTop) ||
+      document.body.scrollTop
+    const scrollHeight =
+      (document.documentElement && document.documentElement.scrollHeight) ||
+      document.body.scrollHeight
+    if (scrollTop + window.innerHeight + 50 >= scrollHeight) {
+      setIsBottom(true)
+    }
+  }
+
+  useEffect(() => {
+    handleFetch()
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [handleFetch])
+
+  useEffect(() => {
+    if (isBottom) {
+      handleFetchMore(url)
+    }
+  }, [handleFetch, isBottom]) // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
     <>
-      <Helmet>
-        <title>POKéDEX &middot; The POKéMON Encyclopedia</title>
-
-        <meta
-          name="description"
-          content="Pokédex is a mini-encyclopedia of Pokémon species, types etc."
-        />
-
-        {/* Twitter Card tags */}
-        <meta name="twitter:card" content="summary" />
-
-        <meta
-          name="twitter:site"
-          content="https://pokedex.theleakycauldronblog.com"
-        />
-
-        <meta
-          name="twitter:title"
-          content="POKéDEX - The POKéMON Encyclopedia"
-        />
-
-        <meta
-          name="twitter:description"
-          content="Pokédex is a mini-encyclopedia of Pokémon species, types etc."
-        />
-
-        <meta
-          name="twitter:image"
-          content="https://pokedex.theleakycauldronblog.com/logo192.png"
-        />
-
-        {/* OpenGraph tags */}
-        <meta
-          property="og:url"
-          content="https://pokedex.theleakycauldronblog.com"
-        />
-
-        <meta
-          property="og:title"
-          content="POKéDEX - The POKéMON Encyclopedia"
-        />
-
-        <meta property="og:author" content="POKéMON" />
-
-        <meta
-          property="og:description"
-          content="Pokédex is a mini-encyclopedia of Pokémon species, types etc."
-        />
-
-        <meta
-          property="og:image"
-          content="https://pokedex.theleakycauldronblog.com/logo192.png"
-        />
-      </Helmet>
+      <SEO
+        title="Home"
+        description="Pokédex is a mini-encyclopedia of Pokémon species, types etc."
+        image="https://pokedex.theleakycauldronblog.com/logo192.png"
+        url="https://pokedex.theleakycauldronblog.com"
+      />
 
       <section className="section">
         <nav className="level">
@@ -155,7 +150,14 @@ const HomePage: FunctionComponent = () => {
 
         <div className="columns">
           <div className="column is-half">
-            <button className="button is-info is-light is-fullwidth">
+            <button
+              type="button"
+              className={`button is-info is-fullwidth ${
+                surprise ? "is-loading" : "is-light"
+              }`}
+              onClick={handleSurprise}
+              disabled={surprise}
+            >
               Surprise Me!
             </button>
           </div>

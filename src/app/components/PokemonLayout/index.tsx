@@ -1,16 +1,16 @@
-import React, { FunctionComponent } from "react"
-import Helmet from "react-helmet"
-import { get, find } from "lodash"
+import React from "react"
+import { find, get } from "lodash"
 import { pokemonIDGenerator } from "../../../utils"
 import { Pokemon } from "../../types/pokemon.types"
 import SpriteBox from "../SpriteBox"
 import StatsBox from "../StatsBox"
+import SEO from "../SEO"
 
 interface Props {
   pokemon: Pokemon
 }
 
-const PokemonLayout: FunctionComponent<Props> = (props) => {
+const PokemonLayout: React.FunctionComponent<Props> = (props) => {
   const { pokemon } = props
 
   const name = get(pokemon, ["name"])
@@ -34,48 +34,12 @@ const PokemonLayout: FunctionComponent<Props> = (props) => {
 
   return (
     <>
-      <Helmet>
-        <title>{name} &middot; POKéDEX &middot; The POKéMON Encyclopedia</title>
-
-        <meta name="description" content={`${name} - ${flavorText}`} />
-
-        {/* Twitter Card tags */}
-        <meta name="twitter:card" content="summary" />
-
-        <meta
-          name="twitter:site"
-          content={`https://pokedex.theleakycauldronblog.com/pokemon/${name}`}
-        />
-
-        <meta
-          name="twitter:title"
-          content={`${name} | POKéDEX - The POKéMON Encyclopedia`}
-        />
-
-        <meta name="twitter:description" content={`${name} - ${flavorText}`} />
-
-        <meta name="twitter:image" content={image} />
-
-        {/* OpenGraph tags */}
-        <meta
-          property="og:url"
-          content={`https://pokedex.theleakycauldronblog.com/pokemon/${name}`}
-        />
-
-        <meta
-          property="og:title"
-          content={`${name} | POKéDEX - The POKéMON Encyclopedia`}
-        />
-
-        <meta property="og:author" content="POKéMON" />
-
-        <meta property="og:description" content={`${name} - ${flavorText}`} />
-
-        <meta
-          property="og:image"
-          content="https://pokedex.theleakycauldronblog.com/logo192.png"
-        />
-      </Helmet>
+      <SEO
+        title={name.toUpperCase()}
+        description={`${name.toUpperCase()} - ${flavorText}`}
+        image={image}
+        url={`https://pokedex.theleakycauldronblog.com/pokemon/${name}`}
+      />
 
       <div className="columns is-vcentered">
         <div className="column is-one-quarter">
