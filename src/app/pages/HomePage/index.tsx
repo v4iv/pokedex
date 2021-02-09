@@ -32,7 +32,7 @@ const HomePage: React.FunctionComponent = () => {
   )
 
   const handleFetch = useCallback(() => {
-    if (!isEmpty(pokemonList) || loading) return
+    if (!isEmpty(pokemonList)) return
 
     dispatch({
       type: FETCH_POKEDEX_REQUEST,
