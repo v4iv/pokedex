@@ -32,7 +32,7 @@ const HomePage: React.FunctionComponent = () => {
   )
 
   const handleFetch = useCallback(() => {
-    if (!isEmpty(pokemonList)) return
+    if (!isEmpty(pokemonList) || loading) return
 
     dispatch({
       type: FETCH_POKEDEX_REQUEST,
@@ -67,6 +67,7 @@ const HomePage: React.FunctionComponent = () => {
           type: FETCH_POKEDEX_SUCCESS,
           payload: res,
         })
+        setIsBottom(false)
       })
       .catch((err) => {
         console.error(FETCH_POKEDEX_ERROR, err)
@@ -74,9 +75,8 @@ const HomePage: React.FunctionComponent = () => {
           type: FETCH_POKEDEX_ERROR,
           payload: "An Error Occurred! Please Try Again.",
         })
+        setIsBottom(false)
       })
-
-    setIsBottom(false)
   }
 
   const handleSort = (e: React.ChangeEvent<HTMLSelectElement>) => {
