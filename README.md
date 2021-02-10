@@ -3,12 +3,36 @@
 # Pokédex
 Made with React & Redux. Powered by [PokeAPI](https://pokeapi.co)
 
+## Stack
+
+- React
+  
+- Redux
+  
+- TypeScript
+  
+- Bulma
+
 ## Features
 
-* Bootstrapped with Create-React-App
-* Redux State Management
-* React Hooks
-* Typescript
-* Route Based Code Splitting
-* OpenGraph & Twitter Card Tags
-* Progressive Web App
+- Bootstrapped with Create-React-App
+  
+- Redux State Management
+  
+- React Hooks
+  
+- Typescript
+  
+- Route Based Code Splitting
+  
+- OpenGraph & Twitter Card Tags
+  
+- Progressive Web App
+
+# TODO
+
+- Search
+  
+- Virtualised Grid Loader
+  
+- i18n

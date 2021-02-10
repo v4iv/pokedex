@@ -14,8 +14,8 @@
 }
 
 .animation-frames {
-    -webkit-animation: frame-animation 600ms infinite;
-    animation: frame-animation 600ms infinite;
+    -webkit-animation: frame-animation 1500ms infinite;
+    animation: frame-animation 1500ms infinite;
     -webkit-animation-timing-function: steps(2);
     animation-timing-function: steps(2);
     display: flex;

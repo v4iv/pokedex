@@ -5,6 +5,7 @@ import { Pokemon } from "../../types/pokemon.types"
 import SpriteBox from "../SpriteBox"
 import StatsBox from "../StatsBox"
 import SEO from "../SEO"
+import ArtBox from "../ArtBox"
 
 interface Props {
   pokemon: Pokemon
@@ -41,15 +42,28 @@ const PokemonLayout: React.FunctionComponent<Props> = (props) => {
         url={`https://pokedex.theleakycauldronblog.com/pokemon/${name}`}
       />
 
-      <div className="columns is-vcentered">
-        <div className="column is-one-quarter">
-          <SpriteBox name={name} sprites={sprites} types={types} />
+      <div className="columns">
+        <div className="column is-two-fifths">
+          <ArtBox name={name} image={image} types={types} />
         </div>
-        <div className="column is-three-quarters">
+        <div className="column is-three-fifths">
           <div className="box">
-            <h1 className="title is-capitalized">{get(pokemon, ["name"])}</h1>
-            <h2 className="subtitle">#{pokemonID}</h2>
+            <div className="columns is-mobile">
+              <div className="column is-2-tablet is-3-mobile">
+                <SpriteBox name={name} sprites={sprites} />
+              </div>
+              <div className="column">
+                <h1 className="title is-capitalized">
+                  {get(pokemon, ["name"])}
+                </h1>
+                <h2 className="subtitle">#{pokemonID}</h2>
+              </div>
+            </div>
           </div>
+
+          <article className="message is-dark">
+            <div className="message-body">{flavorText}</div>
+          </article>
 
           <div className="box">
             <article className="media">
@@ -94,12 +108,10 @@ const PokemonLayout: React.FunctionComponent<Props> = (props) => {
               </div>
             </article>
           </div>
+
+          <hr />
         </div>
       </div>
-
-      <article className="message is-dark">
-        <div className="message-body">{flavorText}</div>
-      </article>
 
       <StatsBox stats={stats} />
     </>
