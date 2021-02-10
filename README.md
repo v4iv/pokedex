@@ -31,7 +31,7 @@ Made with React & Redux. Powered by [PokeAPI](https://pokeapi.co)
 
 # TODO
 
-- Search
+- ~~Search~~
   
 - Virtualised Grid Loader
   

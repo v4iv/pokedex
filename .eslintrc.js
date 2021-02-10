@@ -43,6 +43,7 @@ module.exports = {
     "react/button-has-type": "off",
     "import/prefer-default-export": "off",
     "jsx-a11y/label-has-associated-control": "off",
+    "jsx-a11y/anchor-is-valid": "off",
     "prettier/prettier": [
         "error",
       {

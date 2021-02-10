@@ -52,32 +52,34 @@ const HomePage: React.FunctionComponent = () => {
           payload: "An Error Occurred! Please Try Again.",
         })
       })
-  }, [fetchPokemons, dispatch]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [dispatch, pokemonList, loading])
 
-  const handleFetchMore = (nextURL: string) => {
+  const handleFetchMore = useCallback(() => {
     if (loading) return
 
-    dispatch({
-      type: FETCH_POKEDEX_REQUEST,
-    })
+    if (!loading) {
+      dispatch({
+        type: FETCH_POKEDEX_REQUEST,
+      })
 
-    fetchPokemons(nextURL)
-      .then((res) => {
-        dispatch({
-          type: FETCH_POKEDEX_SUCCESS,
-          payload: res,
+      fetchPokemons(url)
+        .then((res) => {
+          dispatch({
+            type: FETCH_POKEDEX_SUCCESS,
+            payload: res,
+          })
+          setIsBottom(false)
         })
-        setIsBottom(false)
-      })
-      .catch((err) => {
-        console.error(FETCH_POKEDEX_ERROR, err)
-        dispatch({
-          type: FETCH_POKEDEX_ERROR,
-          payload: "An Error Occurred! Please Try Again.",
+        .catch((err) => {
+          console.error(FETCH_POKEDEX_ERROR, err)
+          dispatch({
+            type: FETCH_POKEDEX_ERROR,
+            payload: "An Error Occurred! Please Try Again.",
+          })
+          setIsBottom(false)
         })
-        setIsBottom(false)
-      })
-  }
+    }
+  }, [dispatch, url, loading])
 
   const handleSort = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setOrder(e.target.value)
@@ -124,9 +126,9 @@ const HomePage: React.FunctionComponent = () => {
 
   useEffect(() => {
     if (isBottom) {
-      handleFetchMore(url)
+      handleFetchMore()
     }
-  }, [handleFetch, isBottom]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [handleFetchMore, isBottom])
 
   return (
     <>

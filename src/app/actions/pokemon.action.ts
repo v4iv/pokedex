@@ -4,7 +4,9 @@ import { Pokemon } from "../types/pokemon.types"
 
 export const fetchPokemon = (p: string) => {
   return new Promise((resolve, reject) => {
-    const url = `${process.env.REACT_APP_BASE_URL}/pokemon/${p}`
+    const url = `${
+      process.env.REACT_APP_BASE_URL
+    }/pokemon/${p.toString().toLowerCase()}`
 
     axios
       .get(url)
