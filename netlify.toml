@@ -1,5 +1,6 @@
 [build]
   publish = "build"
+  functions = "functions"
   command = "yarn run build"
 
 [build.environment]
@@ -15,6 +16,15 @@
 	must-revalidate'''
 
 [[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+
+[dev]
+  # Local dev command. A.k.a npm start
+  command = "react-scripts start"

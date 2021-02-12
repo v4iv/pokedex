@@ -8,6 +8,8 @@ Made with React & Redux. Powered by [PokeAPI](https://pokeapi.co)
 - React
   
 - Redux
+
+- Serverless Netlify Functions
   
 - TypeScript
   
@@ -20,6 +22,8 @@ Made with React & Redux. Powered by [PokeAPI](https://pokeapi.co)
 - Redux State Management
   
 - React Hooks
+
+- Simple TypeAhead Search
   
 - Typescript
   

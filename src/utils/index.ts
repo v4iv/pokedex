@@ -1,3 +1,5 @@
+import axios from "axios"
+
 const DEFAULT_DURATION = 600000 // 10 Minutes
 
 // export const sendToGoogleAnalytics = ({name, delta, value, id}) => {
@@ -24,6 +26,16 @@ const DEFAULT_DURATION = 600000 // 10 Minutes
 //         nonInteraction: true, // avoids affecting bounce rate
 //     })
 // }
+
+// Search
+export const fetchSearchResults = (query: string) => {
+  return new Promise((resolve, reject) => {
+    axios
+      .get(`/api/search?q=${query}`)
+      .then((res) => resolve(res.data))
+      .catch((err) => reject(err.data))
+  })
+}
 
 // Pokemon ID Generator
 export const pokemonIDGenerator = (id: number) => {
