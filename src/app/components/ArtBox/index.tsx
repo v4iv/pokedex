@@ -1,14 +1,14 @@
-import React from "react";
-import { get } from "lodash";
+import React from "react"
+import { get } from "lodash"
 
 interface Props {
-  name: string;
-  image: string;
-  types: object[];
+  name: string
+  image: string
+  types: object[]
 }
 
 const ArtBox: React.FunctionComponent<Props> = (props) => {
-  const { name, image, types } = props;
+  const { name, image, types } = props
 
   return (
     <div className="card">
@@ -20,7 +20,7 @@ const ArtBox: React.FunctionComponent<Props> = (props) => {
 
       <footer className="card-footer">
         {types.map((item: object, idx: number) => {
-          const pokemonType = get(item, ["type", "name"]);
+          const pokemonType = get(item, ["type", "name"])
 
           return (
             <span
@@ -29,11 +29,11 @@ const ArtBox: React.FunctionComponent<Props> = (props) => {
             >
               {pokemonType}
             </span>
-          );
+          )
         })}
       </footer>
     </div>
-  );
-};
+  )
+}
 
-export default ArtBox;
+export default ArtBox

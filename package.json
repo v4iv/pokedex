@@ -44,7 +44,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "format": "prettier --write src/**/**/*.ts{,x} --no-semi",
+    "format": "prettier --write src/**/**/*.ts{,x}",
     "lint": "tsc --noEmit && eslint src/**/**/*.ts{,x}",
     "lint:fix": "tsc --noEmit && eslint src/**/**/*.ts{,x} --fix"
   },

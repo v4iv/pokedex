@@ -1,12 +1,13 @@
-import React, { lazy, Suspense } from "react";
-import { Provider } from "react-redux";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import store from "./store";
-import Header from "./components/Header";
-import Spinner from "./components/Spinner";
+import React, { lazy, Suspense } from "react"
+import { Provider } from "react-redux"
+import { BrowserRouter, Route, Switch } from "react-router-dom"
+import store from "./store"
+import Header from "./components/Header"
+import Spinner from "./components/Spinner"
 // Pages
-const HomePage = lazy(() => import("./pages/HomePage"));
-const PokemonPage = lazy(() => import("./pages/PokemonPage"));
+const HomePage = lazy(() => import("./pages/HomePage"))
+const PokemonPage = lazy(() => import("./pages/PokemonPage"))
+const PageNotFound = lazy(() => import("./pages/404"))
 
 const App: React.FunctionComponent = () => {
   return (
@@ -25,13 +26,14 @@ const App: React.FunctionComponent = () => {
               <Switch>
                 <Route component={HomePage} exact path="/" />
                 <Route component={PokemonPage} exact path="/pokemon/:slug" />
+                <Route component={PageNotFound} />
               </Switch>
             </Suspense>
           </div>
         </>
       </BrowserRouter>
     </Provider>
-  );
-};
+  )
+}
 
-export default App;
+export default App
