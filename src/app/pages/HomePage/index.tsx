@@ -166,12 +166,13 @@ const HomePage: React.FunctionComponent = () => {
             </div>
           </div>
         </div>
-        {error && <ErrorBox message={error} />}
 
         {/* TODO Add Virtualized Grid Loader */}
         {!error && !isEmpty(pokemonList) && (
           <PokemonGrid pokemons={pokemonList} />
         )}
+
+        {error && <ErrorBox message={error} />}
 
         {loading && (
           <section className="section">

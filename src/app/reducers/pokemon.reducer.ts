@@ -22,16 +22,19 @@ const pokemonReducer: Reducer = (
         ...state,
         pokemon: {},
         loading: true,
+        error: null,
       }
     case FETCH_POKEMON_SUCCESS:
       return {
         ...state,
         pokemon: action.payload,
         loading: false,
+        error: null,
       }
     case FETCH_POKEMON_ERROR:
       return {
         ...state,
+        pokemon: {},
         error: action.payload,
         loading: false,
       }

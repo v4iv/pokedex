@@ -24,6 +24,7 @@ const pokedexReducer: Reducer = (
         ...state,
         pokemonList: [...state.pokemonList],
         loading: true,
+        error: null,
       }
     case FETCH_POKEDEX_SUCCESS:
       return {
@@ -31,6 +32,7 @@ const pokedexReducer: Reducer = (
         pokemonList: [...state.pokemonList, ...action.payload.data],
         url: action.payload.url,
         loading: false,
+        error: null,
       }
     case FETCH_POKEDEX_ERROR:
       return {
