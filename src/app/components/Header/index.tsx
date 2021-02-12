@@ -82,7 +82,7 @@ const Header: React.FunctionComponent = () => {
               </div>
             </div>
             <a
-              className="navbar-item"
+              className="navbar-item is-pulled-right"
               href="https://github.com/v4iv/pokedex"
               target="_blank"
               rel="noreferrer"
