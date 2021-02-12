@@ -63,16 +63,12 @@ const PokemonPage: React.FunctionComponent = () => {
         url="https://pokedex.theleakycauldronblog.com"
       />
 
-      <section className="section">
+      <section className={`section ${loading ? "is-large" : ""}`}>
         {error && <ErrorBox message={error} />}
 
         {!error && !isEmpty(pokemon) && <PokemonLayout pokemon={pokemon} />}
 
-        {loading && (
-          <section className="section is-large">
-            <Spinner />
-          </section>
-        )}
+        {loading && <Spinner />}
       </section>
     </>
   )
