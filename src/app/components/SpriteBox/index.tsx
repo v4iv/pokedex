@@ -1,17 +1,17 @@
-import React from "react"
-import { get } from "lodash"
-import "./styles.css"
+import React from "react";
+import { get } from "lodash";
+import "./styles.css";
 
 interface Props {
-  name: string
-  sprites: object
+  name: string;
+  sprites: object;
 }
 
 const SpriteBox: React.FunctionComponent<Props> = (props) => {
-  const { name, sprites } = props
+  const { name, sprites } = props;
 
-  const frontDefaultSprite: string = get(sprites, ["front_default"])
-  const backDefaultSprite: string = get(sprites, ["back_default"])
+  const frontDefaultSprite: string = get(sprites, ["front_default"]);
+  const backDefaultSprite: string = get(sprites, ["back_default"]);
 
   return (
     <div className="animation">
@@ -28,7 +28,7 @@ const SpriteBox: React.FunctionComponent<Props> = (props) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SpriteBox
+export default SpriteBox;

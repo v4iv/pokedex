@@ -1,17 +1,17 @@
-import React from "react"
-import { get } from "lodash"
+import React from "react";
+import { get } from "lodash";
 
 interface Props {
-  stats: object[]
+  stats: object[];
 }
 
 const StatsBox: React.FunctionComponent<Props> = (props) => {
-  const { stats } = props
+  const { stats } = props;
   return (
     <div className="box">
       {stats.map((stat, idx) => {
-        const statName = get(stat, ["stat", "name"])
-        const baseStat = get(stat, ["base_stat"])
+        const statName = get(stat, ["stat", "name"]);
+        const baseStat = get(stat, ["base_stat"]);
 
         return (
           <div className="column" key={idx}>
@@ -25,10 +25,10 @@ const StatsBox: React.FunctionComponent<Props> = (props) => {
               {baseStat}%
             </progress>
           </div>
-        )
+        );
       })}
     </div>
-  )
-}
+  );
+};
 
-export default StatsBox
+export default StatsBox;

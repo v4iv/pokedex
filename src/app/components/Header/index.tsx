@@ -1,29 +1,33 @@
-import React, { useState } from "react"
-import { Link, useHistory } from "react-router-dom"
-import { kebabCase } from "lodash"
-import "./styles.css"
+import React, { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { kebabCase } from "lodash";
+import "./styles.css";
 
 const Header: React.FunctionComponent = () => {
-  const history = useHistory()
+  const history = useHistory();
 
-  const [menuOpen, setMenuOpen] = useState(false)
-  const [input, setInput] = useState("")
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [input, setInput] = useState("");
 
   const toggleMenu = () => {
-    setMenuOpen(!menuOpen)
-  }
+    setMenuOpen(!menuOpen);
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault()
-    const { value } = e.target
-    setInput(value)
-  }
+    e.preventDefault();
+    const { value } = e.target;
+    setInput(value);
+  };
 
   const handleSearch = () => {
-    const query = input.toString().trim().toLowerCase()
+    const query = input.toString().trim().toLowerCase();
 
-    history.push(`/pokemon/${kebabCase(query)}`)
-  }
+    history.push(`/pokemon/${kebabCase(query)}`);
+
+    toggleMenu();
+
+    setInput("");
+  };
 
   return (
     <nav className="navbar is-transparent is-danger is-fixed-top">
@@ -62,6 +66,7 @@ const Header: React.FunctionComponent = () => {
                     className="input is-danger"
                     type="text"
                     placeholder="Pokémon ID or Name"
+                    value={input}
                     onChange={handleChange}
                   />
                 </div>
@@ -80,7 +85,7 @@ const Header: React.FunctionComponent = () => {
         </div>
       </div>
     </nav>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

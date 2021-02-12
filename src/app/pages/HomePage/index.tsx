@@ -1,26 +1,26 @@
-import React, { useCallback, useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { useHistory } from "react-router-dom"
-import { isEmpty, random } from "lodash"
-import { RootState } from "../../reducers"
+import React, { useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { isEmpty, random } from "lodash";
+import { RootState } from "../../reducers";
 import {
   FETCH_POKEDEX_ERROR,
   FETCH_POKEDEX_REQUEST,
   FETCH_POKEDEX_SUCCESS,
   SORT_POKEMONS,
-} from "../../constants"
-import { fetchPokemons, sortPokemons } from "../../actions/pokedex.action"
-import SEO from "../../components/SEO"
-import Spinner from "../../components/Spinner"
-import PokemonGrid from "../../components/PokemonGrid"
+} from "../../constants";
+import { fetchPokemons, sortPokemons } from "../../actions/pokedex.action";
+import SEO from "../../components/SEO";
+import Spinner from "../../components/Spinner";
+import PokemonGrid from "../../components/PokemonGrid";
 
 const HomePage: React.FunctionComponent = () => {
-  const history = useHistory()
-  const dispatch = useDispatch()
+  const history = useHistory();
+  const dispatch = useDispatch();
 
-  const [surprise, setSurprise] = useState(false)
-  const [order, setOrder] = useState("Lowest Number First")
-  const [isBottom, setIsBottom] = useState(false)
+  const [surprise, setSurprise] = useState(false);
+  const [order, setOrder] = useState("Lowest Number First");
+  const [isBottom, setIsBottom] = useState(false);
 
   const { pokemonList, url, error, loading } = useSelector(
     (state: RootState) => ({
@@ -29,106 +29,81 @@ const HomePage: React.FunctionComponent = () => {
       error: state.pokedex.error,
       loading: state.pokedex.loading,
     })
-  )
+  );
 
   const handleFetch = useCallback(() => {
-    if (!isEmpty(pokemonList) || loading) return
-
     dispatch({
       type: FETCH_POKEDEX_REQUEST,
-    })
+    });
 
-    fetchPokemons(`${process.env.REACT_APP_BASE_URL}/pokemon?limit=12&offset=0`)
+    fetchPokemons(url)
       .then((res) => {
+        setIsBottom(false);
         dispatch({
           type: FETCH_POKEDEX_SUCCESS,
           payload: res,
-        })
+        });
       })
       .catch((err) => {
-        console.error(FETCH_POKEDEX_ERROR, err)
+        console.error(FETCH_POKEDEX_ERROR, err);
+        setIsBottom(false);
         dispatch({
           type: FETCH_POKEDEX_ERROR,
           payload: "An Error Occurred! Please Try Again.",
-        })
-      })
-  }, [dispatch, pokemonList, loading])
-
-  const handleFetchMore = useCallback(() => {
-    if (loading) return
-
-    if (!loading) {
-      dispatch({
-        type: FETCH_POKEDEX_REQUEST,
-      })
-
-      fetchPokemons(url)
-        .then((res) => {
-          dispatch({
-            type: FETCH_POKEDEX_SUCCESS,
-            payload: res,
-          })
-          setIsBottom(false)
-        })
-        .catch((err) => {
-          console.error(FETCH_POKEDEX_ERROR, err)
-          dispatch({
-            type: FETCH_POKEDEX_ERROR,
-            payload: "An Error Occurred! Please Try Again.",
-          })
-          setIsBottom(false)
-        })
-    }
-  }, [dispatch, url, loading])
+        });
+      });
+  }, [dispatch, url]);
 
   const handleSort = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setOrder(e.target.value)
+    setOrder(e.target.value);
 
-    const orderBy = e.target.value
+    const orderBy = e.target.value;
 
-    const payload = sortPokemons(pokemonList, orderBy)
+    const payload = sortPokemons(pokemonList, orderBy);
 
     dispatch({
       type: SORT_POKEMONS,
       payload,
-    })
-  }
+    });
+  };
 
   const handleSurprise = () => {
-    setSurprise(true)
+    setSurprise(true);
 
     setTimeout(() => {
-      const randomNumber = random(1, 898)
+      const randomNumber = random(1, 898);
 
-      const slug = `/pokemon/${randomNumber}`
+      const slug = `/pokemon/${randomNumber}`;
 
-      history.push(slug)
-    }, 3000)
-  }
+      history.push(slug);
+    }, 3000);
+  };
 
   const handleScroll = () => {
     const scrollTop =
       (document.documentElement && document.documentElement.scrollTop) ||
-      document.body.scrollTop
+      document.body.scrollTop;
     const scrollHeight =
       (document.documentElement && document.documentElement.scrollHeight) ||
-      document.body.scrollHeight
+      document.body.scrollHeight;
     if (scrollTop + window.innerHeight + 50 >= scrollHeight) {
-      setIsBottom(true)
+      setIsBottom(true);
     }
-  }
+  };
 
   useEffect(() => {
-    handleFetch()
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [handleFetch])
+    if (isEmpty(pokemonList)) {
+      handleFetch();
+    }
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [handleFetch]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    if (isBottom) {
-      handleFetchMore()
+    if (isBottom && !loading) {
+      handleFetch();
     }
-  }, [handleFetchMore, isBottom])
+  }, [handleFetch, isBottom]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
@@ -197,7 +172,7 @@ const HomePage: React.FunctionComponent = () => {
         {loading && <Spinner />}
       </section>
     </>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;

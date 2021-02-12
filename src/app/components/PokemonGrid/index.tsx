@@ -1,21 +1,21 @@
-import React from "react"
-import { Pokemon } from "../../types/pokemon.types"
-import PokemonCard from "../PokemonCard"
+import React from "react";
+import { Pokemon } from "../../types/pokemon.types";
+import PokemonCard from "../PokemonCard";
 
 interface Props {
-  pokemons: Pokemon[]
+  pokemons: Pokemon[];
 }
 
 const PokemonGrid: React.FunctionComponent<Props> = (props) => {
-  const { pokemons } = props
+  const { pokemons } = props;
 
   return (
     <div className="columns is-multiline is-centered">
       {pokemons.map((pokemon, idx) => {
-        return <PokemonCard key={idx} pokemon={pokemon} />
+        return <PokemonCard key={idx} pokemon={pokemon} />;
       })}
     </div>
-  )
-}
+  );
+};
 
-export default PokemonGrid
+export default PokemonGrid;

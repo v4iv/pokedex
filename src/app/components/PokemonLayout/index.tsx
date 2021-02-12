@@ -1,37 +1,37 @@
-import React from "react"
-import { find, get } from "lodash"
-import { pokemonIDGenerator } from "../../../utils"
-import { Pokemon } from "../../types/pokemon.types"
-import SpriteBox from "../SpriteBox"
-import StatsBox from "../StatsBox"
-import SEO from "../SEO"
-import ArtBox from "../ArtBox"
+import React from "react";
+import { find, get } from "lodash";
+import { pokemonIDGenerator } from "../../../utils";
+import { Pokemon } from "../../types/pokemon.types";
+import SpriteBox from "../SpriteBox";
+import StatsBox from "../StatsBox";
+import SEO from "../SEO";
+import ArtBox from "../ArtBox";
 
 interface Props {
-  pokemon: Pokemon
+  pokemon: Pokemon;
 }
 
 const PokemonLayout: React.FunctionComponent<Props> = (props) => {
-  const { pokemon } = props
+  const { pokemon } = props;
 
-  const name = get(pokemon, ["name"])
+  const name = get(pokemon, ["name"]);
   const image = get(pokemon, [
     "sprites",
     "other",
     "official-artwork",
     "front_default",
-  ])
-  const sprites = get(pokemon, ["sprites"])
-  const pokemonID = pokemonIDGenerator(get(pokemon, ["id"]))
-  const height = get(pokemon, ["height"]) / 10
-  const weight = get(pokemon, ["weight"]) / 10
-  const abilities = get(pokemon, ["abilities"])
-  const types = get(pokemon, ["types"])
-  const flavorTextEntries = get(pokemon, ["species", "flavor_text_entries"])
-  const englishEntry = find(flavorTextEntries, { language: { name: "en" } })
-  const flavorText = get(englishEntry, ["flavor_text"])
-  const stats = get(pokemon, ["stats"])
-  const shape = get(pokemon, ["species", "shape", "name"])
+  ]);
+  const sprites = get(pokemon, ["sprites"]);
+  const pokemonID = pokemonIDGenerator(get(pokemon, ["id"]));
+  const height = get(pokemon, ["height"]) / 10;
+  const weight = get(pokemon, ["weight"]) / 10;
+  const abilities = get(pokemon, ["abilities"]);
+  const types = get(pokemon, ["types"]);
+  const flavorTextEntries = get(pokemon, ["species", "flavor_text_entries"]);
+  const englishEntry = find(flavorTextEntries, { language: { name: "en" } });
+  const flavorText = get(englishEntry, ["flavor_text"]);
+  const stats = get(pokemon, ["stats"]);
+  const shape = get(pokemon, ["species", "shape", "name"]);
 
   return (
     <>
@@ -72,7 +72,7 @@ const PokemonLayout: React.FunctionComponent<Props> = (props) => {
                   <p>
                     Abilities:{" "}
                     {abilities.map((ability, idx) => {
-                      const abilityName = get(ability, ["ability", "name"])
+                      const abilityName = get(ability, ["ability", "name"]);
                       return (
                         <span
                           key={idx}
@@ -80,7 +80,7 @@ const PokemonLayout: React.FunctionComponent<Props> = (props) => {
                         >
                           {abilityName},&nbsp;
                         </span>
-                      )
+                      );
                     })}
                   </p>
 
@@ -115,7 +115,7 @@ const PokemonLayout: React.FunctionComponent<Props> = (props) => {
 
       <StatsBox stats={stats} />
     </>
-  )
-}
+  );
+};
 
-export default PokemonLayout
+export default PokemonLayout;
