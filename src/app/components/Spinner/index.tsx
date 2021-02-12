@@ -1,5 +1,5 @@
-import React from "react"
-import "./styles.css"
+import React from "react";
+import "./styles.css";
 
 const Spinner: React.FunctionComponent = () => {
   return (
@@ -16,7 +16,7 @@ const Spinner: React.FunctionComponent = () => {
         </div>
       </nav>
     </section>
-  )
-}
+  );
+};
 
-export default Spinner
+export default Spinner;

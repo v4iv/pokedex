@@ -29,7 +29,6 @@ module.exports = {
     "project": "./tsconfig.json"
   },
   "rules": {
-    "semi": [2, "never"],
     "linebreak-style": "off",
     "no-console": "off",
     "consistent-return": "off",
@@ -47,8 +46,7 @@ module.exports = {
     "prettier/prettier": [
         "error",
       {
-        "endOfLine": "auto",
-        "semi": false
+        "endOfLine": "auto"
       }
     ]
   }
