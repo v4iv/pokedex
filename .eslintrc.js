@@ -1,5 +1,5 @@
 module.exports = {
-  "extends": [
+  extends: [
       "airbnb-typescript",
       "airbnb/hooks",
       "plugin:@typescript-eslint/recommended",
@@ -9,18 +9,18 @@ module.exports = {
       "prettier/@typescript-eslint",
       "plugin:prettier/recommended"
   ],
-  "plugins": [ "react", "@typescript-eslint", "jest" ],
-  "env": {
+  plugins: [ "react", "@typescript-eslint", "jest" ],
+  env: {
     "browser": true,
     "es6": true,
     "jest": true
   },
-  "globals": {
+  globals: {
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
   },
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
     "ecmaFeatures": {
       "jsx": true
     },
@@ -28,7 +28,8 @@ module.exports = {
     "sourceType": "module",
     "project": "./tsconfig.json"
   },
-  "rules": {
+  rules: {
+    "semi": "off",
     "linebreak-style": "off",
     "no-console": "off",
     "consistent-return": "off",
@@ -46,7 +47,8 @@ module.exports = {
     "prettier/prettier": [
         "error",
       {
-        "endOfLine": "auto"
+        "endOfLine": "auto",
+        "semi": false
       }
     ]
   }
