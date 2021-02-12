@@ -172,7 +172,7 @@ const HomePage: React.FunctionComponent = () => {
           <PokemonGrid pokemons={pokemonList} />
         )}
 
-        {error && <ErrorBox message={error} />}
+        {error && !loading && <ErrorBox message={error} />}
 
         {loading && (
           <section className="section">
