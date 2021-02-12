@@ -123,3 +123,6 @@ src/setupTests.ts
 src/reportWebVitals.ts
 
 .eslintrc.js
+
+functions/search.js
+search/search-index.json

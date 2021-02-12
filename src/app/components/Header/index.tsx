@@ -1,32 +1,13 @@
 import React, { useState } from "react"
-import { Link, useHistory } from "react-router-dom"
-import { kebabCase } from "lodash"
+import { Link } from "react-router-dom"
 import "./styles.css"
+import SearchBox from "../SearchBox"
 
 const Header: React.FunctionComponent = () => {
-  const history = useHistory()
-
   const [menuOpen, setMenuOpen] = useState(false)
-  const [input, setInput] = useState("")
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen)
-  }
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault()
-    const { value } = e.target
-    setInput(value)
-  }
-
-  const handleSearch = () => {
-    const query = input.toString().trim().toLowerCase()
-
-    history.push(`/pokemon/${kebabCase(query)}`)
-
-    toggleMenu()
-
-    setInput("")
   }
 
   return (
@@ -59,28 +40,7 @@ const Header: React.FunctionComponent = () => {
           className={`navbar-menu ${menuOpen ? "is-active" : ""}`}
         >
           <div className="navbar-end">
-            <div className="navbar-item">
-              <div className="field has-addons">
-                <div className="control is-expanded">
-                  <input
-                    className="input is-danger"
-                    type="text"
-                    placeholder="Pokémon ID or Name"
-                    value={input}
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="control">
-                  <button
-                    className="button is-danger"
-                    type="button"
-                    onClick={handleSearch}
-                  >
-                    Search
-                  </button>
-                </div>
-              </div>
-            </div>
+            <SearchBox />
             <a
               className="navbar-item is-pulled-right"
               href="https://github.com/v4iv/pokedex"

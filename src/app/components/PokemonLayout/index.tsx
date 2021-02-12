@@ -15,12 +15,9 @@ const PokemonLayout: React.FunctionComponent<Props> = (props) => {
   const { pokemon } = props
 
   const name = get(pokemon, ["name"])
-  const image = get(pokemon, [
-    "sprites",
-    "other",
-    "official-artwork",
-    "front_default",
-  ])
+  const image =
+    get(pokemon, ["sprites", "other", "official-artwork", "front_default"]) ||
+    get(pokemon, ["sprites", "front_default"])
   const sprites = get(pokemon, ["sprites"])
   const pokemonID = pokemonIDGenerator(get(pokemon, ["id"]))
   const height = get(pokemon, ["height"]) / 10
