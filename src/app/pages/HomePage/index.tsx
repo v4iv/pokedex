@@ -168,9 +168,7 @@ const HomePage: React.FunctionComponent = () => {
         </div>
 
         {/* TODO Add Virtualized Grid Loader */}
-        {!error && !isEmpty(pokemonList) && (
-          <PokemonGrid pokemons={pokemonList} />
-        )}
+        {!isEmpty(pokemonList) && <PokemonGrid pokemons={pokemonList} />}
 
         {error && !loading && <ErrorBox message={error} />}
 

@@ -66,7 +66,7 @@ const PokemonPage: React.FunctionComponent = () => {
       <section className={`section ${loading ? "is-large" : ""}`}>
         {error && !loading && <ErrorBox message={error} />}
 
-        {!error && !isEmpty(pokemon) && <PokemonLayout pokemon={pokemon} />}
+        {!isEmpty(pokemon) && <PokemonLayout pokemon={pokemon} />}
 
         {loading && <Spinner />}
       </section>
