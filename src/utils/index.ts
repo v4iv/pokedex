@@ -1,31 +1,18 @@
+import React from "react"
 import axios from "axios"
+import { ProviderProps } from "gestalt"
 
 const DEFAULT_DURATION = 600000 // 10 Minutes
 
-// export const sendToGoogleAnalytics = ({name, delta, value, id}) => {
-//     // Assumes the global `gtag()` function exists, see:
-//     // https://developers.google.com/analytics/devguides/collection/ga4
-//     window && window.gtag('event', name, {
-//         // Use the metric delta as the event's value parameter.
-//         value: delta,
-//         // Everything below is a custom event parameter.
-//         web_vitals_metric_id: id, // Needed to aggregate events.
-//         web_vitals_metric_value: value, // Optional
-//         // Any additional params or metadata (e.g. debug information) can be
-//         // set here as well, within the following limitations:
-//         // https://support.google.com/analytics/answer/9267744
-//     })
-// }
+interface ContextProp {
+  theme: ProviderProps["colorScheme"]
+  toggleTheme: () => void
+}
 
-// export const sendToAnalytics = ({ id, name, value }) => {
-//     window && window.ga('send', 'event', {
-//         eventCategory: 'Web Vitals',
-//         eventAction: name,
-//         eventValue: Math.round(name === 'CLS' ? value * 1000 : value), // values must be integers
-//         eventLabel: id, // id unique to current page load
-//         nonInteraction: true, // avoids affecting bounce rate
-//     })
-// }
+export const ThemeContext = React.createContext<ContextProp>({
+  theme: "light",
+  toggleTheme: () => {},
+})
 
 // Search
 export const fetchSearchResults = (query: string) => {

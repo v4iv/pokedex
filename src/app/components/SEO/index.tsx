@@ -1,14 +1,14 @@
 import React from "react"
 import { Helmet } from "react-helmet"
 
-interface Props {
+interface IProps {
   title: string
   url: string
   description: string
   image: string
 }
 
-const SEO: React.FunctionComponent<Props> = (props) => {
+const SEO: React.FunctionComponent<IProps> = (props) => {
   const { title, url, description, image } = props
 
   return (

@@ -1,20 +1,27 @@
 import React from "react"
+import { Masonry } from "gestalt"
 import { Pokemon } from "../../types/pokemon.types"
 import PokemonCard from "../PokemonCard"
 
-interface Props {
+interface IProps {
   pokemons: Pokemon[]
+  loadItems: () => {}
 }
 
-const PokemonGrid: React.FunctionComponent<Props> = (props) => {
-  const { pokemons } = props
+const PokemonGrid: React.FunctionComponent<IProps> = (props) => {
+  const { pokemons, loadItems } = props
 
   return (
-    <div className="columns is-multiline is-centered">
-      {pokemons.map((pokemon, idx) => {
-        return <PokemonCard key={idx} pokemon={pokemon} />
-      })}
-    </div>
+    <>
+      <Masonry
+        minCols={1}
+        comp={({ data }) => <PokemonCard pokemon={data} />}
+        items={pokemons}
+        loadItems={loadItems}
+        flexible
+        virtualize
+      />
+    </>
   )
 }
 

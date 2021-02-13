@@ -1,104 +1,160 @@
-/* latin */
-@font-face {
-    font-family: 'Orbitron';
-    font-style: normal;
-    font-weight: 400;
-    src: local('Orbitron Regular'), local('Orbitron-Regular'), url(../fonts/orbitron-regular.woff2) format('woff2');
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD
-
+body {
+    margin: 0;
 }
 
-* {
-    font-family: 'Orbitron', sans-serif;
-    letter-spacing: 1px;
+pre {
+    white-space: pre-wrap !important; /* stylelint-disable-line declaration-no-important */
+    word-break: break-word !important; /* stylelint-disable-line declaration-no-important */
+}
+
+ul {
+    margin: 0;
+}
+
+li {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+/*!* latin *!*/
+/*@font-face {*/
+/*    font-family: 'Orbitron';*/
+/*    font-style: normal;*/
+/*    font-weight: 400;*/
+/*    src: local('Orbitron Regular'), local('Orbitron-Regular'), url(../fonts/orbitron-regular.woff2) format('woff2');*/
+/*    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD*/
+
+/*}*/
+
+/** {*/
+/*    font-family: 'Orbitron', sans-serif;*/
+/*    letter-spacing: 1px;*/
+/*}*/
+
+.pokemon-type-mini {
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .grass {
-    color: #9bcc50
+    color: #9bcc50;
+    font-family: Avenir, sans-serif;
+    text-transform: uppercase;
 }
 
 .poison {
-    color: #b97fc9
+    color: #b97fc9;
+    font-family: Avenir, sans-serif;
+    text-transform: uppercase;
 }
 
 .fire {
-    color: #fd7d24
+    color: #fd7d24;
+    font-family: Avenir, sans-serif;
+    text-transform: uppercase;
 }
 
 .flying {
-    background-color: #2f2f2f;
     background-image: linear-gradient(#3dc7ef 10%, #bdb9b8 90%);
     background-size: 100%;
     -webkit-background-clip: text;
     -moz-background-clip: text;
     -webkit-text-fill-color: transparent;
     -moz-text-fill-color: transparent;
+    font-family: Avenir, sans-serif;
+    text-transform: uppercase;
 }
 
 .water {
-    color: #4592c4
+    color: #4592c4;
+    font-family: Avenir, sans-serif;
+    text-transform: uppercase;
 }
 
 .bug {
-    color: #729f3f
+    color: #729f3f;
+    font-family: Avenir, sans-serif;
+    text-transform: uppercase;
 }
 
 .normal {
-    color: #a4acaf
+    color: #a4acaf;
+    font-family: Avenir, sans-serif;
+    text-transform: uppercase;
 }
 
 .electric {
-    color: #eed535
+    color: #eed535;
+    font-family: Avenir, sans-serif;
+    text-transform: uppercase;
 }
 
 .ground {
-    background-color: #2f2f2f;
     background-image: linear-gradient(#f7de3f 30%, #ab9842 70%);
     background-size: 100%;
     -webkit-background-clip: text;
     -moz-background-clip: text;
     -webkit-text-fill-color: transparent;
     -moz-text-fill-color: transparent;
+    font-family: Avenir, sans-serif;
+    text-transform: uppercase;
 }
 
 .fairy {
-    color: #fdb9e9
+    color: #fdb9e9;
+    font-family: Avenir, sans-serif;
+    text-transform: uppercase;
 }
 
 .fighting {
-    color: #d56723
+    color: #d56723;
+    font-family: Avenir, sans-serif;
+    text-transform: uppercase;
 }
 
 .psychic {
-    color: #f366b9
+    color: #f366b9;
+    font-family: Avenir, sans-serif;
+    text-transform: uppercase;
 }
 
 .rock {
-    color: #a38c21
+    color: #a38c21;
+    font-family: Avenir, sans-serif;
+    text-transform: uppercase;
 }
 
 .steel {
-    color: #9eb7b8
+    color: #9eb7b8;
+    font-family: Avenir, sans-serif;
+    text-transform: uppercase;
 }
 
 .ice {
-    color: #51c4e7
+    color: #51c4e7;
+    font-family: Avenir, sans-serif;
+    text-transform: uppercase;
 }
 
 .dragon {
-    background-color: #2f2f2f;
     background-image: linear-gradient(#53a4cf 30%, #f16e57 70%);
     background-size: 100%;
     -webkit-background-clip: text;
     -moz-background-clip: text;
     -webkit-text-fill-color: transparent;
     -moz-text-fill-color: transparent;
+    font-family: Avenir, sans-serif;
+    text-transform: uppercase;
 }
 
 .dark {
-    color: #707070
+    color: #707070;
+    font-family: Avenir, sans-serif;
+    text-transform: uppercase;
 }
 
 .ghost {
-    color: #7b62a3
+    color: #7b62a3;
+    font-family: Avenir sans-serif;
+    text-transform: uppercase;
 }

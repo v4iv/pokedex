@@ -13,7 +13,7 @@ Made with React & Redux. Powered by [PokeAPI](https://pokeapi.co)
   
 - TypeScript
   
-- Bulma
+- Gestalt
 
 ## Features
 
@@ -24,6 +24,8 @@ Made with React & Redux. Powered by [PokeAPI](https://pokeapi.co)
 - React Hooks
 
 - Simple TypeAhead Search
+  
+- Virtualised Grid Loader
   
 - Typescript
   
@@ -37,6 +39,8 @@ Made with React & Redux. Powered by [PokeAPI](https://pokeapi.co)
 
 - ~~Search~~
   
-- Virtualised Grid Loader
+- ~~Virtualised Grid Loader~~
+
+- a11y
   
 - i18n

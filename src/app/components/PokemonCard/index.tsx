@@ -1,14 +1,15 @@
 import React from "react"
-import { Link } from "react-router-dom"
 import { get } from "lodash"
+import { Avatar, Box, Card, Heading, Text } from "gestalt"
 import { Pokemon } from "../../types/pokemon.types"
 import { pokemonIDGenerator } from "../../../utils"
+import RouterLink from "../RouterLink"
 
-interface Props {
-  pokemon: Pokemon
+interface IProps {
+  pokemon?: Pokemon | any
 }
 
-const PokemonCard: React.FunctionComponent<Props> = (props) => {
+const PokemonCard: React.FunctionComponent<IProps> = (props) => {
   const { pokemon } = props
 
   const name = get(pokemon, ["name"])
@@ -19,50 +20,43 @@ const PokemonCard: React.FunctionComponent<Props> = (props) => {
   const types = get(pokemon, ["types"])
 
   return (
-    <div className="column is-one-third">
-      <div className="box">
-        <div className="card-image">
-          <figure className="image is-2by2 has-background-light">
-            <Link to={`/pokemon/${name}/`}>
-              <img src={image} alt={name} />
-            </Link>
-          </figure>
-        </div>
+    <Box margin={1} rounding={2} padding={2} borderStyle="sm">
+      <RouterLink to={`/pokemon/${name}/`} hoverStyle="none">
+        <Card image={<Avatar name={name} src={image} />}>
+          <Box paddingX={3} paddingY={2}>
+            <Text color="gray">#{pokemonID}</Text>
 
-        <div className="card-content">
-          <div className="media">
-            <div className="media-content">
-              <p className="subtitle is-6 has-text-grey">#{pokemonID}</p>
+            <Heading size="md" truncate>
+              {name}
+            </Heading>
+          </Box>
 
-              <p className="title is-4 is-capitalized">
-                <Link to={`/pokemon/${name}/`} className="has-text-black">
-                  {name}
-                </Link>
-              </p>
+          <Box paddingX={3} paddingY={2}>
+            <Text>height: {height} m</Text>
 
-              <p className="is-3">Height: {height} m</p>
+            <Text>weight: {weight} kg</Text>
+          </Box>
 
-              <p className="is-3">Weight: {weight} kg</p>
-            </div>
-          </div>
-        </div>
+          <Box
+            paddingX={3}
+            paddingY={2}
+            display="flex"
+            justifyContent="around"
+            alignItems="center"
+          >
+            {types.map((item: object) => {
+              const pokemonType = get(item, ["type", "name"])
 
-        <footer className="card-footer">
-          {types.map((item: object, idx: number) => {
-            const pokemonType = get(item, ["type", "name"])
-
-            return (
-              <span
-                key={idx}
-                className={`card-footer-item is-uppercase ${pokemonType}`}
-              >
-                {pokemonType}
-              </span>
-            )
-          })}
-        </footer>
-      </div>
-    </div>
+              return (
+                <span key={pokemonType} className={pokemonType}>
+                  {pokemonType}
+                </span>
+              )
+            })}
+          </Box>
+        </Card>
+      </RouterLink>
+    </Box>
   )
 }
 

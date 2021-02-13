@@ -6,6 +6,11 @@ import {
   SORT_POKEMONS,
 } from "../constants"
 
+export interface ISearchResult {
+  name: string
+  id: string
+}
+
 export interface PokedexState {
   pokemonList: Pokemon[]
   url: string
