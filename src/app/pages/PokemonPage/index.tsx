@@ -12,7 +12,7 @@ import {
 import { fetchPokemon } from "../../actions/pokemon.action"
 import SEO from "../../components/SEO"
 import ErrorBox from "../../components/ErrorBox"
-import PokemonLayout from "../../components/PokemonLayout"
+import PokemonDetails from "../../components/PokemonDetails"
 
 interface ParamTypes {
   slug: string
@@ -66,7 +66,7 @@ const PokemonPage: React.FunctionComponent = () => {
       <Box paddingY={3} height="100%">
         {error && !loading && <ErrorBox message={error} />}
 
-        {!isEmpty(pokemon) && <PokemonLayout pokemon={pokemon} />}
+        {!isEmpty(pokemon) && <PokemonDetails pokemon={pokemon} />}
 
         <Box paddingY={6}>
           <Spinner accessibilityLabel="Loading..." show={loading} />

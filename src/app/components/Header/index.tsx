@@ -142,12 +142,11 @@ const Header: React.FunctionComponent = () => {
                             </Box>
                             <Box paddingX={2} flex="grow">
                               <Text color="darkGray" weight="bold">
-                                {pokemonName}
+                                {capitalize(pokemonName)}
                               </Text>
-                              <Text
-                                size="sm"
-                                color="gray"
-                              >{`#${pokemonID}`}</Text>
+                              <Text size="sm" color="gray">
+                                {`#${pokemonID}`}
+                              </Text>
                             </Box>
                           </Box>
                         </RouterLink>
