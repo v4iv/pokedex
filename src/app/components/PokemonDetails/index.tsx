@@ -1,9 +1,10 @@
 import React from "react"
-import { Box, Divider, GroupAvatar, Heading, Mask, Module, Text } from "gestalt"
+import { Box, Divider, GroupAvatar, Heading, Mask, Text } from "gestalt"
 import { find, get, capitalize } from "lodash"
 import { pokemonIDGenerator } from "../../../utils"
 import { Pokemon } from "../../types/pokemon.types"
 import SEO from "../SEO"
+import StatsBox from "../StatsBox"
 
 interface IProps {
   pokemon: Pokemon
@@ -36,7 +37,7 @@ const PokemonDetails: React.FunctionComponent<IProps> = (props) => {
         image={image}
         url={`https://react-pokedex.netlify.app/pokemon/${name}`}
       />
-      <Box rounding={2} borderStyle="sm">
+      <Box margin={1} rounding={2} borderStyle="sm">
         <Box display="flex" alignItems="center" padding={3}>
           <Box paddingX={2}>
             <GroupAvatar
@@ -67,10 +68,33 @@ const PokemonDetails: React.FunctionComponent<IProps> = (props) => {
 
         <Divider />
 
-        <Box paddingX={3} paddingY={5}>
-          <Text weight="bold">{flavorText}</Text>
+        <Box
+          paddingX={3}
+          paddingY={2}
+          display="flex"
+          justifyContent="around"
+          alignItems="center"
+        >
+          {types.map((item: object) => {
+            const pokemonType = get(item, ["type", "name"])
+
+            return (
+              <span
+                key={pokemonType}
+                className={`pokemon-type-mini ${pokemonType}`}
+              >
+                {pokemonType}
+              </span>
+            )
+          })}
         </Box>
       </Box>
+
+      <Box margin={1} rounding={2} borderStyle="sm" paddingX={3} paddingY={5}>
+        <Text weight="bold">{flavorText}</Text>
+      </Box>
+
+      <StatsBox stats={stats} />
     </>
   )
 }

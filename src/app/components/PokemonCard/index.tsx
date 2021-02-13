@@ -42,17 +42,14 @@ const PokemonCard: React.FunctionComponent<IProps> = (props) => {
               paddingX={3}
               paddingY={2}
               display="flex"
-              justifyContent="center"
+              justifyContent="around"
               alignItems="center"
             >
               {types.map((item: object) => {
                 const pokemonType = get(item, ["type", "name"])
 
                 return (
-                  <span
-                    key={pokemonType}
-                    className={`pokemon-type-mini ${pokemonType}`}
-                  >
+                  <span key={pokemonType} className={pokemonType}>
                     {pokemonType}
                   </span>
                 )
