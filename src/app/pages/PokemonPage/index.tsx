@@ -1,7 +1,8 @@
-import React, { useEffect, useCallback } from "react"
+import React, { useCallback, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import { isEmpty } from "lodash"
+import { Box, Spinner } from "gestalt"
 import { RootState } from "../../reducers"
 import {
   FETCH_POKEMON_ERROR,
@@ -10,7 +11,6 @@ import {
 } from "../../constants"
 import { fetchPokemon } from "../../actions/pokemon.action"
 import SEO from "../../components/SEO"
-import Spinner from "../../components/Spinner"
 import ErrorBox from "../../components/ErrorBox"
 import PokemonLayout from "../../components/PokemonLayout"
 
@@ -63,13 +63,15 @@ const PokemonPage: React.FunctionComponent = () => {
         url="https://pokedex.theleakycauldronblog.com"
       />
 
-      <section className={`section ${loading ? "is-large" : ""}`}>
+      <Box paddingY={3} height="100%">
         {error && !loading && <ErrorBox message={error} />}
 
         {!isEmpty(pokemon) && <PokemonLayout pokemon={pokemon} />}
 
-        {loading && <Spinner />}
-      </section>
+        <Box paddingY={6}>
+          <Spinner accessibilityLabel="Loading..." show={loading} />
+        </Box>
+      </Box>
     </>
   )
 }

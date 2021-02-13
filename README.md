@@ -13,7 +13,7 @@ Made with React & Redux. Powered by [PokeAPI](https://pokeapi.co)
   
 - TypeScript
   
-- Bulma
+- Gestalt
 
 ## Features
 

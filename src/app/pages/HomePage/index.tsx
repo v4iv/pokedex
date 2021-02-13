@@ -2,6 +2,15 @@ import React, { useCallback, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
 import { isEmpty, random } from "lodash"
+import {
+  Box,
+  Button,
+  Divider,
+  Heading,
+  SelectList,
+  SelectListProps,
+  Spinner,
+} from "gestalt"
 import { RootState } from "../../reducers"
 import {
   FETCH_POKEDEX_ERROR,
@@ -11,7 +20,6 @@ import {
 } from "../../constants"
 import { fetchPokemons, sortPokemons } from "../../actions/pokedex.action"
 import SEO from "../../components/SEO"
-import Spinner from "../../components/Spinner"
 import ErrorBox from "../../components/ErrorBox"
 import PokemonGrid from "../../components/PokemonGrid"
 
@@ -55,12 +63,29 @@ const HomePage: React.FunctionComponent = () => {
       })
   }, [dispatch, url])
 
-  const handleSort = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setOrder(e.target.value)
+  const sortOptions = [
+    {
+      value: "Lowest Number First",
+      label: "Lowest Number (First)",
+    },
+    {
+      value: "Highest Number First",
+      label: "Highest Number (First)",
+    },
+    {
+      value: "A - Z",
+      label: "A - Z",
+    },
+    {
+      value: "Z - A",
+      label: "Z - A",
+    },
+  ]
 
-    const orderBy = e.target.value
+  const handleSort: SelectListProps["onChange"] = ({ value }) => {
+    setOrder(value)
 
-    const payload = sortPokemons(pokemonList, orderBy)
+    const payload = sortPokemons(pokemonList, value)
 
     dispatch({
       type: SORT_POKEMONS,
@@ -117,67 +142,67 @@ const HomePage: React.FunctionComponent = () => {
         url="https://pokedex.theleakycauldronblog.com"
       />
 
-      <section className="section">
-        <nav className="level">
-          <div className="level-item has-text-centered">
-            <div>
-              <h1 className="title">POKéMON</h1>
+      <Box paddingY={3}>
+        <Box
+          padding={2}
+          margin={1}
+          display="flex"
+          direction="column"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Heading size="lg">POKéMON</Heading>
+          <Heading size="sm">gotta catch'em all</Heading>
+        </Box>
 
-              <h2 className="heading">gotta catch'em all</h2>
-            </div>
-          </div>
-        </nav>
+        <Divider />
 
-        <div className="columns">
-          <div className="column is-half">
-            <button
-              type="button"
-              className={`button is-info is-fullwidth ${
-                surprise ? "is-loading" : "is-light"
-              }`}
-              onClick={handleSurprise}
-              disabled={surprise}
-            >
-              Surprise Me!
-            </button>
-          </div>
+        <Box
+          padding={2}
+          margin={1}
+          display="flex"
+          justifyContent="between"
+          alignItems="center"
+        >
+          <Box margin={1} column={6}>
+            {surprise ? (
+              <Spinner
+                accessibilityLabel="Loading Surprise..."
+                show={surprise}
+              />
+            ) : (
+              <Button
+                name="Surprise"
+                color="blue"
+                onClick={handleSurprise}
+                text="Surprise Me!"
+                disabled={surprise}
+              />
+            )}
+          </Box>
+          <Box margin={1} column={6}>
+            <SelectList
+              id="sort"
+              name="Sort"
+              onChange={handleSort}
+              options={sortOptions}
+              placeholder="Sort By"
+              value={order}
+            />
+          </Box>
+        </Box>
 
-          <div className="column is-half">
-            <div className="field is-horizontal is-grouped is-grouped-right">
-              <div className="control is-fullwidth">
-                <div className="field-body is-fullwidth">
-                  <label className="label is-hidden" htmlFor="#sort">
-                    Sort
-                  </label>
-
-                  <div id="sort" className="select is-primary">
-                    <select value={order} onChange={handleSort}>
-                      <option>Lowest Number First</option>
-
-                      <option>Highest Number First</option>
-
-                      <option>A - Z</option>
-
-                      <option>Z - A</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <Divider />
 
         {/* TODO Add Virtualized Grid Loader */}
         {!isEmpty(pokemonList) && <PokemonGrid pokemons={pokemonList} />}
 
         {error && !loading && <ErrorBox message={error} />}
 
-        {loading && (
-          <section className="section">
-            <Spinner />
-          </section>
-        )}
-      </section>
+        <Box paddingY={6}>
+          <Spinner accessibilityLabel="Loading..." show={loading} />
+        </Box>
+      </Box>
     </>
   )
 }
