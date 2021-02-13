@@ -25,6 +25,8 @@ Made with React & Redux. Powered by [PokeAPI](https://pokeapi.co)
 
 - Simple TypeAhead Search
   
+- Virtualised Grid Loader
+  
 - Typescript
   
 - Route Based Code Splitting
@@ -37,6 +39,8 @@ Made with React & Redux. Powered by [PokeAPI](https://pokeapi.co)
 
 - ~~Search~~
   
-- Virtualised Grid Loader
+- ~~Virtualised Grid Loader~~
+
+- a11y
   
 - i18n

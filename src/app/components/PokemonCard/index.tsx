@@ -1,12 +1,12 @@
 import React from "react"
 import { get } from "lodash"
-import { Avatar, Box, Card, Column, Heading, Text } from "gestalt"
+import { Avatar, Box, Card, Heading, Text } from "gestalt"
 import { Pokemon } from "../../types/pokemon.types"
 import { pokemonIDGenerator } from "../../../utils"
 import RouterLink from "../RouterLink"
 
 interface IProps {
-  pokemon: Pokemon
+  pokemon?: Pokemon | any
 }
 
 const PokemonCard: React.FunctionComponent<IProps> = (props) => {
@@ -20,45 +20,43 @@ const PokemonCard: React.FunctionComponent<IProps> = (props) => {
   const types = get(pokemon, ["types"])
 
   return (
-    <Column span={12} mdSpan={4}>
-      <Box margin={2} rounding={2} padding={2} borderStyle="sm">
-        <RouterLink to={`/pokemon/${name}/`} hoverStyle="none">
-          <Card image={<Avatar name={name} src={image} />}>
-            <Box paddingX={3} paddingY={2}>
-              <Text color="gray">#{pokemonID}</Text>
+    <Box margin={1} rounding={2} padding={2} borderStyle="sm">
+      <RouterLink to={`/pokemon/${name}/`} hoverStyle="none">
+        <Card image={<Avatar name={name} src={image} />}>
+          <Box paddingX={3} paddingY={2}>
+            <Text color="gray">#{pokemonID}</Text>
 
-              <Heading size="md" truncate>
-                {name}
-              </Heading>
-            </Box>
+            <Heading size="md" truncate>
+              {name}
+            </Heading>
+          </Box>
 
-            <Box paddingX={3} paddingY={2}>
-              <Text>height: {height} m</Text>
+          <Box paddingX={3} paddingY={2}>
+            <Text>height: {height} m</Text>
 
-              <Text>weight: {weight} kg</Text>
-            </Box>
+            <Text>weight: {weight} kg</Text>
+          </Box>
 
-            <Box
-              paddingX={3}
-              paddingY={2}
-              display="flex"
-              justifyContent="around"
-              alignItems="center"
-            >
-              {types.map((item: object) => {
-                const pokemonType = get(item, ["type", "name"])
+          <Box
+            paddingX={3}
+            paddingY={2}
+            display="flex"
+            justifyContent="around"
+            alignItems="center"
+          >
+            {types.map((item: object) => {
+              const pokemonType = get(item, ["type", "name"])
 
-                return (
-                  <span key={pokemonType} className={pokemonType}>
-                    {pokemonType}
-                  </span>
-                )
-              })}
-            </Box>
-          </Card>
-        </RouterLink>
-      </Box>
-    </Column>
+              return (
+                <span key={pokemonType} className={pokemonType}>
+                  {pokemonType}
+                </span>
+              )
+            })}
+          </Box>
+        </Card>
+      </RouterLink>
+    </Box>
   )
 }
 

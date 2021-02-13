@@ -62,6 +62,8 @@ const HomePage: React.FunctionComponent = () => {
           payload: "Oops! Something went wrong. Please try again later.",
         })
       })
+
+    return {}
   }, [dispatch, url])
 
   const sortOptions = [
@@ -204,7 +206,7 @@ const HomePage: React.FunctionComponent = () => {
               </Box>
             }
           >
-            <PokemonGrid pokemons={pokemonList} />
+            <PokemonGrid pokemons={pokemonList} loadItems={handleFetch} />
           </Suspense>
         )}
 
