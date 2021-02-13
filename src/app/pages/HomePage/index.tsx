@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react"
+import React, { Suspense, lazy, useCallback, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
 import { isEmpty, random } from "lodash"
@@ -20,8 +20,9 @@ import {
 } from "../../constants"
 import { fetchPokemons, sortPokemons } from "../../actions/pokedex.action"
 import SEO from "../../components/SEO"
-import ErrorBox from "../../components/ErrorBox"
-import PokemonGrid from "../../components/PokemonGrid"
+// Lazy Load
+const PokemonGrid = lazy(() => import("../../components/PokemonGrid"))
+const ErrorToast = lazy(() => import("../../components/ErrorToast"))
 
 const HomePage: React.FunctionComponent = () => {
   const history = useHistory()
@@ -58,7 +59,7 @@ const HomePage: React.FunctionComponent = () => {
         setIsBottom(false)
         dispatch({
           type: FETCH_POKEDEX_ERROR,
-          payload: "An Error Occurred! Please Try Again.",
+          payload: "Oops! Something went wrong. Please try again later.",
         })
       })
   }, [dispatch, url])
@@ -138,8 +139,8 @@ const HomePage: React.FunctionComponent = () => {
       <SEO
         title="Home"
         description="Pokédex is a mini-encyclopedia of Pokémon species, types etc."
-        image="https://pokedex.theleakycauldronblog.com/logo192.png"
-        url="https://pokedex.theleakycauldronblog.com"
+        image="https://react-pokedex.netlify.app/logo192.png"
+        url="https://react-pokedex.netlify.app/"
       />
 
       <Box paddingY={3}>
@@ -195,9 +196,29 @@ const HomePage: React.FunctionComponent = () => {
         <Divider />
 
         {/* TODO Add Virtualized Grid Loader */}
-        {!isEmpty(pokemonList) && <PokemonGrid pokemons={pokemonList} />}
+        {!isEmpty(pokemonList) && (
+          <Suspense
+            fallback={
+              <Box paddingY={6}>
+                <Spinner accessibilityLabel="Loading..." show />
+              </Box>
+            }
+          >
+            <PokemonGrid pokemons={pokemonList} />
+          </Suspense>
+        )}
 
-        {error && !loading && <ErrorBox message={error} />}
+        {error && !loading && (
+          <Suspense
+            fallback={
+              <Box paddingY={6}>
+                <Spinner accessibilityLabel="Loading..." show />
+              </Box>
+            }
+          >
+            <ErrorToast message={error} />
+          </Suspense>
+        )}
 
         <Box paddingY={6}>
           <Spinner accessibilityLabel="Loading..." show={loading} />

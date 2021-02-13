@@ -34,7 +34,7 @@ const PokemonDetails: React.FunctionComponent<IProps> = (props) => {
         title={name}
         description={`${name} - ${flavorText}`}
         image={image}
-        url={`https://pokedex.theleakycauldronblog.com/pokemon/${name}`}
+        url={`https://react-pokedex.netlify.app/pokemon/${name}`}
       />
       <Box rounding={2} borderStyle="sm">
         <Box display="flex" alignItems="center" padding={3}>

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react"
+import React, { Suspense, lazy, useCallback, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import { isEmpty } from "lodash"
@@ -11,8 +11,9 @@ import {
 } from "../../constants"
 import { fetchPokemon } from "../../actions/pokemon.action"
 import SEO from "../../components/SEO"
-import ErrorBox from "../../components/ErrorBox"
-import PokemonDetails from "../../components/PokemonDetails"
+// Lazy Load
+const PokemonDetails = lazy(() => import("../../components/PokemonDetails"))
+const ErrorToast = lazy(() => import("../../components/ErrorToast"))
 
 interface ParamTypes {
   slug: string
@@ -45,7 +46,7 @@ const PokemonPage: React.FunctionComponent = () => {
 
         dispatch({
           type: FETCH_POKEMON_ERROR,
-          payload: "An Error Occurred! Please Try Again.",
+          payload: "Oops! Something went wrong. Please try again later.",
         })
       })
   }, [dispatch, slug])
@@ -59,14 +60,34 @@ const PokemonPage: React.FunctionComponent = () => {
       <SEO
         title="POKéMON"
         description="Pokédex is a mini-encyclopedia of Pokémon species, types etc."
-        image="https://pokedex.theleakycauldronblog.com/logo192.png"
-        url="https://pokedex.theleakycauldronblog.com"
+        image="https://react-pokedex.netlify.app/logo192.png"
+        url="https://react-pokedex.netlify.app/"
       />
 
       <Box paddingY={3} height="100%">
-        {error && !loading && <ErrorBox message={error} />}
+        {error && !loading && (
+          <Suspense
+            fallback={
+              <Box paddingY={6}>
+                <Spinner accessibilityLabel="Loading..." show />
+              </Box>
+            }
+          >
+            <ErrorToast message={error} />
+          </Suspense>
+        )}
 
-        {!isEmpty(pokemon) && <PokemonDetails pokemon={pokemon} />}
+        {!isEmpty(pokemon) && (
+          <Suspense
+            fallback={
+              <Box paddingY={6}>
+                <Spinner accessibilityLabel="Loading..." show />
+              </Box>
+            }
+          >
+            <PokemonDetails pokemon={pokemon} />
+          </Suspense>
+        )}
 
         <Box paddingY={6}>
           <Spinner accessibilityLabel="Loading..." show={loading} />
