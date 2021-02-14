@@ -147,14 +147,14 @@ li {
     text-transform: uppercase;
 }
 
-.dark {
-    color: #707070;
-    font-family: Avenir, sans-serif;
-    text-transform: uppercase;
-}
-
 .ghost {
     color: #7b62a3;
     font-family: Avenir sans-serif;
+    text-transform: uppercase;
+}
+
+.dark {
+    color: #707070;
+    font-family: Avenir, sans-serif;
     text-transform: uppercase;
 }
