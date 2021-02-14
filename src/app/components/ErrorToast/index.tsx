@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { Box, Layer, Toast } from "gestalt"
 
 interface Props {
@@ -6,24 +6,36 @@ interface Props {
 }
 
 const ErrorToast: React.FunctionComponent<Props> = (props) => {
+  const [show, setShow] = useState(true)
   const { message } = props
+
+  useEffect(() => {
+    setTimeout(() => {
+      setShow(false)
+    }, 3000)
+  }, [setShow])
+
   return (
-    <Layer>
-      <Box
-        fit
-        dangerouslySetInlineStyle={{
-          __style: {
-            bottom: 50,
-            left: "50%",
-            transform: "translateX(-50%)",
-          },
-        }}
-        paddingX={1}
-        position="fixed"
-      >
-        <Toast color="red" text={<>{message}</>} />
-      </Box>
-    </Layer>
+    <>
+      {show && (
+        <Layer>
+          <Box
+            fit
+            dangerouslySetInlineStyle={{
+              __style: {
+                bottom: 50,
+                left: "50%",
+                transform: "translateX(-50%)",
+              },
+            }}
+            paddingX={1}
+            position="fixed"
+          >
+            <Toast color="red" text={<>{message}</>} />
+          </Box>
+        </Layer>
+      )}
+    </>
   )
 }
 

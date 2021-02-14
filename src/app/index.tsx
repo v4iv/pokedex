@@ -35,7 +35,7 @@ const App: React.FunctionComponent = () => {
                   <Header />
                   <Suspense
                     fallback={
-                      <Box paddingY={9}>
+                      <Box paddingY={7}>
                         <Spinner accessibilityLabel="Loading..." show />
                       </Box>
                     }
