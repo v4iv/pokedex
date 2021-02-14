@@ -59,7 +59,7 @@ export const fetchPokemons: (url: string) => Promise<any> = (url) => {
 
 export const sortPokemons: (list: Pokemon[], order_by: string) => Pokemon[] = (
   list,
-  order_by = "Lowest Number First"
+  order_by = "lowest_number_first"
 ) => {
   return list.sort((param1, param2) => {
     switch (order_by) {

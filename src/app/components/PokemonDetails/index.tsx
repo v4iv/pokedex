@@ -1,10 +1,12 @@
 import React from "react"
 import { Box, Divider, GroupAvatar, Heading, Mask, Text } from "gestalt"
-import { find, get, capitalize } from "lodash"
+import { find, get, capitalize, upperCase } from "lodash"
 import { pokemonIDGenerator } from "../../../utils"
 import { Pokemon } from "../../types/pokemon.types"
 import SEO from "../SEO"
 import StatsBox from "../StatsBox"
+import FlavorTextBox from "../FlavorTextBox"
+import DataTableBox from "../DataTableBox"
 
 interface IProps {
   pokemon: Pokemon
@@ -28,10 +30,11 @@ const PokemonDetails: React.FunctionComponent<IProps> = (props) => {
   const abilities = get(pokemon, ["abilities"])
   const types = get(pokemon, ["types"])
   const flavorTextEntries = get(pokemon, ["species", "flavor_text_entries"])
-  const englishEntry = find(flavorTextEntries, { language: { name: "en" } })
-  const flavorText = get(englishEntry, ["flavor_text"])
+  const blueEntry = find(flavorTextEntries, { version: { name: "blue" } })
+  const flavorText = get(blueEntry, ["flavor_text"])
   const stats = get(pokemon, ["stats"])
-  const shape = get(pokemon, ["species", "shape", "name"])
+  const shape = upperCase(get(pokemon, ["species", "shape", "name"]))
+
   return (
     <>
       <SEO
@@ -93,9 +96,14 @@ const PokemonDetails: React.FunctionComponent<IProps> = (props) => {
         </Box>
       </Box>
 
-      <Box margin={1} rounding={2} borderStyle="sm" paddingX={3} paddingY={5}>
-        <Text weight="bold">{flavorText}</Text>
-      </Box>
+      <FlavorTextBox flavorText={flavorText} />
+
+      <DataTableBox
+        height={height}
+        weight={weight}
+        abilities={abilities}
+        shape={shape}
+      />
 
       <StatsBox stats={stats} />
     </>
