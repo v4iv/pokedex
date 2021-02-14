@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useCallback, useEffect, useState } from "react"
+import React, { lazy, Suspense, useCallback, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
 import { isEmpty, random } from "lodash"
@@ -6,7 +6,6 @@ import {
   Box,
   Button,
   Divider,
-  Heading,
   SelectList,
   SelectListProps,
   Spinner,
@@ -29,8 +28,7 @@ const HomePage: React.FunctionComponent = () => {
   const dispatch = useDispatch()
 
   const [surprise, setSurprise] = useState(false)
-  const [order, setOrder] = useState("Lowest Number First")
-  const [isBottom, setIsBottom] = useState(false)
+  const [order, setOrder] = useState("lowest_number_first")
 
   const { pokemonList, url, error, loading } = useSelector(
     (state: RootState) => ({
@@ -48,7 +46,6 @@ const HomePage: React.FunctionComponent = () => {
 
     fetchPokemons(url)
       .then((res) => {
-        setIsBottom(false)
         dispatch({
           type: FETCH_POKEDEX_SUCCESS,
           payload: res,
@@ -56,7 +53,6 @@ const HomePage: React.FunctionComponent = () => {
       })
       .catch((err) => {
         console.error(FETCH_POKEDEX_ERROR, err)
-        setIsBottom(false)
         dispatch({
           type: FETCH_POKEDEX_ERROR,
           payload: "Oops! Something went wrong. Please try again later.",
@@ -68,19 +64,19 @@ const HomePage: React.FunctionComponent = () => {
 
   const sortOptions = [
     {
-      value: "Lowest Number First",
+      value: "lowest_number_first",
       label: "Lowest Number (First)",
     },
     {
-      value: "Highest Number First",
+      value: "highest_number_first",
       label: "Highest Number (First)",
     },
     {
-      value: "A - Z",
+      value: "z_a",
       label: "A - Z",
     },
     {
-      value: "Z - A",
+      value: "a_z",
       label: "Z - A",
     },
   ]
@@ -110,31 +106,11 @@ const HomePage: React.FunctionComponent = () => {
     }, wait)
   }
 
-  const handleScroll = () => {
-    const scrollTop =
-      (document.documentElement && document.documentElement.scrollTop) ||
-      document.body.scrollTop
-    const scrollHeight =
-      (document.documentElement && document.documentElement.scrollHeight) ||
-      document.body.scrollHeight
-    if (scrollTop + window.innerHeight + 50 >= scrollHeight) {
-      setIsBottom(true)
-    }
-  }
-
   useEffect(() => {
     if (isEmpty(pokemonList)) {
       handleFetch()
     }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
   }, [handleFetch]) // eslint-disable-line react-hooks/exhaustive-deps
-
-  useEffect(() => {
-    if (isBottom && !loading) {
-      handleFetch()
-    }
-  }, [handleFetch, isBottom]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
@@ -147,21 +123,6 @@ const HomePage: React.FunctionComponent = () => {
 
       <Box paddingY={3}>
         <Box
-          padding={2}
-          margin={1}
-          display="flex"
-          direction="column"
-          justifyContent="center"
-          alignItems="center"
-        >
-          <Heading size="lg">POKéMON</Heading>
-          <Heading size="sm">gotta catch'em all</Heading>
-        </Box>
-
-        <Divider />
-
-        <Box
-          padding={2}
           margin={1}
           display="flex"
           justifyContent="between"
@@ -196,8 +157,6 @@ const HomePage: React.FunctionComponent = () => {
         </Box>
 
         <Divider />
-
-        {/* TODO Add Virtualized Grid Loader */}
         {!isEmpty(pokemonList) && (
           <Suspense
             fallback={
@@ -206,10 +165,13 @@ const HomePage: React.FunctionComponent = () => {
               </Box>
             }
           >
-            <PokemonGrid pokemons={pokemonList} loadItems={handleFetch} />
+            <PokemonGrid
+              pokemons={pokemonList}
+              loadItems={handleFetch}
+              loading={loading}
+            />
           </Suspense>
         )}
-
         {error && !loading && (
           <Suspense
             fallback={
@@ -221,10 +183,6 @@ const HomePage: React.FunctionComponent = () => {
             <ErrorToast message={error} />
           </Suspense>
         )}
-
-        <Box paddingY={6}>
-          <Spinner accessibilityLabel="Loading..." show={loading} />
-        </Box>
       </Box>
     </>
   )

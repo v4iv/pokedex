@@ -63,16 +63,16 @@ export const sortPokemons = (
 ) => {
   return list.sort((param1, param2) => {
     switch (order_by) {
-      case "Lowest Number First":
+      case "lowest_number_first":
         return param1.id - param2.id
 
-      case "Highest Number First":
+      case "highest_number_first":
         return param2.id - param1.id
 
-      case "Z - A":
+      case "z_a":
         return param2.name.localeCompare(param1.name)
 
-      case "A - Z":
+      case "a_z":
         return param1.name.localeCompare(param2.name)
 
       default:

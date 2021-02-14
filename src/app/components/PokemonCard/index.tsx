@@ -13,7 +13,10 @@ const PokemonCard: React.FunctionComponent<IProps> = (props) => {
   const { pokemon } = props
 
   const name = get(pokemon, ["name"])
-  const image = get(pokemon, ["sprites", "front_default"])
+  const image = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${get(
+    pokemon,
+    ["id"]
+  )}.png`
   const pokemonID = pokemonIDGenerator(get(pokemon, ["id"]))
   const height = get(pokemon, ["height"]) / 10
   const weight = get(pokemon, ["weight"]) / 10
