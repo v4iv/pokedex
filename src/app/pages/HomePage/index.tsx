@@ -40,6 +40,8 @@ const HomePage: React.FunctionComponent = () => {
   )
 
   const handleFetch = useCallback(() => {
+    if (!url) return
+
     dispatch({
       type: FETCH_POKEDEX_REQUEST,
     })
@@ -121,9 +123,9 @@ const HomePage: React.FunctionComponent = () => {
         url="https://react-pokedex.netlify.app/"
       />
 
-      <Box paddingY={3}>
+      <Box paddingY={1}>
         <Box
-          margin={1}
+          marginBottom={2}
           display="flex"
           justifyContent="between"
           alignItems="center"
@@ -157,6 +159,7 @@ const HomePage: React.FunctionComponent = () => {
         </Box>
 
         <Divider />
+
         {!isEmpty(pokemonList) && (
           <Suspense
             fallback={
@@ -172,6 +175,7 @@ const HomePage: React.FunctionComponent = () => {
             />
           </Suspense>
         )}
+
         {error && !loading && (
           <Suspense
             fallback={

@@ -64,7 +64,7 @@ const PokemonPage: React.FunctionComponent = () => {
         url="https://react-pokedex.netlify.app/"
       />
 
-      <Box paddingY={3} height="100%">
+      <Box paddingY={1}>
         {error && !loading && (
           <Suspense
             fallback={

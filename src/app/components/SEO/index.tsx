@@ -17,6 +17,9 @@ const SEO: React.FunctionComponent<IProps> = (props) => {
 
       <meta name="description" content={description} />
 
+      {/* Canonical Link */}
+      <link rel="canonical" href={url} />
+
       {/* Twitter Card tags */}
       <meta name="twitter:card" content="summary" />
 

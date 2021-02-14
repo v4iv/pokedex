@@ -1,5 +1,5 @@
 import React from "react"
-import { get } from "lodash"
+import { capitalize, get } from "lodash"
 import { Avatar, Box, Card, Heading, Text } from "gestalt"
 import { Pokemon } from "../../types/pokemon.types"
 import { pokemonIDGenerator } from "../../../utils"
@@ -30,7 +30,7 @@ const PokemonCard: React.FunctionComponent<IProps> = (props) => {
             <Text color="gray">#{pokemonID}</Text>
 
             <Heading size="md" truncate>
-              {name}
+              {capitalize(name)}
             </Heading>
           </Box>
 

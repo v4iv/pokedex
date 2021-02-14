@@ -14,7 +14,10 @@ const PokemonDetails: React.FunctionComponent<IProps> = (props) => {
   const { pokemon } = props
 
   const name = capitalize(get(pokemon, ["name"]))
-  const frontDefaultSprite = get(pokemon, ["sprites", "front_default"])
+  const frontDefaultSprite = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${get(
+    pokemon,
+    ["id"]
+  )}.png`
   const backDefaultSprite = get(pokemon, ["sprites", "back_default"])
   const image =
     get(pokemon, ["sprites", "other", "official-artwork", "front_default"]) ||

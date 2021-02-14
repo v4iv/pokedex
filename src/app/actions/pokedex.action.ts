@@ -7,7 +7,7 @@ interface Payload {
   url: string
 }
 
-export const fetchPokemons = (url: string) => {
+export const fetchPokemons: (url: string) => Promise<any> = (url) => {
   return new Promise((resolve, reject) => {
     axios
       .get(url)
@@ -57,8 +57,8 @@ export const fetchPokemons = (url: string) => {
   })
 }
 
-export const sortPokemons = (
-  list: Pokemon[],
+export const sortPokemons: (list: Pokemon[], order_by: string) => Pokemon[] = (
+  list,
   order_by = "Lowest Number First"
 ) => {
   return list.sort((param1, param2) => {
