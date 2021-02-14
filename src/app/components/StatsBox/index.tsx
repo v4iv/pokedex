@@ -1,6 +1,6 @@
 import React from "react"
 import { get, upperCase } from "lodash"
-import { Box, Text } from "gestalt"
+import { Box, Text, Tooltip } from "gestalt"
 
 interface IProps {
   stats: object[]
@@ -18,6 +18,7 @@ const StatsBox: React.FunctionComponent<IProps> = (props) => {
           <Box
             key={statName}
             margin={2}
+            padding={2}
             display="flex"
             justifyContent="between"
             alignItems="stretch"
@@ -27,13 +28,15 @@ const StatsBox: React.FunctionComponent<IProps> = (props) => {
             </Box>
 
             <Box paddingX={3}>
-              <progress
-                className="progress is-primary"
-                value={baseStat}
-                max="100"
-              >
-                {baseStat}%
-              </progress>
+              <Tooltip inline text={baseStat}>
+                <progress
+                  className="progress is-primary"
+                  value={baseStat}
+                  max="300"
+                >
+                  {baseStat}%
+                </progress>
+              </Tooltip>
             </Box>
           </Box>
         )
