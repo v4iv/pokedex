@@ -1,5 +1,5 @@
 import React from "react"
-import { Box, Divider, GroupAvatar, Heading, Mask, Text } from "gestalt"
+import { Badge, Box, Divider, GroupAvatar, Heading, Mask, Text } from "gestalt"
 import { find, get, capitalize, upperCase } from "lodash"
 import { pokemonIDGenerator } from "../../../utils"
 import { Pokemon } from "../../types/pokemon.types"
@@ -34,6 +34,9 @@ const PokemonDetails: React.FunctionComponent<IProps> = (props) => {
   const flavorText = get(blueEntry, ["flavor_text"])
   const stats = get(pokemon, ["stats"])
   const shape = upperCase(get(pokemon, ["species", "shape", "name"]))
+  const isBaby = get(pokemon, ["species", "is_baby"])
+  const isLegendary = get(pokemon, ["species", "is_legendary"])
+  const isMythical = get(pokemon, ["species", "is_mythical"])
 
   return (
     <>
@@ -55,7 +58,15 @@ const PokemonDetails: React.FunctionComponent<IProps> = (props) => {
             />
           </Box>
           <Box paddingX={2}>
-            <Heading>{name}</Heading>
+            <Heading>
+              {name}{" "}
+              <Badge
+                text={`${isBaby ? "Baby" : ""}${
+                  isLegendary ? "Legendary" : ""
+                }${isMythical ? "Mythical" : ""}`}
+                position="top"
+              />
+            </Heading>
             <Text color="gray">#{pokemonID}</Text>
           </Box>
         </Box>
