@@ -40,8 +40,6 @@ const HomePage: React.FunctionComponent = () => {
   )
 
   const handleFetch = useCallback(() => {
-    if (!url) return
-
     dispatch({
       type: FETCH_POKEDEX_REQUEST,
     })

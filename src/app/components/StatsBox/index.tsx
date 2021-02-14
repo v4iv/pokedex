@@ -18,6 +18,7 @@ const StatsBox: React.FunctionComponent<IProps> = (props) => {
           <Box
             key={statName}
             margin={2}
+            padding={2}
             display="flex"
             justifyContent="between"
             alignItems="stretch"
@@ -31,7 +32,7 @@ const StatsBox: React.FunctionComponent<IProps> = (props) => {
                 <progress
                   className="progress is-primary"
                   value={baseStat}
-                  max="100"
+                  max="300"
                 >
                   {baseStat}%
                 </progress>

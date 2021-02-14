@@ -60,12 +60,14 @@ const PokemonDetails: React.FunctionComponent<IProps> = (props) => {
           <Box paddingX={2}>
             <Heading>
               {name}{" "}
-              <Badge
-                text={`${isBaby ? "Baby" : ""}${
-                  isLegendary ? "Legendary" : ""
-                }${isMythical ? "Mythical" : ""}`}
-                position="top"
-              />
+              {(isBaby || isLegendary || isMythical) && (
+                <Badge
+                  text={`${isBaby ? "Baby" : ""}${
+                    isLegendary ? "Legendary" : ""
+                  }${isMythical ? "Mythical" : ""}`}
+                  position="top"
+                />
+              )}
             </Heading>
             <Text color="gray">#{pokemonID}</Text>
           </Box>

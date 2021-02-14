@@ -10,7 +10,7 @@ const FlavorTextBox: React.FunctionComponent<IProps> = (props) => {
 
   return (
     <>
-      <Box margin={1} rounding={2} borderStyle="sm" paddingX={3} paddingY={5}>
+      <Box margin={1} rounding={2} borderStyle="sm" paddingX={5} paddingY={7}>
         <Text weight="bold">{flavorText}</Text>
       </Box>
     </>
