@@ -29,14 +29,11 @@ const DataTableBox: React.FunctionComponent<IProps> = (props) => {
                     get(ability, ["ability", "name"])
                   )
                   return (
-                    <>
-                      <Badge
-                        key={abilityName}
-                        text={abilityName}
-                        position="middle"
-                      />
-                      &nbsp;
-                    </>
+                    <Badge
+                      key={abilityName}
+                      text={`${abilityName}`}
+                      position="middle"
+                    />
                   )
                 })}
               </Text>
