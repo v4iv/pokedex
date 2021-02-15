@@ -35,9 +35,9 @@ const PokemonCard: React.FunctionComponent<IProps> = (props) => {
           </Box>
 
           <Box paddingX={3} paddingY={2}>
-            <Text>Height: {height} m</Text>
+            <Text truncate>Height: {height} m</Text>
 
-            <Text>Weight: {weight} kg</Text>
+            <Text truncate>Weight: {weight} kg</Text>
           </Box>
 
           <Box

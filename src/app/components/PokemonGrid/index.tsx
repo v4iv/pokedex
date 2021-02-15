@@ -17,7 +17,7 @@ const PokemonGrid: React.FunctionComponent<IProps> = (props) => {
     <>
       <Box height={600} ref={scrollContainerRef} overflow="auto">
         <Masonry
-          minCols={1}
+          minCols={2}
           comp={({ data }) => <PokemonCard pokemon={data} />}
           items={pokemons}
           loadItems={loadItems}
