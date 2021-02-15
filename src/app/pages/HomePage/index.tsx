@@ -58,8 +58,6 @@ const HomePage: React.FunctionComponent = () => {
           payload: "Oops! Something went wrong. Please try again later.",
         })
       })
-
-    return {}
   }, [dispatch, url])
 
   const sortOptions = [

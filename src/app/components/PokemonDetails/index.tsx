@@ -7,6 +7,7 @@ import SEO from "../SEO"
 import StatsBox from "../StatsBox"
 import FlavorTextBox from "../FlavorTextBox"
 import DataTableBox from "../DataTableBox"
+import EvolutionBox from "../EvolutionBox"
 
 interface IProps {
   pokemon: Pokemon
@@ -37,6 +38,8 @@ const PokemonDetails: React.FunctionComponent<IProps> = (props) => {
   const isBaby = get(pokemon, ["species", "is_baby"])
   const isLegendary = get(pokemon, ["species", "is_legendary"])
   const isMythical = get(pokemon, ["species", "is_mythical"])
+
+  const evolutionChain = get(pokemon, ["species", "evolution_chain"])
 
   return (
     <>
@@ -98,10 +101,7 @@ const PokemonDetails: React.FunctionComponent<IProps> = (props) => {
             const pokemonType = get(item, ["type", "name"])
 
             return (
-              <span
-                key={pokemonType}
-                className={`pokemon-type-mini ${pokemonType}`}
-              >
+              <span key={pokemonType} className={pokemonType}>
                 {pokemonType}
               </span>
             )
@@ -119,6 +119,8 @@ const PokemonDetails: React.FunctionComponent<IProps> = (props) => {
       />
 
       <StatsBox stats={stats} />
+
+      <EvolutionBox evolutionChain={evolutionChain} />
     </>
   )
 }

@@ -1,5 +1,6 @@
 import React from "react"
-import { Box, Table, Text } from "gestalt"
+import { Badge, Box, Table, Text } from "gestalt"
+import { get, upperCase } from "lodash"
 
 interface IProps {
   height: number
@@ -15,6 +16,29 @@ const DataTableBox: React.FunctionComponent<IProps> = (props) => {
     <Box margin={1} rounding={2} borderStyle="sm" paddingX={3} paddingY={5}>
       <Table>
         <Table.Body>
+          <Table.Row>
+            <Table.Cell>
+              <Text weight="bold" align="center">
+                Abilities
+              </Text>
+            </Table.Cell>
+            <Table.Cell>
+              <Text align="center">
+                {abilities.map((ability) => {
+                  const abilityName = upperCase(
+                    get(ability, ["ability", "name"])
+                  )
+                  return (
+                    <Badge
+                      key={abilityName}
+                      text={`${abilityName}`}
+                      position="middle"
+                    />
+                  )
+                })}
+              </Text>
+            </Table.Cell>
+          </Table.Row>
           <Table.Row>
             <Table.Cell>
               <Text weight="bold" align="center">
