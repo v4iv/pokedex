@@ -30,7 +30,7 @@ const PokemonDetails: React.FunctionComponent<IProps> = (props) => {
   const abilities = get(pokemon, ["abilities"])
   const types = get(pokemon, ["types"])
   const flavorTextEntries = get(pokemon, ["species", "flavor_text_entries"])
-  const blueEntry = find(flavorTextEntries, { version: { name: "blue" } })
+  const blueEntry = find(flavorTextEntries, { language: { name: "en" } })
   const flavorText = get(blueEntry, ["flavor_text"])
   const stats = get(pokemon, ["stats"])
   const shape = upperCase(get(pokemon, ["species", "shape", "name"]))
