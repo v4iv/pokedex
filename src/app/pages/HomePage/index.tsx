@@ -98,7 +98,7 @@ const HomePage: React.FunctionComponent = () => {
     setTimeout(() => {
       const randomNumber = random(1, 898)
 
-      const slug = `/pokemon/${randomNumber}`
+      const slug = `/pokemon/${randomNumber}/`
 
       history.push(slug)
     }, wait)

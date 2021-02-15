@@ -30,7 +30,7 @@ const ResultBox: React.FunctionComponent<IProps> = (props) => {
                 margin={1}
                 flex="grow"
               >
-                <RouterLink to={`/pokemon/${pokemonName}`} hoverStyle="none">
+                <RouterLink to={`/pokemon/${pokemonName}/`} hoverStyle="none">
                   <Box padding={2} alignItems="center" display="flex">
                     <Box paddingX={2}>
                       <Avatar
