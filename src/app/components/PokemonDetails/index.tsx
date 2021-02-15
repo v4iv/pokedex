@@ -1,6 +1,6 @@
 import React from "react"
 import { Badge, Box, Divider, GroupAvatar, Heading, Mask, Text } from "gestalt"
-import { find, get, capitalize, upperCase } from "lodash"
+import { capitalize, find, get, upperCase } from "lodash"
 import { pokemonIDGenerator } from "../../../utils"
 import { Pokemon } from "../../types/pokemon.types"
 import SEO from "../SEO"
@@ -8,6 +8,7 @@ import StatsBox from "../StatsBox"
 import FlavorTextBox from "../FlavorTextBox"
 import DataTableBox from "../DataTableBox"
 import EvolutionBox from "../EvolutionBox"
+import SpriteBox from "../SpriteBox"
 
 interface IProps {
   pokemon: Pokemon
@@ -25,7 +26,8 @@ const PokemonDetails: React.FunctionComponent<IProps> = (props) => {
   const image =
     get(pokemon, ["sprites", "other", "official-artwork", "front_default"]) ||
     frontDefaultSprite
-  const pokemonID = pokemonIDGenerator(get(pokemon, ["id"]))
+  const id = get(pokemon, ["id"])
+  const pokemonID = pokemonIDGenerator(id)
   const height = get(pokemon, ["height"]) / 10
   const weight = get(pokemon, ["weight"]) / 10
   const abilities = get(pokemon, ["abilities"])
@@ -110,6 +112,8 @@ const PokemonDetails: React.FunctionComponent<IProps> = (props) => {
       </Box>
 
       <FlavorTextBox flavorText={flavorText} />
+
+      <SpriteBox id={id} name={name} />
 
       <DataTableBox
         height={height}
