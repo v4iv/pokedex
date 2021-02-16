@@ -1,5 +1,5 @@
 import React from "react"
-import { Badge, Box, Divider, GroupAvatar, Heading, Mask, Text } from "gestalt"
+import { Avatar, Badge, Box, Divider, Heading, Mask, Text } from "gestalt"
 import { capitalize, find, get, upperCase } from "lodash"
 import { pokemonIDGenerator } from "../../../utils"
 import { Pokemon } from "../../types/pokemon.types"
@@ -22,7 +22,6 @@ const PokemonDetails: React.FunctionComponent<IProps> = (props) => {
     pokemon,
     ["id"]
   )}.png`
-  const backDefaultSprite = get(pokemon, ["sprites", "back_default"])
   const image =
     get(pokemon, ["sprites", "other", "official-artwork", "front_default"]) ||
     frontDefaultSprite
@@ -54,13 +53,7 @@ const PokemonDetails: React.FunctionComponent<IProps> = (props) => {
       <Box margin={1} rounding={2} borderStyle="sm">
         <Box display="flex" alignItems="center" padding={3}>
           <Box paddingX={2}>
-            <GroupAvatar
-              size="md"
-              collaborators={[
-                { name, src: frontDefaultSprite },
-                { name, src: backDefaultSprite },
-              ]}
-            />
+            <Avatar name={name} src={frontDefaultSprite} />
           </Box>
           <Box paddingX={2}>
             <Heading>
