@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useState } from "react"
+import React, { lazy, Suspense, useEffect, useState } from "react"
 import { Provider } from "react-redux"
 import { BrowserRouter, Route, Switch } from "react-router-dom"
 import {
@@ -21,8 +21,20 @@ const App: React.FunctionComponent = () => {
 
   const toggleTheme = () => {
     const nextTheme = theme === "light" ? "dark" : "light"
+    localStorage.setItem("colorScheme", nextTheme)
     setTheme(nextTheme)
   }
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+
+    if (localStorage && localStorage.getItem("colorScheme")) {
+      const colorScheme = window.localStorage.getItem("colorScheme")
+
+      // @ts-ignore
+      setTheme(colorScheme)
+    }
+  }, [])
 
   return (
     <>
