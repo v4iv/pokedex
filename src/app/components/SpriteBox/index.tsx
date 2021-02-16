@@ -27,47 +27,27 @@ const SpriteBox: React.FunctionComponent<IProps> = (props) => {
     onChange: ({ activeIndex }) => setItemIndex(activeIndex),
   }
 
-  const renderSprite = () => {
-    switch (itemIndex) {
-      case 0:
-        return (
-          <Box padding={3} display="flex" justifyContent="around">
-            <Column span={4}>
-              <Avatar name={name} src={normaSpriteFront} size="fit" />
-            </Column>
-            <Column span={4}>
-              <Avatar name={name} src={normaSpriteBack} size="fit" />
-            </Column>
-          </Box>
-        )
-      case 1:
-        return (
-          <Box padding={3} display="flex" justifyContent="around">
-            <Column span={4}>
-              <Avatar name={name} src={shinySpriteFront} size="fit" />
-            </Column>
-            <Column span={4}>
-              <Avatar name={name} src={shinySpriteBack} size="fit" />
-            </Column>
-          </Box>
-        )
-      default:
-        return (
-          <Box padding={3} display="flex" justifyContent="around">
-            <Column span={4}>
-              <Avatar name={name} src={normaSpriteFront} size="fit" />
-            </Column>
-            <Column span={4}>
-              <Avatar name={name} src={normaSpriteBack} size="fit" />
-            </Column>
-          </Box>
-        )
-    }
-  }
-
   return (
     <Box margin={1} padding={2} rounding={2} borderStyle="sm">
-      {renderSprite()}
+      {itemIndex === 0 ? (
+        <Box padding={3} display="flex" justifyContent="around">
+          <Column span={4}>
+            <Avatar name={`${name}-normal-front`} src={normaSpriteFront} />
+          </Column>
+          <Column span={4}>
+            <Avatar name={`${name}-normal-back`} src={normaSpriteBack} />
+          </Column>
+        </Box>
+      ) : (
+        <Box padding={3} display="flex" justifyContent="around">
+          <Column span={4}>
+            <Avatar name={`${name}-shiny-front`} src={shinySpriteFront} />
+          </Column>
+          <Column span={4}>
+            <Avatar name={`${name}-shiny-back`} src={shinySpriteBack} />
+          </Column>
+        </Box>
+      )}
       <SegmentedControl {...segmentedControlProps} />
     </Box>
   )
