@@ -1,6 +1,6 @@
 import React from "react"
 import { get, capitalize, isEmpty } from "lodash"
-import { Avatar, Box, Column, Pog, Text } from "gestalt"
+import { Avatar, Box, Column, Text } from "gestalt"
 import RouterLink from "../RouterLink"
 
 interface IProps {
@@ -10,7 +10,14 @@ interface IProps {
 const EvolutionBox: React.FunctionComponent<IProps> = (props) => {
   const { evolutionChain } = props
 
+  const idRegEx = /[0-9]+/g
+
   const species = get(evolutionChain, ["chain", "species", "name"])
+  const speciesURL = get(evolutionChain, ["chain", "species", "url"])
+
+  const speciesID = speciesURL.match(idRegEx)
+
+  const speciesImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${speciesID[1]}.png`
 
   const evolvesToList = get(evolutionChain, ["chain", "evolves_to"], [])
 
@@ -45,7 +52,7 @@ const EvolutionBox: React.FunctionComponent<IProps> = (props) => {
               alignItems="center"
             >
               <Box padding={2}>
-                <Avatar name={species} size="sm" />
+                <Avatar name={species} src={speciesImage} size="sm" />
               </Box>
               <Box flex="grow" padding={2}>
                 <Text truncate>{capitalize(species)}</Text>
@@ -57,6 +64,10 @@ const EvolutionBox: React.FunctionComponent<IProps> = (props) => {
           <Column span={4}>
             {evolvesToList.map((evolution: any) => {
               const evolutionName = get(evolution, ["species", "name"])
+              const evolutionURL = get(evolution, ["species", "url"])
+              const evolutionID = evolutionURL.match(idRegEx)
+              const evolutionImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${evolutionID[1]}.png`
+
               return (
                 <RouterLink
                   key={evolutionName}
@@ -73,7 +84,11 @@ const EvolutionBox: React.FunctionComponent<IProps> = (props) => {
                     alignItems="center"
                   >
                     <Box padding={2}>
-                      <Avatar name={evolutionName} size="sm" />
+                      <Avatar
+                        name={evolutionName}
+                        src={evolutionImage}
+                        size="sm"
+                      />
                     </Box>
                     <Box flex="grow" padding={2}>
                       <Text truncate>{capitalize(evolutionName)}</Text>
@@ -89,6 +104,10 @@ const EvolutionBox: React.FunctionComponent<IProps> = (props) => {
             {evolvesToEvolvesToList.map((evolutions: any) => {
               return evolutions.map((evolution: any) => {
                 const evolutionName = get(evolution, ["species", "name"])
+                const evolutionURL = get(evolution, ["species", "url"])
+                const evolutionID = evolutionURL.match(idRegEx)
+                const evolutionImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${evolutionID[1]}.png`
+
                 return (
                   <RouterLink
                     key={evolutionName}
@@ -104,7 +123,11 @@ const EvolutionBox: React.FunctionComponent<IProps> = (props) => {
                       alignItems="center"
                     >
                       <Box padding={2}>
-                        <Avatar name={evolutionName} size="sm" />
+                        <Avatar
+                          name={evolutionName}
+                          src={evolutionImage}
+                          size="sm"
+                        />
                       </Box>
                       <Box flex="grow" padding={2}>
                         <Text truncate>{capitalize(evolutionName)}</Text>
