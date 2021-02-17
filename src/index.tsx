@@ -10,6 +10,13 @@ import { sendToAnalytics } from "./utils"
 
 const tagManagerArgs = {
   gtmId: process.env.REACT_APP_GTM_ID || "",
+  events: {
+    CLS: "CLS",
+    FCP: "FCP",
+    LCP: "LCP",
+    FID: "FID",
+    TTFB: "TTFB",
+  },
 }
 
 TagManager.initialize(tagManagerArgs)
