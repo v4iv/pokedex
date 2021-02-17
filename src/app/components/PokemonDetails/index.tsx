@@ -53,7 +53,7 @@ const PokemonDetails: React.FunctionComponent<IProps> = (props) => {
       <Box margin={1} rounding={2} borderStyle="sm">
         <Box display="flex" alignItems="center" padding={3}>
           <Box paddingX={2}>
-            <Avatar name={name} src={frontDefaultSprite} />
+            <Avatar name={name} src={frontDefaultSprite} size="md" />
           </Box>
           <Box paddingX={2}>
             <Heading>

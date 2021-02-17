@@ -46,5 +46,6 @@ export const sendToAnalytics = (metrics: any) => {
       // set here as well, within the following limitations:
       // https://support.google.com/analytics/answer/9267744
     })
+    console.log("Reporting Web-Vitals...")
   }
 }
