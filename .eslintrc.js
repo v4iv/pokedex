@@ -41,6 +41,7 @@ module.exports = {
     "react/jsx-props-no-spreading": "off",
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/explicit-module-boundary-types":"off",
     "prettier/prettier": [
         "error",
       {
