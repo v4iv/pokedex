@@ -10,9 +10,6 @@ import { sendToAnalytics } from "./utils"
 
 const tagManagerArgs = {
   gtmId: process.env.REACT_APP_GTM_ID || "",
-  events: {
-    webVitalsReport: "web-vitals-report",
-  },
 }
 
 TagManager.initialize(tagManagerArgs)
