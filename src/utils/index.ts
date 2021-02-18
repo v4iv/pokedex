@@ -38,7 +38,7 @@ export const sendToAnalytics = (metrics: any) => {
   if (typeof window !== "undefined") {
     TagManager.dataLayer({
       dataLayer: {
-        event: name,
+        event: "web-vitals-report",
         // Use the metric delta as the event's value parameter.
         value: delta,
         // Everything below is a custom event parameter.
