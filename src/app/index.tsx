@@ -29,7 +29,7 @@ const App: React.FunctionComponent = () => {
     if (typeof window === "undefined") return
 
     if (localStorage && localStorage.getItem("colorScheme")) {
-      const colorScheme = window.localStorage.getItem("colorScheme")
+      const colorScheme = localStorage.getItem("colorScheme")
 
       // @ts-ignore
       setTheme(colorScheme)
