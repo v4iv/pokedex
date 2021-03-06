@@ -1,27 +1,4 @@
-import React from "react"
-import axios from "axios"
-import { ProviderProps } from "gestalt"
 import TagManager from "react-gtm-module"
-
-interface ContextProp {
-  theme: ProviderProps["colorScheme"]
-  toggleTheme: () => void
-}
-
-export const ThemeContext = React.createContext<ContextProp>({
-  theme: "light",
-  toggleTheme: () => {},
-})
-
-// Search
-export const fetchSearchResults = (query: string) => {
-  return new Promise((resolve, reject) => {
-    axios
-      .get(`/api/search?q=${query}`)
-      .then((res) => resolve(res.data))
-      .catch((err) => reject(err.data))
-  })
-}
 
 // Pokemon ID Generator
 export const pokemonIDGenerator = (id: number) => {
@@ -38,7 +15,7 @@ export const sendToAnalytics = (metrics: any) => {
   if (typeof window !== "undefined") {
     TagManager.dataLayer({
       dataLayer: {
-        event: "web-vitals-report",
+        event: name,
         // Use the metric delta as the event's value parameter.
         value: delta,
         // Everything below is a custom event parameter.

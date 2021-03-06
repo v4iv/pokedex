@@ -5287,10 +5287,10 @@ gensync@^1.0.0-beta.1:
   resolved "https://registry.yarnpkg.com/gensync/-/gensync-1.0.0-beta.2.tgz#32a6ee76c3d7f52d46b2b1ae5d93fea8580a25e0"
   integrity sha512-3hN7NaskYvMDLQY55gnW3NQ+mesEAepTqlg+VEbj7zzqEMBVNhzcGYYeqFo/TlYz6eQiFcp1HcsCZO+nGgS8zg==
 
-gestalt@^17.5.3:
-  version "17.5.3"
-  resolved "https://registry.yarnpkg.com/gestalt/-/gestalt-17.5.3.tgz#17d4eec8897f20c1e95469a179112f2bc7414230"
-  integrity sha512-mIeyIP9GdLLbUTjrYJvf2uOtAc/cMv3ZXq40kK/SFYhjavHhFIW+UNYhR9y04pRCWDQkfnMY7ABhE06evPrrEA==
+gestalt@^19.2.2:
+  version "19.2.2"
+  resolved "https://registry.yarnpkg.com/gestalt/-/gestalt-19.2.2.tgz#597584ca934ff3f6d331612c2c799a26f4c0f919"
+  integrity sha512-O9VSs4siT+dmaLa9ASWUQkJgJAbNUJNQZRvipmXoBC0sRjR1nGlzwc0Zl5lqtBJvgbFy93B1RcWj+68WTI6fHw==
   dependencies:
     classnames "^2.2.6"
     prop-types "^15.7.2"
@@ -7099,6 +7099,11 @@ lodash.uniq@^4.5.0:
   version "4.17.20"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.20.tgz#b44a9b6297bcb698f1c51a3545a2b3b368d59c52"
   integrity sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA==
+
+lodash@^4.17.21:
+  version "4.17.21"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
+  integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
 
 loglevel@^1.6.8:
   version "1.7.1"

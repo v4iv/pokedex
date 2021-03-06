@@ -9,7 +9,7 @@ import {
   Spinner,
 } from "gestalt"
 import store from "./store"
-import { ThemeContext } from "../utils"
+import ThemeContext from "./contexts/ThemeContext"
 import Header from "./components/Header"
 // Pages
 const HomePage = lazy(() => import("./pages/HomePage"))
@@ -29,7 +29,7 @@ const App: React.FunctionComponent = () => {
     if (typeof window === "undefined") return
 
     if (localStorage && localStorage.getItem("colorScheme")) {
-      const colorScheme = window.localStorage.getItem("colorScheme")
+      const colorScheme = localStorage.getItem("colorScheme")
 
       // @ts-ignore
       setTheme(colorScheme)

@@ -4,7 +4,7 @@ import {
   FETCH_POKEDEX_REQUEST,
   FETCH_POKEDEX_SUCCESS,
   SORT_POKEMONS,
-} from "../constants"
+} from "../constants/pokedex.constants"
 
 export interface ISearchResult {
   name: string

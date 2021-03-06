@@ -1,4 +1,11 @@
-import React, { lazy, Suspense, useContext, useRef, useState } from "react"
+import React, {
+  lazy,
+  Suspense,
+  useCallback,
+  useContext,
+  useRef,
+  useState,
+} from "react"
 import {
   Box,
   CompositeZIndex,
@@ -13,29 +20,51 @@ import {
   Spinner,
   Tooltip,
 } from "gestalt"
-import { fetchSearchResults, ThemeContext } from "../../../utils"
-import RouterLink from "../RouterLink"
+import axios from "axios"
+import { get } from "lodash"
+import ThemeContext from "../../contexts/ThemeContext"
 import { githubSVGPath, pokeballSVGPath } from "../../../assets/images/svg"
+import RouterLink from "../RouterLink"
 // Lazy Load
 const ResultBox = lazy(() => import("../ResultBox"))
 
 const Header: React.FunctionComponent = () => {
   const themeContext = useContext(ThemeContext)
+
   const anchorRef = useRef(null)
+
   const [query, setQuery] = useState("")
   const [results, setResults] = useState([])
 
   const SEARCH_ZINDEX = new FixedZIndex(10)
   const resultsZIndex = new CompositeZIndex([SEARCH_ZINDEX])
 
+  const search = useCallback((value) => {
+    axios
+      .get(`/api/search?q=${value}`)
+      .then((res) => {
+        const searchResults = get(res, ["data"])
+
+        setResults(searchResults)
+      })
+      .catch((err) => {
+        if (err.response) {
+          console.log(err.response.data)
+          console.log(err.response.status)
+          console.log(err.response.headers)
+        } else if (err.request) {
+          console.log(err.request)
+        } else {
+          console.log("Error", err.message)
+        }
+        console.log(err.config)
+      })
+  }, [])
+
   const handleSearch: SearchFieldProps["onChange"] = ({ value }) => {
     setQuery(value)
 
-    if (value.length >= 3) {
-      fetchSearchResults(value)
-        .then((res: any) => setResults(res))
-        .catch((err) => console.error("Search Error: ", err))
-    }
+    if (value.length >= 3) search(value)
   }
 
   return (

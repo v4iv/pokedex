@@ -2,7 +2,7 @@ import axios, { AxiosError, AxiosResponse } from "axios"
 import { get } from "lodash"
 import { Pokemon } from "../types/pokemon.types"
 
-export const fetchPokemon: (p: string) => Promise<any> = (p) => {
+export const fetchPokemonAction: (p: string) => Promise<any> = (p) => {
   return new Promise((resolve, reject) => {
     const url = `${
       process.env.REACT_APP_BASE_URL
