@@ -4,7 +4,7 @@ import {
   FETCH_POKEMON_ERROR,
   FETCH_POKEMON_REQUEST,
   FETCH_POKEMON_SUCCESS,
-} from "../constants"
+} from "../constants/pokemon.constants"
 
 const INITIAL_STATE: PokemonState = {
   pokemon: {},

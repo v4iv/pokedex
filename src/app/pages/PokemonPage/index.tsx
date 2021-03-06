@@ -8,8 +8,8 @@ import {
   FETCH_POKEMON_ERROR,
   FETCH_POKEMON_REQUEST,
   FETCH_POKEMON_SUCCESS,
-} from "../../constants"
-import { fetchPokemon } from "../../actions/pokemon.action"
+} from "../../constants/pokemon.constants"
+import { fetchPokemonAction } from "../../actions/pokemon.action"
 import SEO from "../../components/SEO"
 // Lazy Load
 const PokemonDetails = lazy(() => import("../../components/PokemonDetails"))
@@ -34,7 +34,7 @@ const PokemonPage: React.FunctionComponent = () => {
       type: FETCH_POKEMON_REQUEST,
     })
 
-    fetchPokemon(slug)
+    fetchPokemonAction(slug)
       .then((res) => {
         dispatch({
           type: FETCH_POKEMON_SUCCESS,

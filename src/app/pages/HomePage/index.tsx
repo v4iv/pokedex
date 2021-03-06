@@ -16,8 +16,11 @@ import {
   FETCH_POKEDEX_REQUEST,
   FETCH_POKEDEX_SUCCESS,
   SORT_POKEMONS,
-} from "../../constants"
-import { fetchPokemons, sortPokemons } from "../../actions/pokedex.action"
+} from "../../constants/pokedex.constants"
+import {
+  fetchPokemonsAction,
+  sortPokemonsAction,
+} from "../../actions/pokedex.action"
 import SEO from "../../components/SEO"
 // Lazy Load
 const PokemonGrid = lazy(() => import("../../components/PokemonGrid"))
@@ -44,7 +47,7 @@ const HomePage: React.FunctionComponent = () => {
       type: FETCH_POKEDEX_REQUEST,
     })
 
-    fetchPokemons(url)
+    fetchPokemonsAction(url)
       .then((res) => {
         dispatch({
           type: FETCH_POKEDEX_SUCCESS,
@@ -82,7 +85,7 @@ const HomePage: React.FunctionComponent = () => {
   const handleSort: SelectListProps["onChange"] = ({ value }) => {
     setOrder(value)
 
-    const payload = sortPokemons(pokemonList, value)
+    const payload = sortPokemonsAction(pokemonList, value)
 
     dispatch({
       type: SORT_POKEMONS,

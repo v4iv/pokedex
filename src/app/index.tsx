@@ -9,7 +9,7 @@ import {
   Spinner,
 } from "gestalt"
 import store from "./store"
-import { ThemeContext } from "../utils"
+import ThemeContext from "./contexts/ThemeContext"
 import Header from "./components/Header"
 // Pages
 const HomePage = lazy(() => import("./pages/HomePage"))
