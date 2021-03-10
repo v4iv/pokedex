@@ -12,6 +12,8 @@ interface IProps {
 const PokemonGrid: React.FunctionComponent<IProps> = (props) => {
   const { pokemons, loadItems, loading } = props
   const scrollContainerRef = createRef<HTMLDivElement>()
+  // @ts-ignore
+  const measurementStore = Masonry.createMeasurementStore(pokemons.length)
 
   return (
     <>
@@ -22,6 +24,7 @@ const PokemonGrid: React.FunctionComponent<IProps> = (props) => {
           items={pokemons}
           loadItems={loadItems}
           scrollContainer={() => scrollContainerRef.current!}
+          measurementStore={measurementStore}
           flexible
           virtualize
         />

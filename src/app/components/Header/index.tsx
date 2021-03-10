@@ -34,34 +34,36 @@ const Header: React.FunctionComponent = () => {
   const anchorRef = useRef(null)
 
   const [query, setQuery] = useState("")
+  const [searching, setSearching] = useState(false)
   const [results, setResults] = useState([])
 
   const SEARCH_ZINDEX = new FixedZIndex(10)
   const resultsZIndex = new CompositeZIndex([SEARCH_ZINDEX])
 
   const search = useCallback((value) => {
+    setSearching(true)
+
     axios
-      .get(`/api/search?q=${value}`)
+      .get(`${process.env.REACT_APP_SEARCH_API}${value}`)
       .then((res) => {
         const searchResults = get(res, ["data"])
+
+        setSearching(false)
 
         setResults(searchResults)
       })
       .catch((err) => {
+        setSearching(false)
+
         if (err.response) {
-          console.log(err.response.data)
-          console.log(err.response.status)
-          console.log(err.response.headers)
-        } else if (err.request) {
-          console.log(err.request)
+          console.error(err.response.data)
         } else {
-          console.log("Error", err.message)
+          console.error("Error: ", err.message)
         }
-        console.log(err.config)
       })
   }, [])
 
-  const handleSearch: SearchFieldProps["onChange"] = ({ value }) => {
+  const handleChange: SearchFieldProps["onChange"] = ({ value }) => {
     setQuery(value)
 
     if (value.length >= 3) search(value)
@@ -95,7 +97,7 @@ const Header: React.FunctionComponent = () => {
             accessibilityLabel="Search"
             id="searchField"
             autoComplete="off"
-            onChange={handleSearch}
+            onChange={handleChange}
             placeholder="Search"
             value={query}
           />
@@ -103,11 +105,7 @@ const Header: React.FunctionComponent = () => {
 
         <Tooltip
           inline
-          text={
-            themeContext.theme === "light"
-              ? "Dark-Mode View"
-              : "Light-Mode View"
-          }
+          text={themeContext.theme === "light" ? "Dark Mode" : "Light Mode"}
         >
           <Box paddingX={2} display="inlineBlock">
             <IconButton
@@ -148,7 +146,7 @@ const Header: React.FunctionComponent = () => {
                 </Box>
               }
             >
-              <ResultBox results={results} />
+              <ResultBox results={results} searching={searching} />
             </Suspense>
           </Flyout>
         </Layer>

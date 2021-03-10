@@ -7,20 +7,18 @@ import RouterLink from "../RouterLink"
 
 interface IProps {
   results: ISearchResult[]
+  searching: boolean
 }
 
 const ResultBox: React.FunctionComponent<IProps> = (props) => {
-  const { results } = props
+  const { results, searching } = props
 
   return (
     <Box padding={3} column={12}>
       {results.length ? (
         <>
           {results.map((pokemon: any) => {
-            const pokemonID = pokemonIDGenerator(
-              // eslint-disable-next-line radix
-              parseInt(get(pokemon, ["id"]))
-            )
+            const pokemonID = pokemonIDGenerator(get(pokemon, ["id"]))
             const pokemonName = get(pokemon, ["name"])
             return (
               <Box
@@ -54,8 +52,9 @@ const ResultBox: React.FunctionComponent<IProps> = (props) => {
           })}
         </>
       ) : (
-        <Spinner accessibilityLabel="Loading..." show />
+        !searching && <Text>Sorry, No Records Found!</Text>
       )}
+      <Spinner accessibilityLabel="Loading..." show={searching} />
     </Box>
   )
 }
