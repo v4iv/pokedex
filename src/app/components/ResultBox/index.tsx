@@ -52,7 +52,7 @@ const ResultBox: React.FunctionComponent<IProps> = (props) => {
           })}
         </>
       ) : (
-        <Text>Sorry, No Records Found!</Text>
+        !searching && <Text>Sorry, No Records Found!</Text>
       )}
       <Spinner accessibilityLabel="Loading..." show={searching} />
     </Box>

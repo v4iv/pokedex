@@ -44,7 +44,7 @@ const Header: React.FunctionComponent = () => {
     setSearching(true)
 
     axios
-      .get(`https://react-pokedex.netlify.app/api/search?q=${value}`)
+      .get(`${process.env.REACT_APP_SEARCH_API}${value}`)
       .then((res) => {
         const searchResults = get(res, ["data"])
 
