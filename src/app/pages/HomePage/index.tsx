@@ -118,8 +118,8 @@ const HomePage: React.FunctionComponent = () => {
       <SEO
         title="Home"
         description="Pokédex is a mini-encyclopedia of Pokémon species, types etc."
-        image="https://react-pokedex.netlify.app/logo192.png"
-        url="https://react-pokedex.netlify.app/"
+        image={`${process.env.REACT_APP_URL}/logo192.png`}
+        url={`${process.env.REACT_APP_URL}`}
       />
 
       <Box paddingY={1}>

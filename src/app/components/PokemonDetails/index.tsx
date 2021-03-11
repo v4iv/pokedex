@@ -1,5 +1,5 @@
 import React from "react"
-import { Avatar, Badge, Box, Divider, Heading, Mask, Text } from "gestalt"
+import { Avatar, Badge, Box, Divider, Heading, Image, Text } from "gestalt"
 import { capitalize, find, get, upperCase } from "lodash"
 import { pokemonIDGenerator } from "../../../utils"
 import { Pokemon } from "../../types/pokemon.types"
@@ -9,6 +9,7 @@ import FlavorTextBox from "../FlavorTextBox"
 import DataTableBox from "../DataTableBox"
 import EvolutionBox from "../EvolutionBox"
 import SpriteBox from "../SpriteBox"
+import Share from "../Share"
 
 interface IProps {
   pokemon: Pokemon
@@ -42,20 +43,23 @@ const PokemonDetails: React.FunctionComponent<IProps> = (props) => {
 
   const evolutionChain = get(pokemon, ["species", "evolution_chain"])
 
+  const url = `${process.env.REACT_APP_URL}/pokemon/${name}`
+
   return (
     <>
       <SEO
         title={name}
         description={`${name} - ${flavorText}`}
         image={image}
-        url={`https://react-pokedex.netlify.app/pokemon/${name}`}
+        url={url}
       />
       <Box margin={1} rounding={2} borderStyle="sm">
         <Box display="flex" alignItems="center" padding={3}>
           <Box paddingX={2}>
             <Avatar name={name} src={frontDefaultSprite} size="md" />
           </Box>
-          <Box paddingX={2}>
+
+          <Box paddingX={2} flex="grow">
             <Heading>
               {name}{" "}
               {(isBaby || isLegendary || isMythical) && (
@@ -69,19 +73,19 @@ const PokemonDetails: React.FunctionComponent<IProps> = (props) => {
             </Heading>
             <Text color="gray">#{pokemonID}</Text>
           </Box>
+
+          <Share url={url} title={name} excerpt={`${name} - ${flavorText}`} />
         </Box>
 
         <Divider />
 
-        <Box display="flex" justifyContent="center" alignItems="center">
-          <Mask rounding={2} wash>
-            <img
-              alt={name}
-              src={image}
-              style={{ maxWidth: "100%", display: "block" }}
-            />
-          </Mask>
-        </Box>
+        <Image
+          alt={name}
+          src={image}
+          naturalWidth={475}
+          naturalHeight={475}
+          color="rgba(0, 0, 0, 0.04)"
+        />
 
         <Divider />
 

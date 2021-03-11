@@ -4,14 +4,11 @@ import { Box, Heading } from "gestalt"
 const PageNotFound: React.FunctionComponent = () => {
   return (
     <Box
-      rounding={2}
-      padding={12}
-      margin={12}
-      borderStyle="sm"
+      height="80vh"
       display="flex"
-      direction="column"
-      justifyContent="center"
       alignItems="center"
+      justifyContent="center"
+      direction="column"
     >
       <Heading size="lg" color="red">
         404
