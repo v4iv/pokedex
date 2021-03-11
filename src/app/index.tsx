@@ -47,7 +47,16 @@ const App: React.FunctionComponent = () => {
                   <Header />
                   <Suspense
                     fallback={
-                      <Box paddingY={7}>
+                      <Box
+                        position="fixed"
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
+                        top
+                        left
+                        right
+                        bottom
+                      >
                         <Spinner accessibilityLabel="Loading..." show />
                       </Box>
                     }

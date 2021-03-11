@@ -68,7 +68,16 @@ const PokemonPage: React.FunctionComponent = () => {
         {error && !loading && (
           <Suspense
             fallback={
-              <Box paddingY={6}>
+              <Box
+                position="fixed"
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                top
+                left
+                right
+                bottom
+              >
                 <Spinner accessibilityLabel="Loading..." show />
               </Box>
             }
@@ -80,7 +89,16 @@ const PokemonPage: React.FunctionComponent = () => {
         {!isEmpty(pokemon) && (
           <Suspense
             fallback={
-              <Box paddingY={6}>
+              <Box
+                position="fixed"
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                top
+                left
+                right
+                bottom
+              >
                 <Spinner accessibilityLabel="Loading..." show />
               </Box>
             }
@@ -89,9 +107,17 @@ const PokemonPage: React.FunctionComponent = () => {
           </Suspense>
         )}
 
-        <Box paddingY={6}>
-          <Spinner accessibilityLabel="Loading..." show={loading} />
-        </Box>
+        {loading && (
+          <Box
+            height="80vh"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            direction="column"
+          >
+            <Spinner accessibilityLabel="Loading..." show={loading} />
+          </Box>
+        )}
       </Box>
     </>
   )

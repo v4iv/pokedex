@@ -41,6 +41,6 @@ Made with React & Redux. Powered by [PokeAPI](https://pokeapi.co)
   
 - ~~Virtualised Grid Loader~~
 
-- a11y
+- ~~a11y~~
   
 - i18n

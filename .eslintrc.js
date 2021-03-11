@@ -17,7 +17,8 @@ module.exports = {
   },
   globals: {
     "Atomics": "readonly",
-    "SharedArrayBuffer": "readonly"
+    "SharedArrayBuffer": "readonly",
+    alert: true,
   },
   parser: "@typescript-eslint/parser",
   parserOptions: {
@@ -42,6 +43,7 @@ module.exports = {
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/explicit-module-boundary-types":"off",
+    "no-alert":"off",
     "prettier/prettier": [
         "error",
       {
