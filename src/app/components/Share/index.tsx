@@ -3,7 +3,8 @@ import {
   Box,
   CompositeZIndex,
   FixedZIndex,
-  Flyout,
+  // @ts-ignore
+  Popover,
   Icon,
   IconButton,
   Layer,
@@ -44,7 +45,7 @@ const Share: React.FunctionComponent<IProps> = (props) => {
       </Box>
       {open && (
         <Layer zIndex={shareZIndex}>
-          <Flyout
+          <Popover
             anchor={anchorRef.current!}
             idealDirection="down"
             onDismiss={toggleFlyout}
@@ -109,7 +110,7 @@ const Share: React.FunctionComponent<IProps> = (props) => {
                 </RedditShareButton>
               </Box>
             </Box>
-          </Flyout>
+          </Popover>
         </Layer>
       )}
     </>
