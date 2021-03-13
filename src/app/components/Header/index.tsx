@@ -10,11 +10,12 @@ import {
   Box,
   CompositeZIndex,
   FixedZIndex,
-  Flyout,
   Icon,
   IconButton,
   Layer,
   Pog,
+  // @ts-ignore
+  Popover,
   SearchField,
   SearchFieldProps,
   Spinner,
@@ -131,7 +132,7 @@ const Header: React.FunctionComponent = () => {
 
       {query.length >= 3 && (
         <Layer zIndex={resultsZIndex}>
-          <Flyout
+          <Popover
             anchor={anchorRef.current!}
             idealDirection="down"
             onDismiss={() => setQuery("")}
@@ -148,7 +149,7 @@ const Header: React.FunctionComponent = () => {
             >
               <ResultBox results={results} searching={searching} />
             </Suspense>
-          </Flyout>
+          </Popover>
         </Layer>
       )}
     </>
