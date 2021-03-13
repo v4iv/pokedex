@@ -3,7 +3,6 @@ import {
   Box,
   CompositeZIndex,
   FixedZIndex,
-  // @ts-ignore
   Popover,
   Icon,
   IconButton,

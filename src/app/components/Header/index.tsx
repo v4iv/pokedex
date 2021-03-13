@@ -14,7 +14,6 @@ import {
   IconButton,
   Layer,
   Pog,
-  // @ts-ignore
   Popover,
   SearchField,
   SearchFieldProps,
