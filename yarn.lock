@@ -1702,10 +1702,10 @@
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-0.0.39.tgz#e177e699ee1b8c22d23174caaa7422644389509f"
   integrity sha512-EYNwp3bU+98cpU4lAWYYL7Zz+2gryWH1qbdDTidVd6hkiR6weksdbMadyXKXNPEkQFhXM+hVO9ZygomHXp+AIw==
 
-"@types/gestalt@^19.2.1":
-  version "19.2.1"
-  resolved "https://registry.yarnpkg.com/@types/gestalt/-/gestalt-19.2.1.tgz#ef11e477c167a0af1fbac0682e0f1c4ff521fe1c"
-  integrity sha512-kQrQ4q0RDSmNaZABvtNSFw7whgrf7bXovOQZbzkLqkUq5KGpuFKNNMtN6iVZvyUF8qHm/yh1ss1T/m5tzwaXpg==
+"@types/gestalt@^20.1.0":
+  version "20.1.0"
+  resolved "https://registry.yarnpkg.com/@types/gestalt/-/gestalt-20.1.0.tgz#c331e7e90111edcd7243850707552d4d10ec0fb7"
+  integrity sha512-WAFc7ZTimp8Ac9ytWL4N5XmTO3N/O6YtdDQvPvuWuuDyULhJqa/8vbHdj42x+VhF04R4qpdZTsQYa7VUWdeueg==
   dependencies:
     "@types/react" "*"
 
