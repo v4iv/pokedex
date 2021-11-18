@@ -42,6 +42,7 @@ module.exports = {
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/explicit-module-boundary-types":"off",
     "no-alert":"off",
+    "react/require-default-props":"off",
     "prettier/prettier": [
         "error",
       {

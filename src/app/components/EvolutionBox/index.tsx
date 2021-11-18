@@ -55,7 +55,7 @@ const EvolutionBox: React.FunctionComponent<IProps> = (props) => {
                 <Avatar name={species} src={speciesImage} size="sm" />
               </Box>
               <Box flex="grow" padding={2}>
-                <Text truncate>{capitalize(species)}</Text>
+                <Text lineClamp={1}>{capitalize(species)}</Text>
               </Box>
             </Box>
           </RouterLink>
@@ -91,7 +91,7 @@ const EvolutionBox: React.FunctionComponent<IProps> = (props) => {
                       />
                     </Box>
                     <Box flex="grow" padding={2}>
-                      <Text truncate>{capitalize(evolutionName)}</Text>
+                      <Text lineClamp={1}>{capitalize(evolutionName)}</Text>
                     </Box>
                   </Box>
                 </RouterLink>
@@ -130,7 +130,7 @@ const EvolutionBox: React.FunctionComponent<IProps> = (props) => {
                         />
                       </Box>
                       <Box flex="grow" padding={2}>
-                        <Text truncate>{capitalize(evolutionName)}</Text>
+                        <Text lineClamp={1}>{capitalize(evolutionName)}</Text>
                       </Box>
                     </Box>
                   </RouterLink>

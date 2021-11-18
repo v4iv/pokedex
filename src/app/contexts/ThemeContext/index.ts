@@ -1,8 +1,8 @@
 import React from "react"
-import { ProviderProps } from "gestalt"
+import { ColorSchemeProviderProps } from "gestalt"
 
 interface ContextProp {
-  theme: ProviderProps["colorScheme"]
+  theme: ColorSchemeProviderProps["colorScheme"]
   toggleTheme: () => void
 }
 

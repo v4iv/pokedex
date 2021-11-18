@@ -31,7 +31,7 @@ const ErrorToast: React.FunctionComponent<Props> = (props) => {
             paddingX={1}
             position="fixed"
           >
-            <Toast color="red" text={<>{message}</>} />
+            <Toast variant="error" text={<>{message}</>} />
           </Box>
         </Layer>
       )}
