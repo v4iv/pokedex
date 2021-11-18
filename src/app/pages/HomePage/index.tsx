@@ -142,6 +142,7 @@ const HomePage: React.FunctionComponent = () => {
                 onClick={handleSurprise}
                 text="Surprise Me!"
                 disabled={surprise}
+                fullWidth
               />
             )}
           </Box>
