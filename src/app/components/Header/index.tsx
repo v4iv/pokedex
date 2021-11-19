@@ -21,6 +21,7 @@ import {
   Tooltip,
 } from "gestalt"
 import debounce from "lodash/debounce"
+import isEmpty from "lodash/isEmpty"
 import { useDispatch, useSelector } from "react-redux"
 import ThemeContext from "../../contexts/ThemeContext"
 import { githubSVGPath, pokeballSVGPath } from "../../../assets/images/svg"
@@ -149,7 +150,7 @@ const Header: React.FunctionComponent = () => {
         </Tooltip>
       </Box>
 
-      {query.length >= 3 && (
+      {!isEmpty(query) && (
         <Layer zIndex={resultsZIndex}>
           <Popover
             anchor={anchorRef.current!}
