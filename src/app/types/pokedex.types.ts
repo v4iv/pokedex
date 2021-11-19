@@ -1,47 +1,47 @@
-import { Pokemon } from "./pokemon.types"
+import { Pokemon } from "./pokemon.types";
 import {
   FETCH_POKEDEX_ERROR,
   FETCH_POKEDEX_REQUEST,
   FETCH_POKEDEX_SUCCESS,
   SORT_POKEMONS,
-} from "../constants/pokedex.constants"
+} from "../constants/pokedex.constants";
 
 export interface ISearchResult {
-  name: string
-  id: string
+  name: string;
+  id: string;
 }
 
 export interface PokedexState {
-  pokemonList: Pokemon[]
-  url: string
-  error: string | null | undefined
-  loading: boolean
+  pokemonList: Pokemon[];
+  url: string;
+  error: string | null | undefined;
+  loading: boolean;
 }
 
 interface PokedexFetchRequestAction {
-  type: typeof FETCH_POKEDEX_REQUEST
+  type: typeof FETCH_POKEDEX_REQUEST;
 }
 
 interface PokedexFetchSuccessAction {
-  type: typeof FETCH_POKEDEX_SUCCESS
+  type: typeof FETCH_POKEDEX_SUCCESS;
   payload: {
-    data: Pokemon[]
-    url: string
-  }
+    data: Pokemon[];
+    url: string;
+  };
 }
 
 interface PokedexFetchErrorAction {
-  type: typeof FETCH_POKEDEX_ERROR
-  payload: string
+  type: typeof FETCH_POKEDEX_ERROR;
+  payload: string;
 }
 
 interface PokedexSortAction {
-  type: typeof SORT_POKEMONS
-  payload: Pokemon[]
+  type: typeof SORT_POKEMONS;
+  payload: Pokemon[];
 }
 
 export type PokedexActionTypes =
   | PokedexFetchRequestAction
   | PokedexFetchSuccessAction
   | PokedexFetchErrorAction
-  | PokedexSortAction
+  | PokedexSortAction;

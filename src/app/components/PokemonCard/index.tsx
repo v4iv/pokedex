@@ -1,27 +1,27 @@
-import React from "react"
-import get from "lodash/get"
-import capitalize from "lodash/capitalize"
-import { Avatar, Box, Card, Heading, Text } from "gestalt"
-import { Pokemon } from "../../types/pokemon.types"
-import { pokemonIDGenerator } from "../../../utils"
-import RouterLink from "../RouterLink"
+import React from "react";
+import get from "lodash/get";
+import capitalize from "lodash/capitalize";
+import { Avatar, Box, Card, Heading, Text } from "gestalt";
+import { Pokemon } from "../../types/pokemon.types";
+import { pokemonIDGenerator } from "../../../utils";
+import RouterLink from "../RouterLink";
 
 interface IProps {
-  pokemon?: Pokemon | any
+  pokemon?: Pokemon | any;
 }
 
 const PokemonCard: React.FunctionComponent<IProps> = (props) => {
-  const { pokemon } = props
+  const { pokemon } = props;
 
-  const name = get(pokemon, ["name"])
+  const name = get(pokemon, ["name"]);
   const image = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${get(
     pokemon,
     ["id"]
-  )}.png`
-  const pokemonID = pokemonIDGenerator(get(pokemon, ["id"]))
-  const height = get(pokemon, ["height"]) / 10
-  const weight = get(pokemon, ["weight"]) / 10
-  const types = get(pokemon, ["types"])
+  )}.png`;
+  const pokemonID = pokemonIDGenerator(get(pokemon, ["id"]));
+  const height = get(pokemon, ["height"]) / 10;
+  const weight = get(pokemon, ["weight"]) / 10;
+  const types = get(pokemon, ["types"]);
 
   return (
     <Box margin={1} rounding={2} padding={2} borderStyle="sm">
@@ -49,19 +49,19 @@ const PokemonCard: React.FunctionComponent<IProps> = (props) => {
             alignItems="center"
           >
             {types.map((item: object) => {
-              const pokemonType = get(item, ["type", "name"])
+              const pokemonType = get(item, ["type", "name"]);
 
               return (
                 <span key={pokemonType} className={pokemonType}>
                   {pokemonType}
                 </span>
-              )
+              );
             })}
           </Box>
         </Card>
       </RouterLink>
     </Box>
-  )
-}
+  );
+};
 
-export default PokemonCard
+export default PokemonCard;

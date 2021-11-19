@@ -1,8 +1,8 @@
-import React, { lazy, Suspense, useCallback, useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { useNavigate } from "react-router-dom"
-import isEmpty from "lodash/isEmpty"
-import random from "lodash/random"
+import React, { lazy, Suspense, useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import isEmpty from "lodash/isEmpty";
+import random from "lodash/random";
 import {
   Box,
   Button,
@@ -10,29 +10,29 @@ import {
   SelectList,
   SelectListProps,
   Spinner,
-} from "gestalt"
-import { RootState } from "../../reducers"
+} from "gestalt";
+import { RootState } from "../../reducers";
 import {
   FETCH_POKEDEX_ERROR,
   FETCH_POKEDEX_REQUEST,
   FETCH_POKEDEX_SUCCESS,
   SORT_POKEMONS,
-} from "../../constants/pokedex.constants"
+} from "../../constants/pokedex.constants";
 import {
   fetchPokemonsAction,
   sortPokemonsAction,
-} from "../../actions/pokedex.action"
-import SEO from "../../components/SEO"
+} from "../../actions/pokedex.action";
+import SEO from "../../components/SEO";
 // Lazy Load
-const PokemonGrid = lazy(() => import("../../components/PokemonGrid"))
-const ErrorToast = lazy(() => import("../../components/ErrorToast"))
+const PokemonGrid = lazy(() => import("../../components/PokemonGrid"));
+const ErrorToast = lazy(() => import("../../components/ErrorToast"));
 
 const HomePage: React.FunctionComponent = () => {
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const [surprise, setSurprise] = useState(false)
-  const [order, setOrder] = useState("lowest_number_first")
+  const [surprise, setSurprise] = useState(false);
+  const [order, setOrder] = useState("lowest_number_first");
 
   const { pokemonList, url, error, loading } = useSelector(
     (state: RootState) => ({
@@ -41,28 +41,28 @@ const HomePage: React.FunctionComponent = () => {
       error: state.pokedex.error,
       loading: state.pokedex.loading,
     })
-  )
+  );
 
   const handleFetch = useCallback(() => {
     dispatch({
       type: FETCH_POKEDEX_REQUEST,
-    })
+    });
 
     fetchPokemonsAction(url)
       .then((res) => {
         dispatch({
           type: FETCH_POKEDEX_SUCCESS,
           payload: res,
-        })
+        });
       })
       .catch((err) => {
-        console.error(FETCH_POKEDEX_ERROR, err)
+        console.error(FETCH_POKEDEX_ERROR, err);
         dispatch({
           type: FETCH_POKEDEX_ERROR,
           payload: "Oops! Something went wrong. Please try again later.",
-        })
-      })
-  }, [dispatch, url])
+        });
+      });
+  }, [dispatch, url]);
 
   const sortOptions = [
     {
@@ -81,38 +81,38 @@ const HomePage: React.FunctionComponent = () => {
       value: "a_z",
       label: "Z - A",
     },
-  ]
+  ];
 
   const handleSort: SelectListProps["onChange"] = ({ value }) => {
-    setOrder(value)
+    setOrder(value);
 
-    const payload = sortPokemonsAction(pokemonList, value)
+    const payload = sortPokemonsAction(pokemonList, value);
 
     dispatch({
       type: SORT_POKEMONS,
       payload,
-    })
-  }
+    });
+  };
 
   const handleSurprise = () => {
-    setSurprise(true)
+    setSurprise(true);
 
-    const wait: number = random(1000, 3000)
+    const wait: number = random(1000, 3000);
 
     setTimeout(() => {
-      const randomNumber = random(1, 898)
+      const randomNumber = random(1, 898);
 
-      const slug = `/pokemon/${randomNumber}/`
+      const slug = `/pokemon/${randomNumber}/`;
 
-      navigate(slug)
-    }, wait)
-  }
+      navigate(slug);
+    }, wait);
+  };
 
   useEffect(() => {
     if (isEmpty(pokemonList)) {
-      handleFetch()
+      handleFetch();
     }
-  }, [handleFetch]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [handleFetch]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
@@ -190,7 +190,7 @@ const HomePage: React.FunctionComponent = () => {
         )}
       </Box>
     </>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;

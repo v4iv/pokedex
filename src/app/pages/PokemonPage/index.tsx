@@ -1,56 +1,56 @@
-import React, { Suspense, lazy, useCallback, useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { useParams } from "react-router-dom"
-import isEmpty from "lodash/isEmpty"
-import { Box, Spinner } from "gestalt"
-import { RootState } from "../../reducers"
+import React, { Suspense, lazy, useCallback, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import isEmpty from "lodash/isEmpty";
+import { Box, Spinner } from "gestalt";
+import { RootState } from "../../reducers";
 import {
   FETCH_POKEMON_ERROR,
   FETCH_POKEMON_REQUEST,
   FETCH_POKEMON_SUCCESS,
-} from "../../constants/pokemon.constants"
-import { fetchPokemonAction } from "../../actions/pokemon.action"
-import SEO from "../../components/SEO"
+} from "../../constants/pokemon.constants";
+import { fetchPokemonAction } from "../../actions/pokemon.action";
+import SEO from "../../components/SEO";
 // Lazy Load
-const PokemonDetails = lazy(() => import("../../components/PokemonDetails"))
-const ErrorToast = lazy(() => import("../../components/ErrorToast"))
+const PokemonDetails = lazy(() => import("../../components/PokemonDetails"));
+const ErrorToast = lazy(() => import("../../components/ErrorToast"));
 
 const PokemonPage: React.FunctionComponent = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   // @ts-ignore
-  const { slug } = useParams<{ slug: string }>()
+  const { slug } = useParams<{ slug: string }>();
 
   const { pokemon, error, loading } = useSelector((state: RootState) => ({
     pokemon: state.pokemon.pokemon,
     error: state.pokemon.error,
     loading: state.pokemon.loading,
-  }))
+  }));
 
   const handleFetch = useCallback(() => {
     dispatch({
       type: FETCH_POKEMON_REQUEST,
-    })
+    });
 
     fetchPokemonAction(slug)
       .then((res) => {
         dispatch({
           type: FETCH_POKEMON_SUCCESS,
           payload: res,
-        })
+        });
       })
       .catch((err) => {
-        console.error(err)
+        console.error(err);
 
         dispatch({
           type: FETCH_POKEMON_ERROR,
           payload: "Oops! Something went wrong. Please try again later.",
-        })
-      })
-  }, [dispatch, slug])
+        });
+      });
+  }, [dispatch, slug]);
 
   useEffect(() => {
-    handleFetch()
-  }, [handleFetch])
+    handleFetch();
+  }, [handleFetch]);
 
   return (
     <>
@@ -117,7 +117,7 @@ const PokemonPage: React.FunctionComponent = () => {
         )}
       </Box>
     </>
-  )
-}
+  );
+};
 
-export default PokemonPage
+export default PokemonPage;

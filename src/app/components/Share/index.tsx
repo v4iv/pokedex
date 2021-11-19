@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react"
+import React, { useRef, useState } from "react";
 import {
   Box,
   CompositeZIndex,
@@ -7,31 +7,31 @@ import {
   Icon,
   IconButton,
   Layer,
-} from "gestalt"
+} from "gestalt";
 import {
   FacebookShareButton,
   RedditShareButton,
   TwitterShareButton,
   WhatsappShareButton,
-} from "react-share"
-import { redditSVGPath, whatsappSVGPath } from "../../../assets/images/svg"
+} from "react-share";
+import { redditSVGPath, whatsappSVGPath } from "../../../assets/images/svg";
 
 interface IProps {
-  url: string
-  title?: string
-  excerpt?: string
+  url: string;
+  title?: string;
+  excerpt?: string;
 }
 
 const Share: React.FunctionComponent<IProps> = (props) => {
-  const { url, title, excerpt } = props
+  const { url, title, excerpt } = props;
 
-  const [open, setOpen] = useState(false)
-  const anchorRef = useRef(null)
+  const [open, setOpen] = useState(false);
+  const anchorRef = useRef(null);
 
-  const FLYOUT_ZINDEX = new FixedZIndex(10)
-  const shareZIndex = new CompositeZIndex([FLYOUT_ZINDEX])
+  const FLYOUT_ZINDEX = new FixedZIndex(10);
+  const shareZIndex = new CompositeZIndex([FLYOUT_ZINDEX]);
 
-  const toggleFlyout = () => setOpen(!open)
+  const toggleFlyout = () => setOpen(!open);
 
   return (
     <>
@@ -113,7 +113,7 @@ const Share: React.FunctionComponent<IProps> = (props) => {
         </Layer>
       )}
     </>
-  )
-}
+  );
+};
 
-export default Share
+export default Share;
