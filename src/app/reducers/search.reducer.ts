@@ -16,7 +16,9 @@ const searchReducer = (state = INITIAL_STATE, action: SearchActionTypes) => {
     case SEARCH_REQUEST:
       return {
         ...state,
+        results: [],
         loading: true,
+        error: null,
       }
     case SEARCH_SUCCESS:
       return {
