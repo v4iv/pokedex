@@ -43,6 +43,7 @@ module.exports = {
     "@typescript-eslint/explicit-module-boundary-types":"off",
     "no-alert":"off",
     "react/require-default-props":"off",
+    "no-async-promise-executor":"off",
     "prettier/prettier": [
         "error",
       {
