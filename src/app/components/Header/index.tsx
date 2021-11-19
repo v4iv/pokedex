@@ -20,54 +20,74 @@ import {
   Spinner,
   Tooltip,
 } from "gestalt"
-import axios from "axios"
-import { get } from "lodash"
+import debounce from "lodash/debounce"
+import { useDispatch, useSelector } from "react-redux"
 import ThemeContext from "../../contexts/ThemeContext"
 import { githubSVGPath, pokeballSVGPath } from "../../../assets/images/svg"
 import RouterLink from "../RouterLink"
+import { RootState } from "../../reducers"
+import {
+  SEARCH_ERROR,
+  SEARCH_REQUEST,
+  SEARCH_SUCCESS,
+} from "../../constants/search.constants"
+import { searchAction } from "../../actions/search.action"
 // Lazy Load
 const ResultBox = lazy(() => import("../ResultBox"))
 
 const Header: React.FunctionComponent = () => {
   const themeContext = useContext(ThemeContext)
+  const dispatch = useDispatch()
 
   const anchorRef = useRef(null)
 
   const [query, setQuery] = useState("")
-  const [searching, setSearching] = useState(false)
-  const [results, setResults] = useState([])
 
   const SEARCH_ZINDEX = new FixedZIndex(10)
   const resultsZIndex = new CompositeZIndex([SEARCH_ZINDEX])
 
-  const search = useCallback((value) => {
-    setSearching(true)
+  const { results, searching } = useSelector((state: RootState) => ({
+    results: state.search.results,
+    searching: state.search.loading,
+  }))
 
-    axios
-      .get(`${process.env.REACT_APP_SEARCH_API}${value}`)
-      .then((res) => {
-        const searchResults = get(res, ["data"])
-
-        setSearching(false)
-
-        setResults(searchResults)
+  const search = useCallback(
+    (value) => {
+      dispatch({
+        type: SEARCH_REQUEST,
       })
-      .catch((err) => {
-        setSearching(false)
 
-        if (err.response) {
-          console.error(err.response.data)
-        } else {
-          console.error("Error: ", err.message)
-        }
-      })
-  }, [])
+      const url = `${process.env.REACT_APP_SEARCH_API}${value}`
 
-  const handleChange: SearchFieldProps["onChange"] = ({ value }) => {
-    setQuery(value)
+      searchAction(url)
+        .then((res) => {
+          dispatch({
+            type: SEARCH_SUCCESS,
+            payload: res,
+          })
+        })
+        .catch((err) => {
+          console.error(SEARCH_ERROR, err)
 
-    if (value.length >= 3) search(value)
-  }
+          dispatch({
+            type: SEARCH_ERROR,
+            payload: "Oops! Something went wrong. Please try again later.",
+          })
+        })
+    },
+    [dispatch]
+  )
+
+  const debouncedSearch = debounce(search, 500)
+
+  const handleChange: SearchFieldProps["onChange"] = useCallback(
+    ({ value }) => {
+      setQuery(value)
+
+      if (value.length) debouncedSearch(value)
+    },
+    [debouncedSearch]
+  )
 
   return (
     <>
