@@ -1,5 +1,7 @@
 import React from "react"
-import { get, capitalize, isEmpty } from "lodash"
+import get from "lodash/get"
+import capitalize from "lodash/capitalize"
+import isEmpty from "lodash/isEmpty"
 import { Avatar, Box, Column, Text } from "gestalt"
 import RouterLink from "../RouterLink"
 

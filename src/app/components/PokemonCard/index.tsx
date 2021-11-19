@@ -1,5 +1,6 @@
 import React from "react"
-import { capitalize, get } from "lodash"
+import get from "lodash/get"
+import capitalize from "lodash/capitalize"
 import { Avatar, Box, Card, Heading, Text } from "gestalt"
 import { Pokemon } from "../../types/pokemon.types"
 import { pokemonIDGenerator } from "../../../utils"

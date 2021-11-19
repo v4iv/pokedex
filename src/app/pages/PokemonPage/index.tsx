@@ -1,7 +1,7 @@
 import React, { Suspense, lazy, useCallback, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
-import { isEmpty } from "lodash"
+import isEmpty from "lodash/isEmpty"
 import { Box, Spinner } from "gestalt"
 import { RootState } from "../../reducers"
 import {

@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosResponse } from "axios"
-import { get } from "lodash"
+import get from "lodash/get"
 import { Pokemon } from "../types/pokemon.types"
 
 export const fetchPokemonAction: (p: string) => Promise<any> = (p) => {

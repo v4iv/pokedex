@@ -1,6 +1,7 @@
 import React from "react"
 import { Badge, Box, Table, Text } from "gestalt"
-import { get, upperCase } from "lodash"
+import get from "lodash/get"
+import upperCase from "lodash/upperCase"
 
 interface IProps {
   height: number

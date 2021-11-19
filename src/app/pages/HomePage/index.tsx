@@ -1,7 +1,8 @@
 import React, { lazy, Suspense, useCallback, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import { isEmpty, random } from "lodash"
+import isEmpty from "lodash/isEmpty"
+import random from "lodash/random"
 import {
   Box,
   Button,
