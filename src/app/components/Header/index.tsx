@@ -5,7 +5,7 @@ import React, {
   useContext,
   useRef,
   useState,
-} from "react";
+} from "react"
 import {
   Box,
   CompositeZIndex,
@@ -19,76 +19,76 @@ import {
   SearchFieldProps,
   Spinner,
   Tooltip,
-} from "gestalt";
-import debounce from "lodash/debounce";
-import isEmpty from "lodash/isEmpty";
-import { useDispatch, useSelector } from "react-redux";
-import ThemeContext from "../../contexts/ThemeContext";
-import { githubSVGPath, pokeballSVGPath } from "../../../assets/images/svg";
-import RouterLink from "../RouterLink";
-import { RootState } from "../../reducers";
+} from "gestalt"
+import debounce from "lodash/debounce"
+import isEmpty from "lodash/isEmpty"
+import { useDispatch, useSelector } from "react-redux"
+import ThemeContext from "../../contexts/ThemeContext"
+import { githubSVGPath, pokeballSVGPath } from "../../../assets/images/svg"
+import RouterLink from "../RouterLink"
+import { RootState } from "../../reducers"
 import {
   SEARCH_ERROR,
   SEARCH_REQUEST,
   SEARCH_SUCCESS,
-} from "../../constants/search.constants";
-import { searchAction } from "../../actions/search.action";
+} from "../../constants/search.constants"
+import { searchAction } from "../../actions/search.action"
 // Lazy Load
-const ResultBox = lazy(() => import("../ResultBox"));
+const ResultBox = lazy(() => import("../ResultBox"))
 
 const Header: React.FunctionComponent = () => {
-  const themeContext = useContext(ThemeContext);
-  const dispatch = useDispatch();
+  const themeContext = useContext(ThemeContext)
+  const dispatch = useDispatch()
 
-  const anchorRef = useRef(null);
+  const anchorRef = useRef(null)
 
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState("")
 
-  const SEARCH_ZINDEX = new FixedZIndex(10);
-  const resultsZIndex = new CompositeZIndex([SEARCH_ZINDEX]);
+  const SEARCH_ZINDEX = new FixedZIndex(10)
+  const resultsZIndex = new CompositeZIndex([SEARCH_ZINDEX])
 
   const { results, searching } = useSelector((state: RootState) => ({
     results: state.search.results,
     searching: state.search.loading,
-  }));
+  }))
 
   const search = useCallback(
     (value) => {
       dispatch({
         type: SEARCH_REQUEST,
-      });
+      })
 
-      const url = `${process.env.REACT_APP_SEARCH_API}${value}`;
+      const url = `${process.env.REACT_APP_SEARCH_API}${value}`
 
       searchAction(url)
         .then((res) => {
           dispatch({
             type: SEARCH_SUCCESS,
             payload: res,
-          });
+          })
         })
         .catch((err) => {
-          console.error(SEARCH_ERROR, err);
+          console.error(SEARCH_ERROR, err)
 
           dispatch({
             type: SEARCH_ERROR,
             payload: "Oops! Something went wrong. Please try again later.",
-          });
-        });
+          })
+        })
     },
     [dispatch]
-  );
+  )
 
-  const debouncedSearch = debounce(search, 500);
+  const debouncedSearch = debounce(search, 500)
 
   const handleChange: SearchFieldProps["onChange"] = useCallback(
     ({ value }) => {
-      setQuery(value);
+      setQuery(value)
 
-      if (value.length) debouncedSearch(value);
+      if (value.length) debouncedSearch(value)
     },
     [debouncedSearch]
-  );
+  )
 
   return (
     <>
@@ -173,7 +173,7 @@ const Header: React.FunctionComponent = () => {
         </Layer>
       )}
     </>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

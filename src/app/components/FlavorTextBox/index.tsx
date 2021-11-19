@@ -1,12 +1,12 @@
-import React from "react";
-import { Box, Text } from "gestalt";
+import React from "react"
+import { Box, Text } from "gestalt"
 
 interface IProps {
-  flavorText: string;
+  flavorText: string
 }
 
 const FlavorTextBox: React.FunctionComponent<IProps> = (props) => {
-  const { flavorText } = props;
+  const { flavorText } = props
 
   return (
     <>
@@ -14,7 +14,7 @@ const FlavorTextBox: React.FunctionComponent<IProps> = (props) => {
         <Text weight="bold">{flavorText}</Text>
       </Box>
     </>
-  );
-};
+  )
+}
 
-export default FlavorTextBox;
+export default FlavorTextBox

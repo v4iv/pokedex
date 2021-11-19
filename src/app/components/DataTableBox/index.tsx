@@ -1,17 +1,17 @@
-import React from "react";
-import { Badge, Box, Table, Text } from "gestalt";
-import get from "lodash/get";
-import upperCase from "lodash/upperCase";
+import React from "react"
+import { Badge, Box, Table, Text } from "gestalt"
+import get from "lodash/get"
+import upperCase from "lodash/upperCase"
 
 interface IProps {
-  height: number;
-  weight: number;
-  abilities: Object[];
-  shape: string;
+  height: number
+  weight: number
+  abilities: Object[]
+  shape: string
 }
 
 const DataTableBox: React.FunctionComponent<IProps> = (props) => {
-  const { height, weight, abilities, shape } = props;
+  const { height, weight, abilities, shape } = props
 
   return (
     <Box margin={1} rounding={2} borderStyle="sm" paddingX={3} paddingY={5}>
@@ -28,14 +28,14 @@ const DataTableBox: React.FunctionComponent<IProps> = (props) => {
                 {abilities.map((ability) => {
                   const abilityName = upperCase(
                     get(ability, ["ability", "name"])
-                  );
+                  )
                   return (
                     <Badge
                       key={abilityName}
                       text={`${abilityName}`}
                       position="middle"
                     />
-                  );
+                  )
                 })}
               </Text>
             </Table.Cell>
@@ -73,7 +73,7 @@ const DataTableBox: React.FunctionComponent<IProps> = (props) => {
         </Table.Body>
       </Table>
     </Box>
-  );
-};
+  )
+}
 
-export default DataTableBox;
+export default DataTableBox

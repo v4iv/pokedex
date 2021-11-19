@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { Box, Layer, Toast } from "gestalt";
+import React, { useEffect, useState } from "react"
+import { Box, Layer, Toast } from "gestalt"
 
 interface Props {
-  message: string;
+  message: string
 }
 
 const ErrorToast: React.FunctionComponent<Props> = (props) => {
-  const [show, setShow] = useState(true);
-  const { message } = props;
+  const [show, setShow] = useState(true)
+  const { message } = props
 
   useEffect(() => {
     setTimeout(() => {
-      setShow(false);
-    }, 3000);
-  }, [setShow]);
+      setShow(false)
+    }, 3000)
+  }, [setShow])
 
   return (
     <>
@@ -36,7 +36,7 @@ const ErrorToast: React.FunctionComponent<Props> = (props) => {
         </Layer>
       )}
     </>
-  );
-};
+  )
+}
 
-export default ErrorToast;
+export default ErrorToast

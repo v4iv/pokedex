@@ -1,5 +1,5 @@
-import React from "react";
-import { Box, Heading } from "gestalt";
+import React from "react"
+import { Box, Heading } from "gestalt"
 
 const PageNotFound: React.FunctionComponent = () => {
   return (
@@ -16,7 +16,7 @@ const PageNotFound: React.FunctionComponent = () => {
 
       <Heading size="sm">Error: Page Not Found</Heading>
     </Box>
-  );
-};
+  )
+}
 
-export default PageNotFound;
+export default PageNotFound

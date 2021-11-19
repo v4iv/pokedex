@@ -1,52 +1,52 @@
-import React from "react";
-import { Avatar, Badge, Box, Divider, Heading, Image, Text } from "gestalt";
-import get from "lodash/get";
-import find from "lodash/find";
-import upperCase from "lodash/upperCase";
-import capitalize from "lodash/capitalize";
-import { pokemonIDGenerator } from "../../../utils";
-import { Pokemon } from "../../types/pokemon.types";
-import SEO from "../SEO";
-import StatsBox from "../StatsBox";
-import FlavorTextBox from "../FlavorTextBox";
-import DataTableBox from "../DataTableBox";
-import EvolutionBox from "../EvolutionBox";
-import SpriteBox from "../SpriteBox";
-import Share from "../Share";
+import React from "react"
+import { Avatar, Badge, Box, Divider, Heading, Image, Text } from "gestalt"
+import get from "lodash/get"
+import find from "lodash/find"
+import upperCase from "lodash/upperCase"
+import capitalize from "lodash/capitalize"
+import { pokemonIDGenerator } from "../../../utils"
+import { Pokemon } from "../../types/pokemon.types"
+import SEO from "../SEO"
+import StatsBox from "../StatsBox"
+import FlavorTextBox from "../FlavorTextBox"
+import DataTableBox from "../DataTableBox"
+import EvolutionBox from "../EvolutionBox"
+import SpriteBox from "../SpriteBox"
+import Share from "../Share"
 
 interface IProps {
-  pokemon: Pokemon;
+  pokemon: Pokemon
 }
 
 const PokemonDetails: React.FunctionComponent<IProps> = (props) => {
-  const { pokemon } = props;
+  const { pokemon } = props
 
-  const name = capitalize(get(pokemon, ["name"]));
+  const name = capitalize(get(pokemon, ["name"]))
   const frontDefaultSprite = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${get(
     pokemon,
     ["id"]
-  )}.png`;
+  )}.png`
   const image =
     get(pokemon, ["sprites", "other", "official-artwork", "front_default"]) ||
-    frontDefaultSprite;
-  const id = get(pokemon, ["id"]);
-  const pokemonID = pokemonIDGenerator(id);
-  const height = get(pokemon, ["height"]) / 10;
-  const weight = get(pokemon, ["weight"]) / 10;
-  const abilities = get(pokemon, ["abilities"]);
-  const types = get(pokemon, ["types"]);
-  const flavorTextEntries = get(pokemon, ["species", "flavor_text_entries"]);
-  const blueEntry = find(flavorTextEntries, { language: { name: "en" } });
-  const flavorText = get(blueEntry, ["flavor_text"]);
-  const stats = get(pokemon, ["stats"]);
-  const shape = upperCase(get(pokemon, ["species", "shape", "name"]));
-  const isBaby = get(pokemon, ["species", "is_baby"]);
-  const isLegendary = get(pokemon, ["species", "is_legendary"]);
-  const isMythical = get(pokemon, ["species", "is_mythical"]);
+    frontDefaultSprite
+  const id = get(pokemon, ["id"])
+  const pokemonID = pokemonIDGenerator(id)
+  const height = get(pokemon, ["height"]) / 10
+  const weight = get(pokemon, ["weight"]) / 10
+  const abilities = get(pokemon, ["abilities"])
+  const types = get(pokemon, ["types"])
+  const flavorTextEntries = get(pokemon, ["species", "flavor_text_entries"])
+  const blueEntry = find(flavorTextEntries, { language: { name: "en" } })
+  const flavorText = get(blueEntry, ["flavor_text"])
+  const stats = get(pokemon, ["stats"])
+  const shape = upperCase(get(pokemon, ["species", "shape", "name"]))
+  const isBaby = get(pokemon, ["species", "is_baby"])
+  const isLegendary = get(pokemon, ["species", "is_legendary"])
+  const isMythical = get(pokemon, ["species", "is_mythical"])
 
-  const evolutionChain = get(pokemon, ["species", "evolution_chain"]);
+  const evolutionChain = get(pokemon, ["species", "evolution_chain"])
 
-  const url = `${process.env.REACT_APP_URL}/pokemon/${name}`;
+  const url = `${process.env.REACT_APP_URL}/pokemon/${name}`
 
   return (
     <>
@@ -100,13 +100,13 @@ const PokemonDetails: React.FunctionComponent<IProps> = (props) => {
           alignItems="center"
         >
           {types.map((item: object) => {
-            const pokemonType = get(item, ["type", "name"]);
+            const pokemonType = get(item, ["type", "name"])
 
             return (
               <span key={pokemonType} className={pokemonType}>
                 {pokemonType}
               </span>
-            );
+            )
           })}
         </Box>
       </Box>
@@ -126,7 +126,7 @@ const PokemonDetails: React.FunctionComponent<IProps> = (props) => {
 
       <EvolutionBox evolutionChain={evolutionChain} />
     </>
-  );
-};
+  )
+}
 
-export default PokemonDetails;
+export default PokemonDetails

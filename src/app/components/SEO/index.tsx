@@ -1,15 +1,15 @@
-import React from "react";
-import { Helmet } from "react-helmet";
+import React from "react"
+import { Helmet } from "react-helmet"
 
 interface IProps {
-  title: string;
-  url: string;
-  description: string;
-  image: string;
+  title: string
+  url: string
+  description: string
+  image: string
 }
 
 const SEO: React.FunctionComponent<IProps> = (props) => {
-  const { title, url, description, image } = props;
+  const { title, url, description, image } = props
 
   return (
     <Helmet>
@@ -48,7 +48,7 @@ const SEO: React.FunctionComponent<IProps> = (props) => {
 
       <meta property="og:image" content={image} />
     </Helmet>
-  );
-};
+  )
+}
 
-export default SEO;
+export default SEO

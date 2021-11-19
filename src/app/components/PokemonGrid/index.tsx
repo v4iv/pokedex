@@ -1,19 +1,19 @@
-import React, { createRef } from "react";
-import { Box, Masonry, Spinner } from "gestalt";
-import { Pokemon } from "../../types/pokemon.types";
-import PokemonCard from "../PokemonCard";
+import React, { createRef } from "react"
+import { Box, Masonry, Spinner } from "gestalt"
+import { Pokemon } from "../../types/pokemon.types"
+import PokemonCard from "../PokemonCard"
 
 interface IProps {
-  pokemons: Pokemon[];
-  loadItems: () => void;
-  loading: boolean;
+  pokemons: Pokemon[]
+  loadItems: () => void
+  loading: boolean
 }
 
 const PokemonGrid: React.FunctionComponent<IProps> = (props) => {
-  const { pokemons, loadItems, loading } = props;
-  const scrollContainerRef = createRef<HTMLDivElement>();
+  const { pokemons, loadItems, loading } = props
+  const scrollContainerRef = createRef<HTMLDivElement>()
   // @ts-ignore
-  const measurementStore = Masonry.createMeasurementStore(pokemons.length);
+  const measurementStore = Masonry.createMeasurementStore(pokemons.length)
 
   return (
     <>
@@ -33,7 +33,7 @@ const PokemonGrid: React.FunctionComponent<IProps> = (props) => {
         </Box>
       </Box>
     </>
-  );
-};
+  )
+}
 
-export default PokemonGrid;
+export default PokemonGrid

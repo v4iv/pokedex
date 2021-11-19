@@ -1,19 +1,19 @@
-import React from "react";
-import get from "lodash/get";
-import upperCase from "lodash/upperCase";
-import { Box, Text, Tooltip } from "gestalt";
+import React from "react"
+import get from "lodash/get"
+import upperCase from "lodash/upperCase"
+import { Box, Text, Tooltip } from "gestalt"
 
 interface IProps {
-  stats: object[];
+  stats: object[]
 }
 
 const StatsBox: React.FunctionComponent<IProps> = (props) => {
-  const { stats } = props;
+  const { stats } = props
   return (
     <Box margin={1} rounding={2} borderStyle="sm">
       {stats.map((stat) => {
-        const statName = upperCase(get(stat, ["stat", "name"]));
-        const baseStat = get(stat, ["base_stat"]);
+        const statName = upperCase(get(stat, ["stat", "name"]))
+        const baseStat = get(stat, ["base_stat"])
 
         return (
           <Box
@@ -40,10 +40,10 @@ const StatsBox: React.FunctionComponent<IProps> = (props) => {
               </Tooltip>
             </Box>
           </Box>
-        );
+        )
       })}
     </Box>
-  );
-};
+  )
+}
 
-export default StatsBox;
+export default StatsBox
