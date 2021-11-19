@@ -1,5 +1,6 @@
 import React from "react"
-import { get, upperCase } from "lodash"
+import get from "lodash/get"
+import upperCase from "lodash/upperCase"
 import { Box, Text, Tooltip } from "gestalt"
 
 interface IProps {
