@@ -14,7 +14,7 @@ const DataTableBox: React.FunctionComponent<IProps> = (props) => {
 
   return (
     <Box margin={1} rounding={2} borderStyle="sm" paddingX={3} paddingY={5}>
-      <Table>
+      <Table accessibilityLabel="Pokemon Data">
         <Table.Body>
           <Table.Row>
             <Table.Cell>

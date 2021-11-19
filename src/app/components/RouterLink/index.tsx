@@ -1,67 +1,38 @@
-import React, { useCallback } from "react"
-import { Link, LinkProps } from "gestalt"
-import {
-  LinkProps as RouterLinkProps,
-  RouteComponentProps,
-  withRouter,
-} from "react-router-dom"
+import React, { ForwardedRef, forwardRef } from "react"
+import { Link } from "gestalt"
+import { useHref, useLinkClickHandler } from "react-router-dom"
 
-const isModifiedEvent = (event: KeyboardEvent) =>
-  event.metaKey || event.altKey || event.ctrlKey || event.shiftKey
-
-// @ts-ignore
-interface IProps extends LinkProps, RouteComponentProps {
-  replace?: RouterLinkProps["replace"]
-  to?: RouterLinkProps["to"]
-  href?: RouterLinkProps["href"]
-  target?: LinkProps["target"]
-  onClick?: LinkProps["onClick"]
-}
-
-const RouterLink: React.FunctionComponent<IProps> = (props) => {
-  const { children, history, onClick, replace = false, target, to } = props
-
-  const href = history.createHref({
+const RouterLink: React.FC<any> = forwardRef(
+  (
     // @ts-ignore
-    pathname: to,
-  })
+    { onClick, replace = false, state, target, to, ...rest },
+    ref: ForwardedRef<HTMLAnchorElement>
+  ) => {
+    const href = useHref(to)
+    const handleClick = useLinkClickHandler(to, {
+      replace,
+      state,
+      target,
+    })
 
-  const handleClick = useCallback(
-    ({ event }) => {
-      if (onClick) {
-        // @ts-ignore
-        onClick({ event })
-      }
-
-      if (
-        !event.defaultPrevented && // onClick prevented default
-        event.button === 0 && // ignore everything but left clicks
-        !target && // let browser handle "target=_blank" etc.
-        !isModifiedEvent(event)
-      ) {
-        // ignore clicks with modifier keys
-        event.preventDefault()
-
-        if (replace) {
+    return (
+      <Link
+        {...rest}
+        href={href}
+        onClick={(event) => {
+          onClick?.(event)
           // @ts-ignore
-          history.replace(to)
-        } else {
-          // @ts-ignore
-          history.push(to)
-        }
-      }
-    },
-    [history, onClick, replace, target, to]
-  )
-
-  const newProps = {
-    ...props,
-    target,
-    onClick: handleClick,
-    href,
+          if (!event.defaultPrevented) {
+            // onClick prevented default
+            // @ts-ignore
+            handleClick(event)
+          }
+        }}
+        ref={ref}
+        target={target}
+      />
+    )
   }
+)
 
-  return <Link {...newProps}>{children}</Link>
-}
-
-export default withRouter(RouterLink)
+export default RouterLink

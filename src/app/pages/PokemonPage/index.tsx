@@ -15,13 +15,10 @@ import SEO from "../../components/SEO"
 const PokemonDetails = lazy(() => import("../../components/PokemonDetails"))
 const ErrorToast = lazy(() => import("../../components/ErrorToast"))
 
-interface ParamTypes {
-  slug: string
-}
-
 const PokemonPage: React.FunctionComponent = () => {
   const dispatch = useDispatch()
-  const { slug } = useParams<ParamTypes>()
+  // @ts-ignore
+  const { slug } = useParams<{ slug: string }>()
 
   const { pokemon, error, loading } = useSelector((state: RootState) => ({
     pokemon: state.pokemon.pokemon,

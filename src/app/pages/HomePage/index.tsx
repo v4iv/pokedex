@@ -1,6 +1,6 @@
 import React, { lazy, Suspense, useCallback, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useHistory } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { isEmpty, random } from "lodash"
 import {
   Box,
@@ -27,7 +27,7 @@ const PokemonGrid = lazy(() => import("../../components/PokemonGrid"))
 const ErrorToast = lazy(() => import("../../components/ErrorToast"))
 
 const HomePage: React.FunctionComponent = () => {
-  const history = useHistory()
+  const navigate = useNavigate()
   const dispatch = useDispatch()
 
   const [surprise, setSurprise] = useState(false)
@@ -103,7 +103,7 @@ const HomePage: React.FunctionComponent = () => {
 
       const slug = `/pokemon/${randomNumber}/`
 
-      history.push(slug)
+      navigate(slug)
     }, wait)
   }
 
@@ -142,6 +142,7 @@ const HomePage: React.FunctionComponent = () => {
                 onClick={handleSurprise}
                 text="Surprise Me!"
                 disabled={surprise}
+                fullWidth
               />
             )}
           </Box>

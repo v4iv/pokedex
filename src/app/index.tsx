@@ -1,11 +1,11 @@
 import React, { lazy, Suspense, useEffect, useState } from "react"
 import { Provider } from "react-redux"
-import { BrowserRouter, Route, Switch } from "react-router-dom"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 import {
   Box,
   Container,
-  Provider as GestaltProvider,
-  ProviderProps,
+  ColorSchemeProvider,
+  ColorSchemeProviderProps,
   Spinner,
 } from "gestalt"
 import store from "./store"
@@ -17,7 +17,8 @@ const PokemonPage = lazy(() => import("./pages/PokemonPage"))
 const PageNotFound = lazy(() => import("./pages/404"))
 
 const App: React.FunctionComponent = () => {
-  const [theme, setTheme] = useState<ProviderProps["colorScheme"]>("light")
+  const [theme, setTheme] =
+    useState<ColorSchemeProviderProps["colorScheme"]>("light")
 
   const toggleTheme = () => {
     const nextTheme = theme === "light" ? "dark" : "light"
@@ -39,7 +40,7 @@ const App: React.FunctionComponent = () => {
   return (
     <>
       <ThemeContext.Provider value={{ theme, toggleTheme }}>
-        <GestaltProvider colorScheme={theme}>
+        <ColorSchemeProvider colorScheme={theme}>
           <Provider store={store}>
             <BrowserRouter>
               <Box color="white" minHeight="100vh">
@@ -61,21 +62,17 @@ const App: React.FunctionComponent = () => {
                       </Box>
                     }
                   >
-                    <Switch>
-                      <Route component={HomePage} exact path="/" />
-                      <Route
-                        component={PokemonPage}
-                        exact
-                        path="/pokemon/:slug"
-                      />
-                      <Route component={PageNotFound} />
-                    </Switch>
+                    <Routes>
+                      <Route element={<HomePage />} path="/" />
+                      <Route element={<PokemonPage />} path="/pokemon/:slug" />
+                      <Route element={<PageNotFound />} />
+                    </Routes>
                   </Suspense>
                 </Container>
               </Box>
             </BrowserRouter>
           </Provider>
-        </GestaltProvider>
+        </ColorSchemeProvider>
       </ThemeContext.Provider>
     </>
   )
