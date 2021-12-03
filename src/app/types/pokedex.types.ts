@@ -1,10 +1,10 @@
-import { Pokemon } from "./pokemon.types"
+import {Pokemon} from './pokemon.types'
 import {
   FETCH_POKEDEX_ERROR,
   FETCH_POKEDEX_REQUEST,
   FETCH_POKEDEX_SUCCESS,
   SORT_POKEMONS,
-} from "../constants/pokedex.constants"
+} from '../constants/pokedex.constants'
 
 export interface ISearchResult {
   name: string

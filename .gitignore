@@ -16,6 +16,7 @@ yarn-error.log
 
 # production
 /build
+.netlify/
 
 # misc
 .DS_Store

@@ -1,11 +1,11 @@
-import { Reducer } from "redux"
+import {Reducer} from 'redux'
 import {
   FETCH_POKEDEX_ERROR,
   FETCH_POKEDEX_REQUEST,
   FETCH_POKEDEX_SUCCESS,
   SORT_POKEMONS,
-} from "../constants/pokedex.constants"
-import { PokedexActionTypes, PokedexState } from "../types/pokedex.types"
+} from '../constants/pokedex.constants'
+import {PokedexActionTypes, PokedexState} from '../types/pokedex.types'
 
 const INITIAL_STATE: PokedexState = {
   pokemonList: [],
@@ -16,7 +16,7 @@ const INITIAL_STATE: PokedexState = {
 
 const pokedexReducer: Reducer = (
   state = INITIAL_STATE,
-  action: PokedexActionTypes
+  action: PokedexActionTypes,
 ) => {
   switch (action.type) {
     case FETCH_POKEDEX_REQUEST:

@@ -2,8 +2,8 @@ import {
   SEARCH_ERROR,
   SEARCH_REQUEST,
   SEARCH_SUCCESS,
-} from "../constants/search.constants"
-import { SearchActionTypes, SearchState } from "../types/search.types"
+} from '../constants/search.constants'
+import {SearchActionTypes, SearchState} from '../types/search.types'
 
 const INITIAL_STATE: SearchState = {
   results: [],

@@ -1,7 +1,8 @@
-import React from "react"
-import { Badge, Box, Table, Text } from "gestalt"
-import get from "lodash/get"
-import upperCase from "lodash/upperCase"
+import React from 'react'
+import {Badge, Box, Table, Text} from 'gestalt'
+import get from 'lodash/get'
+import upperCase from 'lodash/upperCase'
+import {useTranslation} from 'react-i18next'
 
 interface IProps {
   height: number
@@ -10,24 +11,25 @@ interface IProps {
   shape: string
 }
 
-const DataTableBox: React.FunctionComponent<IProps> = (props) => {
-  const { height, weight, abilities, shape } = props
+const DataTableBox: React.FC<IProps> = (props) => {
+  const {height, weight, abilities, shape} = props
+  const {t} = useTranslation(['common'])
 
   return (
     <Box margin={1} rounding={2} borderStyle="sm" paddingX={3} paddingY={5}>
-      <Table accessibilityLabel="Pokemon Data">
+      <Table accessibilityLabel={t('common:pokemon-data')}>
         <Table.Body>
           <Table.Row>
             <Table.Cell>
               <Text weight="bold" align="center">
-                Abilities
+                {t('common:abilities')}
               </Text>
             </Table.Cell>
             <Table.Cell>
               <Text align="center">
                 {abilities.map((ability) => {
                   const abilityName = upperCase(
-                    get(ability, ["ability", "name"])
+                    get(ability, ['ability', 'name']),
                   )
                   return (
                     <Badge
@@ -43,7 +45,7 @@ const DataTableBox: React.FunctionComponent<IProps> = (props) => {
           <Table.Row>
             <Table.Cell>
               <Text weight="bold" align="center">
-                Height
+                {t('common:height')}
               </Text>
             </Table.Cell>
             <Table.Cell>
@@ -53,7 +55,7 @@ const DataTableBox: React.FunctionComponent<IProps> = (props) => {
           <Table.Row>
             <Table.Cell>
               <Text weight="bold" align="center">
-                Weight
+                {t('common:weight')}
               </Text>
             </Table.Cell>
             <Table.Cell>
@@ -63,7 +65,7 @@ const DataTableBox: React.FunctionComponent<IProps> = (props) => {
           <Table.Row>
             <Table.Cell>
               <Text weight="bold" align="center">
-                Shape
+                {t('common:shape')}
               </Text>
             </Table.Cell>
             <Table.Cell>

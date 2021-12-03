@@ -5,7 +5,7 @@ import React, {
   useContext,
   useRef,
   useState,
-} from "react"
+} from 'react'
 import {
   Box,
   CompositeZIndex,
@@ -19,35 +19,37 @@ import {
   SearchFieldProps,
   Spinner,
   Tooltip,
-} from "gestalt"
-import debounce from "lodash/debounce"
-import isEmpty from "lodash/isEmpty"
-import { useDispatch, useSelector } from "react-redux"
-import ThemeContext from "../../contexts/ThemeContext"
-import { githubSVGPath, pokeballSVGPath } from "../../../assets/images/svg"
-import RouterLink from "../RouterLink"
-import { RootState } from "../../reducers"
+} from 'gestalt'
+import debounce from 'lodash/debounce'
+import isEmpty from 'lodash/isEmpty'
+import {useDispatch, useSelector} from 'react-redux'
+import ThemeContext from '../../contexts/ThemeContext'
+import {githubSVGPath, pokeballSVGPath} from '../../../assets/images/svg'
+import RouterLink from '../RouterLink'
+import {RootState} from '../../reducers'
 import {
   SEARCH_ERROR,
   SEARCH_REQUEST,
   SEARCH_SUCCESS,
-} from "../../constants/search.constants"
-import { searchAction } from "../../actions/search.action"
+} from '../../constants/search.constants'
+import {searchAction} from '../../actions/search.action'
+import {useTranslation} from 'react-i18next'
 // Lazy Load
-const ResultBox = lazy(() => import("../ResultBox"))
+const ResultBox = lazy(() => import('../ResultBox'))
 
-const Header: React.FunctionComponent = () => {
+const Header: React.FC = () => {
+  const {t} = useTranslation(['common'])
   const themeContext = useContext(ThemeContext)
   const dispatch = useDispatch()
 
   const anchorRef = useRef(null)
 
-  const [query, setQuery] = useState("")
+  const [query, setQuery] = useState('')
 
   const SEARCH_ZINDEX = new FixedZIndex(10)
   const resultsZIndex = new CompositeZIndex([SEARCH_ZINDEX])
 
-  const { results, searching } = useSelector((state: RootState) => ({
+  const {results, searching} = useSelector((state: RootState) => ({
     results: state.search.results,
     searching: state.search.loading,
   }))
@@ -72,22 +74,22 @@ const Header: React.FunctionComponent = () => {
 
           dispatch({
             type: SEARCH_ERROR,
-            payload: "Oops! Something went wrong. Please try again later.",
+            payload: 'Oops! Something went wrong. Please try again later.',
           })
         })
     },
-    [dispatch]
+    [dispatch],
   )
 
   const debouncedSearch = debounce(search, 500)
 
-  const handleChange: SearchFieldProps["onChange"] = useCallback(
-    ({ value }) => {
+  const handleChange: SearchFieldProps['onChange'] = useCallback(
+    ({value}) => {
       setQuery(value)
 
       if (value.length) debouncedSearch(value)
     },
-    [debouncedSearch]
+    [debouncedSearch],
   )
 
   return (
@@ -102,46 +104,54 @@ const Header: React.FunctionComponent = () => {
         borderStyle="sm"
       >
         <Box padding={2}>
-          <RouterLink to="/" hoverStyle="none" accessibilityLabel="Home">
+          <RouterLink
+            to="/"
+            hoverStyle="none"
+            accessibilityLabel={t('common:home')}
+          >
             <Icon
               dangerouslySetSvgPath={pokeballSVGPath}
               color="watermelon"
               size={32}
               inline
-              accessibilityLabel="Pokedex"
+              accessibilityLabel={t('common:pokedex')}
             />
           </RouterLink>
         </Box>
 
         <Box flex="grow" paddingX={1} ref={anchorRef}>
           <SearchField
-            accessibilityLabel="Search"
+            accessibilityLabel={t('common:search')}
             id="searchField"
             autoComplete="off"
             onChange={handleChange}
-            placeholder="Search"
+            placeholder={t('common:search')}
             value={query}
           />
         </Box>
 
         <Tooltip
           inline
-          text={themeContext.theme === "light" ? "Dark Mode" : "Light Mode"}
+          text={
+            themeContext.theme === 'light'
+              ? t('common:dark-mode')
+              : t('common:light-mode')
+          }
         >
           <Box paddingX={2} display="inlineBlock">
             <IconButton
-              accessibilityLabel="toggle color scheme: light / dark mode views"
+              accessibilityLabel={t('common:toggle-color-scheme')}
               icon="workflow-status-in-progress"
               size="md"
               onClick={themeContext.toggleTheme}
             />
           </Box>
         </Tooltip>
-        <Tooltip inline text="Github">
+        <Tooltip inline text={t('common:github')}>
           <Box paddingX={2} display="inlineBlock">
             <RouterLink to="https://github.com/v4iv/pokedex" target="blank">
               <Pog
-                accessibilityLabel="Github"
+                accessibilityLabel={t('common:github')}
                 dangerouslySetSvgPath={githubSVGPath}
                 size="md"
               />
@@ -155,7 +165,7 @@ const Header: React.FunctionComponent = () => {
           <Popover
             anchor={anchorRef.current!}
             idealDirection="down"
-            onDismiss={() => setQuery("")}
+            onDismiss={() => setQuery('')}
             positionRelativeToAnchor={false}
             size="md"
             showCaret
@@ -163,7 +173,7 @@ const Header: React.FunctionComponent = () => {
             <Suspense
               fallback={
                 <Box padding={3} column={12}>
-                  <Spinner accessibilityLabel="Loading..." show />
+                  <Spinner accessibilityLabel={t('common:loading')} show />
                 </Box>
               }
             >

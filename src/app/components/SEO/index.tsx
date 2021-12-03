@@ -1,5 +1,5 @@
-import React from "react"
-import { Helmet } from "react-helmet"
+import React from 'react'
+import {Helmet} from 'react-helmet'
 
 interface IProps {
   title: string
@@ -9,7 +9,7 @@ interface IProps {
 }
 
 const SEO: React.FunctionComponent<IProps> = (props) => {
-  const { title, url, description, image } = props
+  const {title, url, description, image} = props
 
   return (
     <Helmet>

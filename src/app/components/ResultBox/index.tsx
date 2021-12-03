@@ -1,10 +1,11 @@
-import React from "react"
-import get from "lodash/get"
-import capitalize from "lodash/capitalize"
-import { Avatar, Box, Spinner, Text } from "gestalt"
-import { ISearchResult } from "../../types/pokedex.types"
-import { pokemonIDGenerator } from "../../../utils"
-import RouterLink from "../RouterLink"
+import React from 'react'
+import get from 'lodash/get'
+import capitalize from 'lodash/capitalize'
+import {Avatar, Box, Spinner, Text} from 'gestalt'
+import {ISearchResult} from '../../types/pokedex.types'
+import {pokemonIDGenerator} from '../../../utils'
+import RouterLink from '../RouterLink'
+import {useTranslation} from 'react-i18next'
 
 interface IProps {
   results: ISearchResult[]
@@ -12,15 +13,16 @@ interface IProps {
 }
 
 const ResultBox: React.FunctionComponent<IProps> = (props) => {
-  const { results, searching } = props
+  const {results, searching} = props
+  const {t} = useTranslation(['common'])
 
   return (
     <Box padding={3} column={12}>
       {results.length ? (
         <>
           {results.map((pokemon: any) => {
-            const pokemonID = pokemonIDGenerator(get(pokemon, ["id"]))
-            const pokemonName = get(pokemon, ["name"])
+            const pokemonID = pokemonIDGenerator(get(pokemon, ['id']))
+            const pokemonName = get(pokemon, ['name'])
             return (
               <Box
                 key={pokemonID}
@@ -53,9 +55,9 @@ const ResultBox: React.FunctionComponent<IProps> = (props) => {
           })}
         </>
       ) : (
-        !searching && <Text>Sorry, No Records Found!</Text>
+        !searching && <Text>{t('common:errors:no-records-found')}</Text>
       )}
-      <Spinner accessibilityLabel="Loading..." show={searching} />
+      <Spinner accessibilityLabel={t('common:loading')} show={searching} />
     </Box>
   )
 }

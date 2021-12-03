@@ -2,7 +2,7 @@ import {
   SEARCH_ERROR,
   SEARCH_REQUEST,
   SEARCH_SUCCESS,
-} from "../constants/search.constants"
+} from '../constants/search.constants'
 
 export interface SearchResult {
   name: string

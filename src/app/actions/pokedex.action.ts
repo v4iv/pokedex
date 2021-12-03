@@ -1,6 +1,6 @@
-import axios, { AxiosError, AxiosResponse } from "axios"
-import get from "lodash/get"
-import { Pokemon } from "../types/pokemon.types"
+import axios, {AxiosError, AxiosResponse} from 'axios'
+import get from 'lodash/get'
+import {Pokemon} from '../types/pokemon.types'
 
 interface Payload {
   data: Pokemon[]
@@ -8,25 +8,25 @@ interface Payload {
 }
 
 export const fetchPokemonsAction: (url: string | null) => Promise<any> = (
-  url
+  url,
 ) => {
   return new Promise((resolve, reject) => {
     if (url) {
       axios
         .get(url)
         .then((response: AxiosResponse) => {
-          const results = get(response, ["data", "results"])
-          const nextURL = get(response, ["data", "next"])
+          const results = get(response, ['data', 'results'])
+          const nextURL = get(response, ['data', 'next'])
 
           const requests = results.map((pokemon: Pokemon) => {
-            const pokemonURL = get(pokemon, ["url"])
+            const pokemonURL = get(pokemon, ['url'])
 
             return axios.get(pokemonURL)
           })
 
           Promise.all<AxiosResponse>(requests)
             .then((res) => {
-              const pokemonList = res.map((r) => get(r, ["data"]))
+              const pokemonList = res.map((r) => get(r, ['data']))
 
               const payload: Payload = {
                 data: pokemonList,
@@ -51,7 +51,7 @@ export const fetchPokemonsAction: (url: string | null) => Promise<any> = (
             console.log(err.request)
           } else {
             // Something happened in setting up the request that triggered an Error
-            console.log("Error", err.message)
+            console.log('Error', err.message)
           }
           console.log(err.config)
 
@@ -63,20 +63,20 @@ export const fetchPokemonsAction: (url: string | null) => Promise<any> = (
 
 export const sortPokemonsAction: (
   list: Pokemon[],
-  order_by: string
-) => Pokemon[] = (list, order_by = "lowest_number_first") => {
+  order_by: string,
+) => Pokemon[] = (list, order_by = 'lowest_number_first') => {
   return list.sort((param1, param2) => {
     switch (order_by) {
-      case "lowest_number_first":
+      case 'lowest_number_first':
         return param1.id - param2.id
 
-      case "highest_number_first":
+      case 'highest_number_first':
         return param2.id - param1.id
 
-      case "z_a":
+      case 'z_a':
         return param2.name.localeCompare(param1.name)
 
-      case "a_z":
+      case 'a_z':
         return param1.name.localeCompare(param2.name)
 
       default:

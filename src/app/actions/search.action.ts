@@ -1,12 +1,12 @@
-import axios from "axios"
-import get from "lodash/get"
+import axios from 'axios'
+import get from 'lodash/get'
 
 export const searchAction = (url: string) => {
   return new Promise(async (resolve, reject) => {
     try {
       const response = await axios.get(url)
 
-      const results = get(response, ["data"])
+      const results = get(response, ['data'])
 
       resolve(results)
     } catch (err: any) {
@@ -23,7 +23,7 @@ export const searchAction = (url: string) => {
         console.log(err.request)
       } else {
         // Something happened in setting up the request that triggered an Error
-        console.log("Error", err.message)
+        console.log('Error', err.message)
       }
       console.log(err.config)
 

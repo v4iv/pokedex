@@ -1,8 +1,9 @@
-import React, { lazy, Suspense, useCallback, useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { useNavigate } from "react-router-dom"
-import isEmpty from "lodash/isEmpty"
-import random from "lodash/random"
+import React, {lazy, Suspense, useCallback, useEffect, useState} from 'react'
+import {useDispatch, useSelector} from 'react-redux'
+import {useNavigate} from 'react-router-dom'
+import {useTranslation} from 'react-i18next'
+import isEmpty from 'lodash/isEmpty'
+import random from 'lodash/random'
 import {
   Box,
   Button,
@@ -10,37 +11,38 @@ import {
   SelectList,
   SelectListProps,
   Spinner,
-} from "gestalt"
-import { RootState } from "../../reducers"
+} from 'gestalt'
+import {RootState} from '../../reducers'
 import {
   FETCH_POKEDEX_ERROR,
   FETCH_POKEDEX_REQUEST,
   FETCH_POKEDEX_SUCCESS,
   SORT_POKEMONS,
-} from "../../constants/pokedex.constants"
+} from '../../constants/pokedex.constants'
 import {
   fetchPokemonsAction,
   sortPokemonsAction,
-} from "../../actions/pokedex.action"
-import SEO from "../../components/SEO"
+} from '../../actions/pokedex.action'
+import SEO from '../../components/SEO'
 // Lazy Load
-const PokemonGrid = lazy(() => import("../../components/PokemonGrid"))
-const ErrorToast = lazy(() => import("../../components/ErrorToast"))
+const PokemonGrid = lazy(() => import('../../components/PokemonGrid'))
+const ErrorToast = lazy(() => import('../../components/ErrorToast'))
 
 const HomePage: React.FunctionComponent = () => {
+  const {t} = useTranslation(['common'])
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
   const [surprise, setSurprise] = useState(false)
-  const [order, setOrder] = useState("lowest_number_first")
+  const [order, setOrder] = useState('lowest_number_first')
 
-  const { pokemonList, url, error, loading } = useSelector(
+  const {pokemonList, url, error, loading} = useSelector(
     (state: RootState) => ({
       pokemonList: state.pokedex.pokemonList,
       url: state.pokedex.url,
       error: state.pokedex.error,
       loading: state.pokedex.loading,
-    })
+    }),
   )
 
   const handleFetch = useCallback(() => {
@@ -59,31 +61,31 @@ const HomePage: React.FunctionComponent = () => {
         console.error(FETCH_POKEDEX_ERROR, err)
         dispatch({
           type: FETCH_POKEDEX_ERROR,
-          payload: "Oops! Something went wrong. Please try again later.",
+          payload: 'Oops! Something went wrong. Please try again later.',
         })
       })
   }, [dispatch, url])
 
   const sortOptions = [
     {
-      value: "lowest_number_first",
-      label: "Lowest Number (First)",
+      value: 'lowest_number_first',
+      label: t('common:sortOptions.lowest-number-first'),
     },
     {
-      value: "highest_number_first",
-      label: "Highest Number (First)",
+      value: 'highest_number_first',
+      label: t('common:sortOptions.highest-number-first'),
     },
     {
-      value: "z_a",
-      label: "A - Z",
+      value: 'z_a',
+      label: t('common:sortOptions.z-a'),
     },
     {
-      value: "a_z",
-      label: "Z - A",
+      value: 'a_z',
+      label: t('common:sortOptions.a-z'),
     },
   ]
 
-  const handleSort: SelectListProps["onChange"] = ({ value }) => {
+  const handleSort: SelectListProps['onChange'] = ({value}) => {
     setOrder(value)
 
     const payload = sortPokemonsAction(pokemonList, value)
@@ -112,7 +114,7 @@ const HomePage: React.FunctionComponent = () => {
     if (isEmpty(pokemonList)) {
       handleFetch()
     }
-  }, [handleFetch]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [handleFetch])
 
   return (
     <>
@@ -133,7 +135,7 @@ const HomePage: React.FunctionComponent = () => {
           <Box margin={1} column={6}>
             {surprise ? (
               <Spinner
-                accessibilityLabel="Loading Surprise..."
+                accessibilityLabel={t('common:loading-surprise')}
                 show={surprise}
               />
             ) : (
@@ -141,7 +143,7 @@ const HomePage: React.FunctionComponent = () => {
                 name="Surprise"
                 color="blue"
                 onClick={handleSurprise}
-                text="Surprise Me!"
+                text={t('common:surprise-me')}
                 disabled={surprise}
                 fullWidth
               />
@@ -153,7 +155,7 @@ const HomePage: React.FunctionComponent = () => {
               name="Sort"
               onChange={handleSort}
               options={sortOptions}
-              placeholder="Sort By"
+              placeholder={t('common:sort-by')}
               value={order}
             />
           </Box>
@@ -165,7 +167,7 @@ const HomePage: React.FunctionComponent = () => {
           <Suspense
             fallback={
               <Box paddingY={6}>
-                <Spinner accessibilityLabel="Loading..." show />
+                <Spinner accessibilityLabel={t('common:loading')} show />
               </Box>
             }
           >
@@ -181,7 +183,7 @@ const HomePage: React.FunctionComponent = () => {
           <Suspense
             fallback={
               <Box paddingY={6}>
-                <Spinner accessibilityLabel="Loading..." show />
+                <Spinner accessibilityLabel={t('common:loading')} show />
               </Box>
             }
           >

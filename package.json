@@ -2,7 +2,19 @@
   "name": "pokedex",
   "version": "2.0.0",
   "private": true,
+  "scripts": {
+    "dev": "netlify dev",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "format": "prettier --write \"**/*.ts{,x}\"",
+    "lint": "tsc --noEmit && eslint \"**/*.ts{,x}\"",
+    "lint:fix": "tsc --noEmit && eslint \"**/*.ts{,x}\" --fix",
+    "clean": "rimraf .netlify"
+  },
   "dependencies": {
+    "@netlify/functions": "^0.10.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -19,11 +31,13 @@
     "@types/react-router-dom": "^5.3.2",
     "axios": "^0.24.0",
     "gestalt": "^40.1.2",
+    "i18next": "^21.5.4",
     "lodash": "^4.17.21",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-gtm-module": "^2.0.11",
     "react-helmet": "^6.1.0",
+    "react-i18next": "^11.14.3",
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.2",
@@ -44,15 +58,14 @@
     "workbox-strategies": "^5.1.3",
     "workbox-streams": "^5.1.3"
   },
-  "scripts": {
-    "dev": "netlify dev",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "format": "prettier --write src/**/**/*.ts{,x}",
-    "lint": "tsc --noEmit && eslint src/**/**/*.ts{,x}",
-    "lint:fix": "tsc --noEmit && eslint src/**/**/*.ts{,x} --fix"
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.4.0",
+    "@typescript-eslint/parser": "^5.4.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.27.1",
+    "prettier": "^2.5.0",
+    "rimraf": "^3.0.2"
   },
   "eslintConfig": {
     "extends": [
@@ -71,20 +84,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.18.0",
-    "@typescript-eslint/parser": "^4.18.0",
-    "eslint": "^7.22.0",
-    "eslint-config-airbnb": "^18.2.1",
-    "eslint-config-airbnb-typescript": "^12.3.1",
-    "eslint-config-prettier": "^8.1.0",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jest": "^24.3.1",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-prettier": "^3.3.1",
-    "eslint-plugin-react": "^7.22.0",
-    "eslint-plugin-react-hooks": "^4.2.0",
-    "prettier": "^2.2.1"
   }
 }

@@ -1,13 +1,13 @@
-import React from "react"
-import { ColorSchemeProviderProps } from "gestalt"
+import React from 'react'
+import {ColorSchemeProviderProps} from 'gestalt'
 
 interface ContextProp {
-  theme: ColorSchemeProviderProps["colorScheme"]
+  theme: ColorSchemeProviderProps['colorScheme']
   toggleTheme: () => void
 }
 
 const ThemeContext = React.createContext<ContextProp>({
-  theme: "light",
+  theme: 'light',
   toggleTheme: () => {},
 })
 

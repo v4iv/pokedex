@@ -2,7 +2,7 @@ import {
   FETCH_POKEMON_ERROR,
   FETCH_POKEMON_REQUEST,
   FETCH_POKEMON_SUCCESS,
-} from "../constants/pokemon.constants"
+} from '../constants/pokemon.constants'
 
 export interface Pokemon {
   id: number
