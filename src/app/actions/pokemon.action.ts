@@ -1,6 +1,6 @@
-import axios, { AxiosError, AxiosResponse } from "axios"
-import get from "lodash/get"
-import { Pokemon } from "../types/pokemon.types"
+import axios, {AxiosError, AxiosResponse} from 'axios'
+import get from 'lodash/get'
+import {Pokemon} from '../types/pokemon.types'
 
 export const fetchPokemonAction: (p: string) => Promise<any> = (p) => {
   return new Promise((resolve, reject) => {
@@ -11,27 +11,27 @@ export const fetchPokemonAction: (p: string) => Promise<any> = (p) => {
     axios
       .get(url)
       .then((response: AxiosResponse) => {
-        const pokemon = get(response, ["data"])
+        const pokemon = get(response, ['data'])
 
-        const speciesURL = get(pokemon, ["species", "url"])
+        const speciesURL = get(pokemon, ['species', 'url'])
 
         axios
           .get(speciesURL)
           .then((res: AxiosResponse) => {
-            const species = get(res, ["data"])
-            const evolutionChainURL = get(species, ["evolution_chain", "url"])
+            const species = get(res, ['data'])
+            const evolutionChainURL = get(species, ['evolution_chain', 'url'])
 
             axios
               .get(evolutionChainURL)
               .then((r: AxiosResponse) => {
-                const evolutionChain = get(r, ["data"])
+                const evolutionChain = get(r, ['data'])
 
                 const speciesData = {
                   ...species,
                   evolution_chain: evolutionChain,
                 }
 
-                const payload: Pokemon = { ...pokemon, species: speciesData }
+                const payload: Pokemon = {...pokemon, species: speciesData}
 
                 resolve(payload)
               })
@@ -49,7 +49,7 @@ export const fetchPokemonAction: (p: string) => Promise<any> = (p) => {
                   console.log(e.request)
                 } else {
                   // Something happened in setting up the request that triggered an Error
-                  console.log("Error", e.message)
+                  console.log('Error', e.message)
                 }
                 console.log(e.config)
 
@@ -70,7 +70,7 @@ export const fetchPokemonAction: (p: string) => Promise<any> = (p) => {
               console.log(err.request)
             } else {
               // Something happened in setting up the request that triggered an Error
-              console.log("Error", err.message)
+              console.log('Error', err.message)
             }
             console.log(err.config)
 
@@ -91,7 +91,7 @@ export const fetchPokemonAction: (p: string) => Promise<any> = (p) => {
           console.log(error.request)
         } else {
           // Something happened in setting up the request that triggered an Error
-          console.log("Error", error.message)
+          console.log('Error', error.message)
         }
         console.log(error.config)
 

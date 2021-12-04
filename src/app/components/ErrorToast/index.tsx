@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react"
-import { Box, Layer, Toast } from "gestalt"
+import React, {useEffect, useState} from 'react'
+import {Box, Layer, Toast} from 'gestalt'
+import {useTranslation} from 'react-i18next'
 
 interface Props {
   message: string
 }
 
 const ErrorToast: React.FunctionComponent<Props> = (props) => {
+  const {message} = props
+  const {t} = useTranslation(['common'])
   const [show, setShow] = useState(true)
-  const { message } = props
 
   useEffect(() => {
     setTimeout(() => {
@@ -24,14 +26,17 @@ const ErrorToast: React.FunctionComponent<Props> = (props) => {
             dangerouslySetInlineStyle={{
               __style: {
                 bottom: 50,
-                left: "50%",
-                transform: "translateX(-50%)",
+                left: '50%',
+                transform: 'translateX(-50%)',
               },
             }}
             paddingX={1}
             position="fixed"
           >
-            <Toast variant="error" text={<>{message}</>} />
+            <Toast
+              variant="error"
+              text={<>{t(`common:errors.${message}`)}</>}
+            />
           </Box>
         </Layer>
       )}

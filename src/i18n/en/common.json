@@ -1,0 +1,48 @@
+{
+  "pokedex": "Pokédex",
+  "home": "Home",
+  "search": "Search",
+  "light-mode": "Light Mode",
+  "dark-mode": "Dark Mode",
+  "surprise-me": "Surprise Me!",
+  "loading-surprise": "Loading Surprise...",
+  "toggle-color-scheme": "toggle color scheme: light / dark mode views",
+  "github": "GitHub",
+  "sort": "Sort",
+  "sort-by": "Sort By",
+  "loading": "Loading...",
+  "sortOptions": {
+    "lowest-number-first": "Lowest Number (First)",
+    "highest-number-first": "Highest Number (First)",
+    "z-a": "Z - A",
+    "a-z": "A - Z"
+  },
+  "pokemon-data": "Pokémon Data",
+  "abilities": "Abilities",
+  "height": "Height",
+  "weight": "Weight",
+  "shape": "Shape",
+  "evolution-chain": "Evolution Chain",
+  "baby": "Baby",
+  "legendary": "Legendary",
+  "mythical": "Mythical",
+  "shareOptions": {
+    "share": "Share",
+    "share-twitter": "Share on Twitter",
+    "share-facebook": "Share on Facebook",
+    "share-whatsapp": "Share on WhatsApp",
+    "share-reddit": "Share on Reddit",
+    "share-email": "Share via Email"
+  },
+  "errors": {
+    "page-not-found": "Error: Page not found",
+    "something-went-wrong": "Oops! Something went wrong. Please try again later.",
+    "bad-request": "Bad Request!",
+    "unauthorized": "Unauthorized!",
+    "forbidden": "Forbidden!",
+    "not-found": "Not Found!",
+    "method-not-allowed": "Method Not Allowed!",
+    "internal-server-error": "Internal Server Error!",
+    "no-records-found": "Sorry, No Records Found!"
+  }
+}

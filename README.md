@@ -43,4 +43,4 @@ Made with React & Redux. Powered by [PokeAPI](https://pokeapi.co)
 
 - ~~a11y~~
   
-- i18n
+- ~~i18n~~

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react"
+import React, {useRef, useState} from 'react'
 import {
   Box,
   CompositeZIndex,
@@ -7,14 +7,15 @@ import {
   Icon,
   IconButton,
   Layer,
-} from "gestalt"
+} from 'gestalt'
 import {
   FacebookShareButton,
   RedditShareButton,
   TwitterShareButton,
   WhatsappShareButton,
-} from "react-share"
-import { redditSVGPath, whatsappSVGPath } from "../../../assets/images/svg"
+} from 'react-share'
+import {redditSVGPath, whatsappSVGPath} from '../../../assets/images/svg'
+import {useTranslation} from 'react-i18next'
 
 interface IProps {
   url: string
@@ -23,7 +24,8 @@ interface IProps {
 }
 
 const Share: React.FunctionComponent<IProps> = (props) => {
-  const { url, title, excerpt } = props
+  const {url, title, excerpt} = props
+  const {t} = useTranslation(['common'])
 
   const [open, setOpen] = useState(false)
   const anchorRef = useRef(null)
@@ -37,7 +39,7 @@ const Share: React.FunctionComponent<IProps> = (props) => {
     <>
       <Box paddingX={2} ref={anchorRef} aria-haspopup aria-expanded={open}>
         <IconButton
-          accessibilityLabel="Share"
+          accessibilityLabel={t('common:shareOptions.share')}
           icon="android-share"
           onClick={toggleFlyout}
         />
@@ -60,7 +62,7 @@ const Share: React.FunctionComponent<IProps> = (props) => {
               >
                 <FacebookShareButton url={url} quote={excerpt}>
                   <Icon
-                    accessibilityLabel="Facebook"
+                    accessibilityLabel={t('common:shareOptions.share-facebook')}
                     icon="facebook"
                     color="navy"
                   />
@@ -74,7 +76,7 @@ const Share: React.FunctionComponent<IProps> = (props) => {
               >
                 <TwitterShareButton url={url} title={excerpt}>
                   <Icon
-                    accessibilityLabel="Twitter"
+                    accessibilityLabel={t('common:shareOptions.share-twitter')}
                     icon="twitter"
                     color="blue"
                   />
@@ -88,7 +90,7 @@ const Share: React.FunctionComponent<IProps> = (props) => {
               >
                 <WhatsappShareButton url={url} title={title}>
                   <Icon
-                    accessibilityLabel="Whatsapp"
+                    accessibilityLabel={t('common:shareOptions.share-whatsapp')}
                     dangerouslySetSvgPath={whatsappSVGPath}
                     color="green"
                   />
@@ -102,7 +104,7 @@ const Share: React.FunctionComponent<IProps> = (props) => {
               >
                 <RedditShareButton url={url} title={title}>
                   <Icon
-                    accessibilityLabel="Reddit"
+                    accessibilityLabel={t('common:shareOptions.share-reddit')}
                     dangerouslySetSvgPath={redditSVGPath}
                     color="red"
                   />

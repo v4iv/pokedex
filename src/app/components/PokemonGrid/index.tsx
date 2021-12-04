@@ -1,7 +1,7 @@
-import React, { createRef } from "react"
-import { Box, Masonry, Spinner } from "gestalt"
-import { Pokemon } from "../../types/pokemon.types"
-import PokemonCard from "../PokemonCard"
+import React, {createRef} from 'react'
+import {Box, Masonry, Spinner} from 'gestalt'
+import {Pokemon} from '../../types/pokemon.types'
+import PokemonCard from '../PokemonCard'
 
 interface IProps {
   pokemons: Pokemon[]
@@ -10,7 +10,7 @@ interface IProps {
 }
 
 const PokemonGrid: React.FunctionComponent<IProps> = (props) => {
-  const { pokemons, loadItems, loading } = props
+  const {pokemons, loadItems, loading} = props
   const scrollContainerRef = createRef<HTMLDivElement>()
   // @ts-ignore
   const measurementStore = Masonry.createMeasurementStore(pokemons.length)
@@ -20,7 +20,7 @@ const PokemonGrid: React.FunctionComponent<IProps> = (props) => {
       <Box maxHeight="80vh" ref={scrollContainerRef} overflow="auto">
         <Masonry
           minCols={2}
-          comp={({ data }) => <PokemonCard pokemon={data} />}
+          comp={({data}) => <PokemonCard pokemon={data} />}
           items={pokemons}
           loadItems={loadItems}
           scrollContainer={() => scrollContainerRef.current!}

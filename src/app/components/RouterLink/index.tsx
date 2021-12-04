@@ -1,12 +1,13 @@
-import React, { ForwardedRef, forwardRef } from "react"
-import { Link } from "gestalt"
-import { useHref, useLinkClickHandler } from "react-router-dom"
+import React, {ForwardedRef, forwardRef} from 'react'
+import {Link} from 'gestalt'
+import {useHref, useLinkClickHandler} from 'react-router-dom'
 
+// @ts-ignore
 const RouterLink: React.FC<any> = forwardRef(
   (
     // @ts-ignore
-    { onClick, replace = false, state, target, to, ...rest },
-    ref: ForwardedRef<HTMLAnchorElement>
+    {onClick, replace = false, state, target, to, ...rest},
+    ref: ForwardedRef<HTMLAnchorElement>,
   ) => {
     const href = useHref(to)
     const handleClick = useLinkClickHandler(to, {
@@ -32,7 +33,7 @@ const RouterLink: React.FC<any> = forwardRef(
         target={target}
       />
     )
-  }
+  },
 )
 
 export default RouterLink

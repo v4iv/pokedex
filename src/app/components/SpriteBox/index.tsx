@@ -1,11 +1,11 @@
-import React from "react"
+import React from 'react'
 import {
   Avatar,
   Box,
   Column,
   SegmentedControl,
   SegmentedControlProps,
-} from "gestalt"
+} from 'gestalt'
 
 interface IProps {
   id: string | number
@@ -13,7 +13,7 @@ interface IProps {
 }
 
 const SpriteBox: React.FunctionComponent<IProps> = (props) => {
-  const { id, name } = props
+  const {id, name} = props
   const [itemIndex, setItemIndex] = React.useState(0)
 
   const normaSpriteFront = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
@@ -22,9 +22,9 @@ const SpriteBox: React.FunctionComponent<IProps> = (props) => {
   const shinySpriteBack = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/${id}.png`
 
   const segmentedControlProps: SegmentedControlProps = {
-    items: ["Normal", "Shiny"],
+    items: ['Normal', 'Shiny'],
     selectedItemIndex: itemIndex,
-    onChange: ({ activeIndex }) => setItemIndex(activeIndex),
+    onChange: ({activeIndex}) => setItemIndex(activeIndex),
   }
 
   return (

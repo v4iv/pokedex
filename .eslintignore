@@ -122,7 +122,7 @@ src/serviceWorkerRegistration.ts
 src/setupTests.ts
 src/reportWebVitals.ts
 
-.eslintrc.js
+.eslintrc.json
+.prettierrc
 
-functions/search.js
-search/search-index.json
+.netlify/
